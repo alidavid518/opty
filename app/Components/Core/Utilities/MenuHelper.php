@@ -8,9 +8,8 @@
 
 namespace App\Components\Core\Utilities;
 
-
 use App\Components\Core\Menu\MenuManager;
-use App\Components\User\Models\User;
+use App\Models\User;
 
 class MenuHelper
 {

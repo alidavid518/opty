@@ -9,8 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Components\Core\Utilities\Helpers;
-use App\Components\User\Models\User;
-use App\Components\User\Repositories\UserRepository;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends AdminController

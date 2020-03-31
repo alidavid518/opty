@@ -55,7 +55,7 @@
 
                 self.isLoading = true;
 
-                axios.post('/admin/file-groups',payload).then(function(response) {
+                axios.post('/app/file-groups',payload).then(function(response) {
 
                     self.$store.commit('showSnackbar',{
                         message: response.data.message,

@@ -153,7 +153,7 @@
                     message: "Are you sure you want to delete this file group?",
                     okCb: ()=>{
 
-                        axios.delete('/admin/file-groups/' + group.id).then(function(response) {
+                        axios.delete('/app/file-groups/' + group.id).then(function(response) {
 
                             self.$store.commit('showSnackbar',{
                                 message: response.data.message,
@@ -210,7 +210,7 @@
                     per_page: self.pagination.rowsPerPage
                 };
 
-                axios.get('/admin/file-groups',{params: params}).then(function(response) {
+                axios.get('/app/file-groups',{params: params}).then(function(response) {
                     self.items = response.data.data.data;
                     self.totalItems = response.data.data.total;
                     self.pagination.totalItems = response.data.data.total;

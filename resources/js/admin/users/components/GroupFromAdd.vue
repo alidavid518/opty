@@ -117,7 +117,7 @@
 
                 self.$store.commit('showLoader');
 
-                axios.post('/admin/groups',payload).then(function(response) {
+                axios.post('/app/groups',payload).then(function(response) {
 
                     self.$store.commit('showSnackbar',{
                         message: response.data.message,
@@ -173,7 +173,7 @@
                     page: self.page
                 };
 
-                axios.get('/admin/permissions',{params: params}).then(function(response) {
+                axios.get('/app/permissions',{params: params}).then(function(response) {
                     self.options.permissions = response.data.data;
                     cb();
                 });

@@ -65,7 +65,7 @@
 
                 self.isLoading = true;
 
-                axios.put('/admin/file-groups/' + self.propFileGroupId,payload).then(function(response) {
+                axios.put('/app/file-groups/' + self.propFileGroupId,payload).then(function(response) {
 
                     self.$store.commit('showSnackbar',{
                         message: response.data.message,
@@ -95,7 +95,7 @@
 
                 const self = this;
 
-                axios.get('/admin/file-groups/' + self.propFileGroupId).then(function(response) {
+                axios.get('/app/file-groups/' + self.propFileGroupId).then(function(response) {
                     let Group = response.data.data;
                     self.name = Group.name;
                     self.description = Group.description;

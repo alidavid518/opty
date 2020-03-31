@@ -123,7 +123,7 @@
                     message: "Are you sure you want to delete this permission?",
                     okCb: ()=>{
 
-                        axios.delete('/admin/permissions/' + permission.id).then(function(response) {
+                        axios.delete('/app/permissions/' + permission.id).then(function(response) {
 
                             self.$store.commit('showSnackbar',{
                                 message: response.data.message,
@@ -165,7 +165,7 @@
                     per_page: self.pagination.rowsPerPage
                 };
 
-                axios.get('/admin/permissions',{params: params}).then(function(response) {
+                axios.get('/app/permissions',{params: params}).then(function(response) {
                     self.items = response.data.data.data;
                     self.totalItems = response.data.data.total;
                     self.pagination.totalItems = response.data.data.total;

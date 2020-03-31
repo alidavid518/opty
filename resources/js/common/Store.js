@@ -28,7 +28,6 @@ export default new Vuex.Store({
         dialogCancelCb: ()=>{},
     },
     mutations: {
-
         // breadcrumbs
         setBreadcrumbs(state, items) {
             items.unshift({label:'Home',to:{name:'dashboard'}});
@@ -77,46 +76,23 @@ export default new Vuex.Store({
         }
     },
     getters: {
-
         // get breadcrumbs
-        getBreadcrumbs: state => {
-            return state.breadcrumbs
-        },
+        getBreadcrumbs: state => { return state.breadcrumbs },
 
         // loader
-        showLoader: state => {
-            return state.showLoader
-        },
+        showLoader: state => { return state.showLoader },
 
         // snackbar
-        showSnackbar: state => {
-            return state.showSnackbar
-        },
-        snackbarMessage: state => {
-            return state.snackbarMessage
-        },
-        snackbarColor: state => {
-            return state.snackbarColor
-        },
-        snackbarDuration: state => {
-            return state.snackbarDuration
-        },
+        showSnackbar: state => { return state.showSnackbar },
+        snackbarMessage: state => { return state.snackbarMessage },
+        snackbarColor: state => { return state.snackbarColor },
+        snackbarDuration: state => { return state.snackbarDuration},
 
         // dialog
-        showDialog: state => {
-            return state.dialogShow
-        },
-        dialogType: state => {
-            return state.dialogType
-        },
-        dialogTitle: state => {
-            return state.dialogTitle
-        },
-        dialogMessage: state => {
-            return state.dialogMessage
-        },
-        dialogIcon: state => {
-            return state.dialogIcon
-        },
+        showDialog: state => { return state.dialogShow },
+        dialogType: state => { return state.dialogType },
+        dialogTitle: state => { return state.dialogTitle },
+        dialogMessage: state => { return state.dialogMessage },
+        dialogIcon: state => { return state.dialogIcon },
     }
 });

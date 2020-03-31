@@ -188,7 +188,7 @@
                     message: "Are you sure you want to delete this file?",
                     okCb: ()=>{
 
-                        axios.delete('/admin/files/' + file.id).then(function(response) {
+                        axios.delete('/app/files/' + file.id).then(function(response) {
 
                             self.$store.commit('showSnackbar',{
                                 message: response.data.message,
@@ -229,7 +229,7 @@
                     paginate: 'no'
                 };
 
-                axios.get('/admin/file-groups',{params: params}).then(function(response) {
+                axios.get('/app/file-groups',{params: params}).then(function(response) {
                     self.filters.fileGroupsHolder = response.data.data;
                     cb();
                 });
@@ -245,7 +245,7 @@
                     per_page: self.pagination.rowsPerPage
                 };
 
-                axios.get('/admin/files',{params: params}).then(function(response) {
+                axios.get('/app/files',{params: params}).then(function(response) {
                     self.items = response.data.data.data;
                     self.totalItems = response.data.data.total;
                     self.pagination.totalItems = response.data.data.total;

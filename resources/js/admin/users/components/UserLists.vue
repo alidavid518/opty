@@ -208,7 +208,7 @@
                     message: "Are you sure you want to delete this user?",
                     okCb: ()=>{
 
-                        axios.delete('/admin/users/' + user.id).then(function(response) {
+                        axios.delete('/app/users/' + user.id).then(function(response) {
 
                             self.$store.commit('showSnackbar',{
                                 message: response.data.message,
@@ -265,7 +265,7 @@
                     per_page: self.pagination.itemsPerPage
                 };
 
-                axios.get('/admin/users',{params: params}).then(function(response) {
+                axios.get('/app/users',{params: params}).then(function(response) {
                     self.items = response.data.data.data;
                     self.totalItems = response.data.data.total;
                     self.pagination.totalItems = response.data.data.total;
@@ -280,7 +280,7 @@
                     paginate: 'no'
                 };
 
-                axios.get('/admin/groups',{params: params}).then(function(response) {
+                axios.get('/app/groups',{params: params}).then(function(response) {
                     self.filters.groupOptions = response.data.data;
                     cb();
                 });

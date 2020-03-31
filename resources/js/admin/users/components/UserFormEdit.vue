@@ -183,7 +183,7 @@
 
                 self.$store.commit('showLoader');
 
-                axios.put('/admin/users/'+self.propUserId,payload).then(function(response) {
+                axios.put('/app/users/'+self.propUserId,payload).then(function(response) {
 
                     self.$store.commit('showSnackbar',{
                        message: response.data.message,
@@ -242,7 +242,7 @@
                 // reset first
                 self.groups = [];
 
-                axios.get('/admin/users/' + self.propUserId).then(function(response) {
+                axios.get('/app/users/' + self.propUserId).then(function(response) {
                     let User = response.data.data;
 
                     self.name = User.name;
@@ -272,7 +272,7 @@
                     paginate: 'no'
                 };
 
-                axios.get('/admin/permissions',{params: params}).then(function(response) {
+                axios.get('/app/permissions',{params: params}).then(function(response) {
                     self.options.permissions = response.data.data;
                     cb();
                 });
@@ -285,7 +285,7 @@
                     paginate: 'no'
                 };
 
-                axios.get('/admin/groups',{params: params}).then(function(response) {
+                axios.get('/app/groups',{params: params}).then(function(response) {
                     self.options.groups = response.data.data;
 
                     _.each(self.options.groups,g=>{

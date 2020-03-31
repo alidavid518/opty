@@ -83,7 +83,7 @@
 
                 self.isLoading = true;
 
-                axios.post('/admin/permissions',payload).then(function(response) {
+                axios.post('/app/permissions',payload).then(function(response) {
 
                     self.$store.commit('showSnackbar',{
                         message: response.data.message,

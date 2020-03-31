@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/','Front\\HomeController@index')->name('front.home');
-Route::get('files/{id}/preview','Front\\FileController@filePreview')->name('front.file.preview');
-Route::get('files/{id}/download','Front\\FileController@fileDownload')->name('front.file.download');
+Route::get('/','Front\HomeController@index')->name('front.home');
 
 Auth::routes();
 
@@ -29,8 +27,14 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function
 
     // resource routes
     Route::resource('users','UserController');
-    Route::resource('groups','GroupController');
-    Route::resource('permissions','PermissionController');
-    Route::resource('files','FileController');
-    Route::resource('file-groups','FileGroupController');
+});
+
+// user
+Route::prefix('user')->namespace('User')->middleware(['auth'])->group(function()
+{
+    // single page
+    Route::get('/', 'SinglePageController@displaySPA')->name('user.spa');
+
+    // resource routes
+    Route::resource('users','UserController');
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -23,10 +24,26 @@ class LoginController extends Controller
 
     /**
      * Where to redirect users after login.
-     *
-     * @var string
+     * @return string
      */
-    protected $redirectTo = '/admin';
+//    protected $redirectTo = '/admin';
+    public function redirectTo(){
+        // User role
+        $role = Auth::user()->role;
+
+        // Check user role
+        switch ($role) {
+            case 'admin':
+                return '/admin';
+                break;
+            case 'user':
+                return '/user';
+                break;
+            default:
+                return '/login';
+                break;
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -59,9 +76,7 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
-
-            $this->guard()->user()->logLastLogin();
-
+//            $this->guard()->user()->logLastLogin();
             return $this->sendLoginResponse($request);
         }
 

@@ -84,7 +84,7 @@
 
                 self.isLoading = true;
 
-                axios.put('/admin/permissions/' + self.propPermissionId,payload).then(function(response) {
+                axios.put('/app/permissions/' + self.propPermissionId,payload).then(function(response) {
 
                     self.$store.commit('showSnackbar',{
                         message: response.data.message,
@@ -118,7 +118,7 @@
 
                 const self = this;
 
-                axios.get('/admin/permissions/' + self.propPermissionId).then(function(response) {
+                axios.get('/app/permissions/' + self.propPermissionId).then(function(response) {
 
                     let Permission = response.data.data;
 
