@@ -38,7 +38,7 @@
                             <img class="logo" src="{{  url('/img/logo.png') }}"/>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item :to="{name: 'admin.dashboard'}" :exact="false">
+                    <v-list-item :to="{name: 'admin.dashboard'}" :exact="true">
                         <v-list-item-icon>
                             <v-icon>$vuetify.icons.home</v-icon>
                         </v-list-item-icon>
@@ -46,7 +46,7 @@
                             <v-list-item-title>Home</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item to="/campain" :exact="false">
+                    <v-list-item :to="{name:'admin.campaigns'}" :exact="false">
                         <v-list-item-icon>
                             <v-icon>$vuetify.icons.campain</v-icon>
                         </v-list-item-icon>
@@ -54,7 +54,7 @@
                             <v-list-item-title>キャンペーン一覧</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item to="/affiliate" :exact="false">
+                    <v-list-item :to="{name:'admin.affiliates'}" :exact="false">
                         <v-list-item-icon>
                             <v-icon>$vuetify.icons.affiliate</v-icon>
                         </v-list-item-icon>
@@ -62,7 +62,7 @@
                             <v-list-item-title>アフィリエイター</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item to="/fraud-check" :exact="false">
+                    <v-list-item :to="{name:'admin.fraud-checks'}" :exact="false">
                         <v-list-item-icon>
                             <v-icon>$vuetify.icons.eye</v-icon>
                         </v-list-item-icon>
@@ -70,7 +70,7 @@
                             <v-list-item-title>不正チェック</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item to="/contract" :exact="false">
+                    <v-list-item :to="{name:'admin.contracts'}" :exact="false">
                         <v-list-item-icon>
                             <v-icon>$vuetify.icons.contract</v-icon>
                         </v-list-item-icon>
@@ -78,7 +78,7 @@
                             <v-list-item-title>成約管理</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item to="/transfer" :exact="false">
+                    <v-list-item :to="{name:'admin.transfers'}" :exact="false">
                         <v-list-item-icon>
                             <v-icon>$vuetify.icons.credit</v-icon>
                         </v-list-item-icon>
@@ -96,25 +96,25 @@
                             </v-list-item-content>
                         </template>
 
-                        <v-list-item to="/analysis/data" :exact="false">
+                        <v-list-item :to="{name:'admin.analysis.data'}" :exact="false">
                             <v-list-item-icon>
                                 <v-icon>$vuetify.icons.data_icon</v-icon>
                             </v-list-item-icon>
                             <v-list-item-title>データ推移</v-list-item-title>
                         </v-list-item>
-                        <v-list-item to="/analysis/lp" :exact="false">
+                        <v-list-item :to="{name:'admin.analysis.lp'}" :exact="false">
                             <v-list-item-icon>
                                 <v-icon>$vuetify.icons.lp</v-icon>
                             </v-list-item-icon>
                             <v-list-item-title>LP分析</v-list-item-title>
                         </v-list-item>
-                        <v-list-item to="/analysis/lp" :exact="false">
+                        <v-list-item :to="{name:'admin.analysis.wp'}" :exact="false">
                             <v-list-item-icon>
                                 <v-icon>$vuetify.icons.wp</v-icon>
                             </v-list-item-icon>
                             <v-list-item-title>WP分析</v-list-item-title>
                         </v-list-item>
-                        <v-list-item to="/analysis/affiliate" :exact="false">
+                        <v-list-item :to="{name:'admin.analysis.affiliate'}" :exact="false">
                             <v-list-item-icon>
                                 <v-icon>$vuetify.icons.affiliateanalysis</v-icon>
                             </v-list-item-icon>
@@ -131,31 +131,31 @@
                             </v-list-item-content>
                         </template>
 
-                        <v-list-item to="/support/notify" :exact="false">
+                        <v-list-item :to="{name:'admin.support.notify'}" :exact="false">
                             <v-list-item-icon>
                                 <v-icon>$vuetify.icons.notify</v-icon>
                             </v-list-item-icon>
                             <v-list-item-title>お知らせ</v-list-item-title>
                         </v-list-item>
-                        <v-list-item to="/support/history" :exact="false">
+                        <v-list-item :to="{name:'admin.support.history'}" :exact="false">
                             <v-list-item-icon>
                                 <v-icon>$vuetify.icons.history</v-icon>
                             </v-list-item-icon>
                             <v-list-item-title>操作履歴</v-list-item-title>
                         </v-list-item>
-                        <v-list-item to="/support/qa" :exact="false">
+                        <v-list-item :to="{name:'admin.support.qa'}" :exact="false">
                             <v-list-item-icon>
                                 <v-icon>$vuetify.icons.qa</v-icon>
                             </v-list-item-icon>
                             <v-list-item-title>よくある質問</v-list-item-title>
                         </v-list-item>
-                        <v-list-item to="/support/account" :exact="false">
+                        <v-list-item :to="{name:'admin.support.profile'}" :exact="false">
                             <v-list-item-icon>
                                 <v-icon>$vuetify.icons.account</v-icon>
                             </v-list-item-icon>
                             <v-list-item-title>管理アカウント</v-list-item-title>
                         </v-list-item>
-                        <v-list-item to="/support/contact" :exact="false">
+                        <v-list-item :to="{name:'admin.support.contact'}" :exact="false">
                             <v-list-item-icon>
                                 <v-icon>$vuetify.icons.contact</v-icon>
                             </v-list-item-icon>
@@ -167,29 +167,52 @@
 
             <v-app-bar app clipped-left>
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-                <v-toolbar-title>{{config('app.name')}}</v-toolbar-title>
+                <v-toolbar-title>
+                    {{config('app.name')}}
+                </v-toolbar-title>
+
+                <v-spacer></v-spacer>
+
+                <v-btn icon>
+                    <v-icon>mdi-plus</v-icon>
+                </v-btn>
+
+                <v-avatar left>
+                    <v-img :src="'https://cdn.vuetifyjs.com/images/lists/3.jpg'"></v-img>
+                </v-avatar>
+
+                <v-btn text> John Doe </v-btn>
+
+                <v-menu
+                        bottom
+                        right
+                        offset-y
+                        origin="top right"
+                        transition="scale-transition"
+                >
+                    <template v-slot:activator="{ on }">
+                        <v-btn v-on="on" icon>
+                            <v-icon>mdi-account-cog</v-icon>
+                        </v-btn>
+                    </template>
+
+                    <v-list :tile="false" nav>
+                        <v-list-item-title>item1</v-list-item-title>
+                        <v-list-item-title>item2</v-list-item-title>
+                        <v-list-item-title>item3</v-list-item-title>
+                    </v-list>
+                </v-menu>
+
+
             </v-app-bar>
 
             <v-content>
-                <div>
-                    <v-breadcrumbs :items="getBreadcrumbs">
-                        <template v-slot:item="props">
-                            <v-breadcrumbs-item :to="props.item.to" exact
-                                                :key="props.item.label"
-                                                :disabled="props.item.disabled">
-                                <template v-slot:divider>
-                                    <v-icon>mdi-forward</v-icon>
-                                </template>
-                                @{{ props.item.label }}
-                            </v-breadcrumbs-item>
-                        </template>
-                    </v-breadcrumbs>
-                </div>
                 <v-divider></v-divider>
                 <transition name="fade">
                     <router-view></router-view>
                 </transition>
             </v-content>
+
             <v-footer fixed>
                 <span>&copy; {{ date('Y') }}</span>
             </v-footer>

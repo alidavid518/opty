@@ -55,31 +55,31 @@ img.logo {
   z-index: 500 !important;
 }
 
-.v-list-group__items {
-  flex: 1 1 auto;
-  padding-left: 15px;
-}
-
 .v-navigation-drawer{
   &__content {
     background-color: #385356;
   }
-}
 
-.v-list-item {
-  &__title {
-    color: #fff !important;
+  .v-list-group__items {
+    flex: 1 1 auto;
+    padding-left: 15px;
   }
-  &--active {
-    background-color: #304749;
-  }
-}
 
-.v-list-group__header {
-  background-color: #5C6879 !important;
-  &__append-icon {
-    .v-icon {
+  .v-list-item {
+    &__title {
       color: #fff !important;
+    }
+    &--active {
+      background-color: #304749;
+    }
+  }
+
+  .v-list-group__header {
+    background-color: #5C6879 !important;
+    &__append-icon {
+      .v-icon {
+        color: #fff !important;
+      }
     }
   }
 }

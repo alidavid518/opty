@@ -516,30 +516,30 @@ img.logo {
   z-index: 500 !important;
 }
 
-.v-list-group__items {
+.v-navigation-drawer__content {
+  background-color: #385356;
+}
+
+.v-navigation-drawer .v-list-group__items {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   padding-left: 15px;
 }
 
-.v-navigation-drawer__content {
-  background-color: #385356;
-}
-
-.v-list-item__title {
+.v-navigation-drawer .v-list-item__title {
   color: #fff !important;
 }
 
-.v-list-item--active {
+.v-navigation-drawer .v-list-item--active {
   background-color: #304749;
 }
 
-.v-list-group__header {
+.v-navigation-drawer .v-list-group__header {
   background-color: #5C6879 !important;
 }
 
-.v-list-group__header__append-icon .v-icon {
+.v-navigation-drawer .v-list-group__header__append-icon .v-icon {
   color: #fff !important;
 }
 

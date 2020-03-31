@@ -15,16 +15,15 @@ Route::get('/','Front\HomeController@index')->name('front.home');
 
 Auth::routes();
 
-// NOTE:
-// remove the demo middleware before you start on a project, this middleware if only
-// for demo purpose to prevent viewers to modify data on a live demo site
+// single page
+Route::middleware(['auth'])->group(function()
+{
+    Route::get('/', 'SinglePageController@displaySPA')->name('admin.spa');
+});
 
 // admin
 Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function()
 {
-    // single page
-    Route::get('/', 'SinglePageController@displaySPA')->name('admin.spa');
-
     // resource routes
     Route::resource('users','UserController');
 });

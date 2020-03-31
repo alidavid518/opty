@@ -6,11 +6,11 @@
  * Time: 8:40 AM
  */
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Models\User;
 
-class SinglePageController extends AdminController
+class SinglePageController extends Controller
 {
     public function displaySPA()
     {
@@ -20,6 +20,7 @@ class SinglePageController extends AdminController
         $currentUser = \Auth::user();
         view()->share('nav', $currentUser);
 
-        return view('layouts.admin');
+        $layout = 'layouts.' . $currentUser->role;
+        return view($layout);
     }
 }
