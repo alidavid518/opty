@@ -9,12 +9,22 @@ const router = new Router({
         {
             name: 'admin.dashboard',
             path: '/admin',
-            component: require('./admin/dashboard/index'),
+            // component: require('./admin/campaign/index'),
         },
         {
-            name: 'admin.campaigns',
-            path: '/admin/campaigns',
-            // component: require('./admin/campaigns/index'),
+            name: 'admin.campaign.index',
+            path: '/admin/campaign',
+            component: require('./admin/campaign/index'),
+        },
+        {
+            name: 'admin.campaign.edit',
+            path: '/admin/campaign/edit/:id',
+            component: require('./admin/campaign/edit'),
+        },
+        {
+            name: 'admin.campaign.new',
+            path: '/admin/campaign/new',
+            component: require('./admin/campaign/new'),
         },
         {
             name: 'admin.affiliates',
@@ -150,16 +160,6 @@ const router = new Router({
         },
 
  */
-        {
-            name: 'files',
-            path: '/files',
-            component: require('./admin/files/Files'),
-        },
-        {
-            name: 'settings',
-            path: '/settings',
-            component: require('./admin/settings/Settings'),
-        }
     ],
 });
 

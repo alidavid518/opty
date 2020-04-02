@@ -1,0 +1,24 @@
+.affiliate-pr-dialog {
+
+  &_title {
+    text-align: center;
+    display:block !important;
+  }
+
+  &_block {
+    padding-right: 20px;
+    padding-left: 20px;
+    border-bottom: 1px solid #777;
+  }
+
+  &_block_preview, &_block_edit {
+    width: 100%;
+    min-height: 400px;
+    max-height: 600px;
+  }
+
+  &_action {
+    justify-content: center;
+    padding: 10px 0 20px !important;
+  }
+}

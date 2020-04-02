@@ -64,9 +64,9 @@ class MenuTest extends TestCase
             'permission_requirements' => ['superuser'],
             'label'=>'Super User Dashboard',
             'nav_type' => MenuItem::$NAV_TYPE_NAV,
-            'icon'=>'dashboard',
+            'icon'=>'campaign',
             'route_type'=>'vue',
-            'route_name'=>'dashboard'
+            'route_name'=>'campaign'
         ]));
 
         $this->assertFalse($menuManager->hasMenu('Super User Dashboard'));
@@ -100,9 +100,9 @@ class MenuTest extends TestCase
             'permission_requirements' => ['permission.1'],
             'label'=>'Super User Dashboard',
             'nav_type' => MenuItem::$NAV_TYPE_NAV,
-            'icon'=>'dashboard',
+            'icon'=>'campaign',
             'route_type'=>'vue',
-            'route_name'=>'dashboard'
+            'route_name'=>'campaign'
         ]));
 
         $this->assertTrue($menuManager->hasMenu('Super User Dashboard'));
@@ -133,9 +133,9 @@ class MenuTest extends TestCase
             'permission_requirements' => [],
             'label'=>'Group 1 Nav',
             'nav_type' => MenuItem::$NAV_TYPE_NAV,
-            'icon'=>'dashboard',
+            'icon'=>'campaign',
             'route_type'=>'vue',
-            'route_name'=>'dashboard'
+            'route_name'=>'campaign'
         ]));
 
         $this->assertFalse($menuManager->hasMenu('Group 1 Nav'));
@@ -168,9 +168,9 @@ class MenuTest extends TestCase
             'permission_requirements' => [],
             'label'=>'Group 1 Nav',
             'nav_type' => MenuItem::$NAV_TYPE_NAV,
-            'icon'=>'dashboard',
+            'icon'=>'campaign',
             'route_type'=>'vue',
-            'route_name'=>'dashboard'
+            'route_name'=>'campaign'
         ]));
 
         $this->assertTrue($menuManager->hasMenu('Group 1 Nav'));
@@ -215,9 +215,9 @@ class MenuTest extends TestCase
             'permission_requirements' => [$permission->key],
             'label'=>'Group 1 Nav',
             'nav_type' => MenuItem::$NAV_TYPE_NAV,
-            'icon'=>'dashboard',
+            'icon'=>'campaign',
             'route_type'=>'vue',
-            'route_name'=>'dashboard'
+            'route_name'=>'campaign'
         ]));
 
         $this->assertFalse($menuManager->hasMenu('Group 1 Nav'));
@@ -257,9 +257,9 @@ class MenuTest extends TestCase
             'permission_requirements' => [$permission->key],
             'label'=>'Group 1 Nav',
             'nav_type' => MenuItem::$NAV_TYPE_NAV,
-            'icon'=>'dashboard',
+            'icon'=>'campaign',
             'route_type'=>'vue',
-            'route_name'=>'dashboard'
+            'route_name'=>'campaign'
         ]));
 
         $this->assertFalse($menuManager->hasMenu('Group 1 Nav'));

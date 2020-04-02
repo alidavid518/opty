@@ -1,13 +1,16 @@
 @import "variables";
 @import "dropzone";
+@import 'quill-editor';
 
 /* general */
 a {
   text-decoration: none;
 }
+
 .bg_half_transparent {
   background: rgba($loader-bg-color, $loader-bg-transparency);
 }
+
 .wask_loader {
   padding: 150px 0;
   position: fixed;
@@ -18,28 +21,35 @@ a {
   top: 0;
   bottom: 0;
 }
+
 .wask_loader > div.v-spinner > div {
   margin: 0 auto;
 }
+
 img.logo {
   width: 100px !important;
   height: 100px;
   flex: none;
   margin: 30px auto;
 }
+
 .permissions_container {
   padding: 10px;
 }
+
 .fade-enter-active, .fade-leave-active {
   transition-property: opacity;
   transition-duration: .25s;
 }
+
 .fade-enter-active {
   transition-delay: .25s;
 }
+
 .fade-enter, .fade-leave-active {
   opacity: 0
 }
+
 .breadcrumbs li a {
   text-decoration: none;
   color: $menu-text-color;
@@ -55,7 +65,7 @@ img.logo {
   z-index: 500 !important;
 }
 
-.v-navigation-drawer{
+.v-navigation-drawer {
   &__content {
     background-color: #385356;
   }
@@ -69,6 +79,7 @@ img.logo {
     &__title {
       color: #fff !important;
     }
+
     &--active {
       background-color: #304749;
     }
@@ -76,6 +87,7 @@ img.logo {
 
   .v-list-group__header {
     background-color: #5C6879 !important;
+
     &__append-icon {
       .v-icon {
         color: #fff !important;

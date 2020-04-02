@@ -443,6 +443,10 @@
   border-bottom: 6px solid #be2626;
 }
 
+.quill-editor .ql-container {
+  min-height: 300px;
+}
+
 /* general */
 
 a {
@@ -541,5 +545,222 @@ img.logo {
 
 .v-navigation-drawer .v-list-group__header__append-icon .v-icon {
   color: #fff !important;
+}
+
+.campaign-page {
+  position: fixed;
+}
+
+.campaign-page_header {
+  max-width: 100% !important;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: 0 1px 2px #ccc;
+          box-shadow: 0 1px 2px #ccc;
+  padding-bottom: 0;
+}
+
+.campaign-page_header_toolbar {
+  position: relative;
+}
+
+.campaign-page_header_toolbar_button {
+  margin: 0 10px;
+  width: 100px;
+}
+
+.campaign-page_header_toolbar_sort {
+  position: absolute !important;
+  right: 15px;
+  bottom: -10px;
+  max-width: 150px;
+}
+
+.campaign-page_container {
+  height: calc(100vh - 250px);
+  overflow-y: scroll;
+}
+
+.campaign-edit-page {
+  position: fixed;
+}
+
+.campaign-edit-page ._header {
+  max-width: 100% !important;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: 0 1px 2px #ccc;
+          box-shadow: 0 1px 2px #ccc;
+}
+
+.campaign-edit-page ._header ._header_title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.campaign-edit-page ._header ._btn_back {
+  position: absolute;
+}
+
+.campaign-edit-page ._header ._btn_back.v-btn--active {
+  background: transparent !important;
+}
+
+.campaign-edit-page ._contents {
+  height: calc(100vh - 250px);
+  overflow-y: scroll;
+}
+
+.campaign-edit-page ._contents .col {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.campaign-edit-page ._contents ._img_preview {
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 3px 3px 3px #ddd;
+          box-shadow: 3px 3px 3px #ddd;
+}
+
+.campaign-edit-page ._contents ._block {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.campaign-edit-page ._contents ._img_preview {
+  min-height: 200px;
+  max-height: 400px;
+}
+
+.campaign-edit-page ._contents ._label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.campaign-edit-page ._contents ._date_start,
+.campaign-edit-page ._contents ._date_end {
+  width: 150px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.campaign-edit-page ._contents ._time_start,
+.campaign-edit-page ._contents ._time_end {
+  width: 100px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.campaign-edit-page ._contents .v-btn-toggle .v-btn--active {
+  background-color: royalblue !important;
+  color: white !important;
+}
+
+.campaign-edit-page ._action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.campaign-edit-page ._action .v-btn {
+  color: white !important;
+}
+
+.campaign-item {
+  height: 500px;
+}
+
+.campaign-item .v-image {
+  height: 200px;
+}
+
+.campaign-item_title,
+.campaign-item_subtitle,
+.campaign-item_text {
+  text-align: center;
+  padding: 10px 16px 0 !important;
+}
+
+.campaign-item_text {
+  text-align: center;
+  padding: 7px 16px 0 !important;
+}
+
+.campaign-item_title {
+  font-size: 1.1rem !important;
+  font-weight: 600;
+}
+
+.campaign-dialog_title {
+  text-align: center;
+  display: block !important;
+}
+
+.campaign-dialog_block {
+  padding-right: 20px;
+  padding-left: 20px;
+  border-bottom: 1px solid #777;
+}
+
+.campaign-dialog_block_label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.campaign-dialog_content {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.campaign-dialog_action {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px 0 20px !important;
+}
+
+.campaign-dialog_action .v-btn__content {
+  color: white;
+}
+
+.affiliate-pr-dialog_title {
+  text-align: center;
+  display: block !important;
+}
+
+.affiliate-pr-dialog_block {
+  padding-right: 20px;
+  padding-left: 20px;
+  border-bottom: 1px solid #777;
+}
+
+.affiliate-pr-dialog_block_preview,
+.affiliate-pr-dialog_block_edit {
+  width: 100%;
+  min-height: 400px;
+  max-height: 600px;
+}
+
+.affiliate-pr-dialog_action {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px 0 20px !important;
 }
 

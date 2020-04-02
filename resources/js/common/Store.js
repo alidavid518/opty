@@ -30,7 +30,7 @@ export default new Vuex.Store({
     mutations: {
         // breadcrumbs
         setBreadcrumbs(state, items) {
-            items.unshift({label:'Home',to:{name:'dashboard'}});
+            items.unshift({label:'Home',to:{name:'campaign'}});
             state.breadcrumbs = items;
         },
 

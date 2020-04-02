@@ -15,9 +15,13 @@ import 'vuetify/dist/vuetify.min.css';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueProgressBar from 'vue-progressbar'
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
 
 Vue.use(Vuetify);
-
+Vue.use(VueQuillEditor)
 Vue.use(VueProgressBar,{
     color: '#3f51b5',
     failedColor: '#b71c1c',
@@ -47,7 +51,7 @@ import IconAccount from './components/icon/account'
 import IconAffiliateAnalysis from './components/icon/affiliate-analysis'
 import IconAffiliate from './components/icon/affiliate'
 import IconAsp from './components/icon/asp'
-import IconCampain from './components/icon/campain'
+import IconCampaign from './components/icon/campaign'
 import IconContact from './components/icon/contact'
 import IconContract from './components/icon/contract'
 import IconCredit from './components/icon/credit'
@@ -81,23 +85,23 @@ const app = new Vue({
             iconfont: 'mdi',
             values: {
                 account: { component: IconAccount },
-                affiliateanalysis: { component: IconAffiliateAnalysis },
+                affiliate_analysis: { component: IconAffiliateAnalysis },
                 affiliate: { component: IconAffiliate },
                 asp: { component: IconAsp },
-                campain: { component: IconCampain },
+                campaign: { component: IconCampaign },
                 contact: { component: IconContact },
                 contract: { component: IconContract },
                 credit: { component: IconCredit },
-                data_icon: { component: IconData },
+                data_analysis: { component: IconData },
                 eye: { component: IconEye },
                 graph: { component: IconGraph },
                 history: { component: IconHistory },
                 home: { component: IconHome },
-                lp: { component: IconLp },
+                lp_analysis: { component: IconLp },
                 notify: { component: IconNotify },
                 qa: { component: IconQa },
                 support: { component: IconSupport },
-                wp: { component: IconWp },
+                wp_analysis: { component: IconWp },
             },
         }
     }),
