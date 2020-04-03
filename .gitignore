@@ -11,3 +11,7 @@ npm-debug.log
 yarn-error.log
 .env
 .notes
+/public/css/user.css
+/public/js/app.js
+/public/js/vendor.js
+/public/css/admin.css
