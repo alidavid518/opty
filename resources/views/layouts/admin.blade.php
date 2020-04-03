@@ -143,7 +143,7 @@
               </v-list-item-icon>
               <v-list-item-title>操作履歴</v-list-item-title>
             </v-list-item>
-            <v-list-item :to="{name:'admin.support.qa'}" :exact="false">
+            <v-list-item :to="{name:'admin.support.qa.index'}" :exact="false">
               <v-list-item-icon>
                 <v-icon>$vuetify.icons.qa</v-icon>
               </v-list-item-icon>

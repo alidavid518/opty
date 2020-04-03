@@ -678,29 +678,29 @@ img.logo {
   color: white !important;
 }
 
-.campaign-item {
-  height: 500px;
-}
-
-.campaign-item .v-image {
-  height: 200px;
-}
-
-.campaign-item_title,
-.campaign-item_subtitle,
-.campaign-item_text {
+.affiliate-pr-dialog_title {
   text-align: center;
-  padding: 10px 16px 0 !important;
+  display: block !important;
 }
 
-.campaign-item_text {
-  text-align: center;
-  padding: 7px 16px 0 !important;
+.affiliate-pr-dialog_block {
+  padding-right: 20px;
+  padding-left: 20px;
+  border-bottom: 1px solid #777;
 }
 
-.campaign-item_title {
-  font-size: 1.1rem !important;
-  font-weight: 600;
+.affiliate-pr-dialog_block_preview,
+.affiliate-pr-dialog_block_edit {
+  width: 100%;
+  min-height: 400px;
+  max-height: 600px;
+}
+
+.affiliate-pr-dialog_action {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px 0 20px !important;
 }
 
 .campaign-dialog_title {
@@ -739,28 +739,39 @@ img.logo {
   color: white;
 }
 
-.affiliate-pr-dialog_title {
+.campaign-item {
+  height: 500px;
+}
+
+.campaign-item .v-image {
+  height: 200px;
+}
+
+.campaign-item_title,
+.campaign-item_subtitle,
+.campaign-item_text {
   text-align: center;
-  display: block !important;
+  padding: 10px 16px 0 !important;
 }
 
-.affiliate-pr-dialog_block {
-  padding-right: 20px;
-  padding-left: 20px;
-  border-bottom: 1px solid #777;
+.campaign-item_text {
+  text-align: center;
+  padding: 7px 16px 0 !important;
 }
 
-.affiliate-pr-dialog_block_preview,
-.affiliate-pr-dialog_block_edit {
-  width: 100%;
-  min-height: 400px;
-  max-height: 600px;
+.campaign-item_title {
+  font-size: 1.1rem !important;
+  font-weight: 600;
 }
 
-.affiliate-pr-dialog_action {
+.qa-page ._header h2 {
+  font-size: 1.25rem;
+  margin-right: 40px;
+}
+
+.qa-page ._action {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 10px 0 20px !important;
 }
 

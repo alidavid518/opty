@@ -47,6 +47,7 @@ import AxiosAjaxDetect from './common/AxiosAjaxDetect';
 
 Vue.use(formatters);
 Vue.use(eventBus);
+
 import IconAccount from './components/icon/account'
 import IconAffiliateAnalysis from './components/icon/affiliate-analysis'
 import IconAffiliate from './components/icon/affiliate'

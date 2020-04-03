@@ -73,35 +73,29 @@ const router = new Router({
             ]
         },
         {
-            name: 'admin.support',
-            path: '/admin/support',
-            children: [
-                {
-                    name: 'admin.support.notify',
-                    path: '/admin/support/notify',
-                    // component: require('./admin/support/notify/index'),
-                },
-                {
-                    name: 'admin.support.history',
-                    path: '/admin/support/history',
-                    // component: require('./admin/support/history/index'),
-                },
-                {
-                    name: 'admin.support.qa',
-                    path: '/admin/support/qa',
-                    // component: require('./admin/support/qa/index'),
-                },
-                {
-                    name: 'admin.support.profile',
-                    path: '/admin/support/profile',
-                    // component: require('./admin/support/profile/index'),
-                },
-                {
-                    name: 'admin.support.contact',
-                    path: '/admin/support/contact',
-                    // component: require('./admin/support/contact/index'),
-                },
-            ]
+            name: 'admin.support.notify',
+            path: '/admin/support/notify',
+            // component: require('./admin/support/notify/index'),
+        },
+        {
+            name: 'admin.support.history',
+            path: '/admin/support/history',
+            // component: require('./admin/support/history/index'),
+        },
+        {
+            name: 'admin.support.qa.index',
+            path: '/admin/support/qa',
+            component: require('./admin/support/qa/index'),
+        },
+        {
+            name: 'admin.support.profile',
+            path: '/admin/support/profile',
+            // component: require('./admin/support/profile/index'),
+        },
+        {
+            name: 'admin.support.contact',
+            path: '/admin/support/contact',
+            // component: require('./admin/support/contact/index'),
         },
 /*
         {
