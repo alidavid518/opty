@@ -95,7 +95,7 @@ const router = new Router({
         {
             name: 'admin.support.contact',
             path: '/admin/support/contact',
-            // component: require('./admin/support/contact/index'),
+            component: require('./admin/support/contact/index'),
         },
 /*
         {
