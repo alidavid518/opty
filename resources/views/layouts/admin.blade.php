@@ -54,12 +54,20 @@
               <v-list-item-title>キャンペーン一覧</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="{name:'admin.affiliates'}" :exact="false">
+          <v-list-item :to="{name:'admin.affiliate.index'}" :exact="false">
             <v-list-item-icon>
               <v-icon>$vuetify.icons.affiliate</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>アフィリエイター</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="{name:'admin.advertiser.index'}" :exact="false">
+            <v-list-item-icon>
+              <v-icon>$vuetify.icons.affiliate</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>広告主管理</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'admin.fraud-checks'}" :exact="false">

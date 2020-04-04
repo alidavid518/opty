@@ -27,6 +27,16 @@ const router = new Router({
             component: require('./admin/campaign/new'),
         },
         {
+            name: 'admin.affiliate.index',
+            path: '/admin/affiliate',
+            // component: require('./admin/affiliates/index'),
+        },
+        {
+            name: 'admin.advertiser.index',
+            path: '/admin/advertiser',
+            component: require('./admin/advertiser/index'),
+        },
+        {
             name: 'admin.affiliates',
             path: '/admin/affiliates',
             // component: require('./admin/affiliates/index'),
