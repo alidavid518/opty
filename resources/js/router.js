@@ -75,7 +75,7 @@ const router = new Router({
         {
             name: 'admin.support.notify',
             path: '/admin/support/notify',
-            // component: require('./admin/support/notify/index'),
+            component: require('./admin/support/notify/index'),
         },
         {
             name: 'admin.support.history',

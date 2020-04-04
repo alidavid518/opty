@@ -19,8 +19,10 @@ import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
+import VueDayjs from 'vue-dayjs-plugin'
 
-Vue.use(Vuetify);
+Vue.use(Vuetify)
+Vue.use(VueDayjs)
 Vue.use(VueQuillEditor)
 Vue.use(VueProgressBar,{
     color: '#3f51b5',

@@ -23,6 +23,7 @@
   "dependencies": {
     "dropzone": "^5.7.0",
     "moment": "^2.21.0",
+    "vue-dayjs-plugin": "^1.0.0",
     "vue-progressbar": "^0.7.5",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.1.6",
