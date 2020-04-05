@@ -37,6 +37,11 @@ const router = new Router({
             component: require('./admin/advertiser/index'),
         },
         {
+            name: 'admin.manager.index',
+            path: '/admin/manager',
+            component: require('./admin/manager/index'),
+        },
+        {
             name: 'admin.affiliates',
             path: '/admin/affiliates',
             // component: require('./admin/affiliates/index'),
