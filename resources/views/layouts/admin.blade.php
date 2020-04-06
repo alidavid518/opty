@@ -78,7 +78,7 @@
               <v-list-item-title>管理者管理</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="{name:'admin.fraud-checks'}" :exact="false">
+          <v-list-item :to="{name:'admin.fraud-check.index'}" :exact="false">
             <v-list-item-icon>
               <v-icon>$vuetify.icons.eye</v-icon>
             </v-list-item-icon>

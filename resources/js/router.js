@@ -62,9 +62,9 @@ const router = new Router({
             // component: require('./admin/transfer/deleted'),
         },
         {
-            name: 'admin.fraud-checks',
-            path: '/admin/fraud-checks',
-            // component: require('./admin/fraud-check/index'),
+            name: 'admin.fraud-check.index',
+            path: '/admin/fraud-check',
+            component: require('./admin/fraud-check/index'),
         },
         {
             name: 'admin.contract.index',
