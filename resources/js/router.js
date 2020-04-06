@@ -47,6 +47,21 @@ const router = new Router({
             component: require('./admin/manager/index'),
         },
         {
+            name: 'admin.transfer.index',
+            path: '/admin/transfer',
+            component: require('./admin/transfer/index'),
+        },
+        {
+            name: 'admin.transfer.in_month',
+            path: '/admin/transfer/in-month',
+            // component: require('./admin/transfer/in-month'),
+        },
+        {
+            name: 'admin.transfer.deleted',
+            path: '/admin/transfer/deleted',
+            // component: require('./admin/transfer/deleted'),
+        },
+        {
             name: 'admin.fraud-checks',
             path: '/admin/fraud-checks',
             // component: require('./admin/fraud-check/index'),

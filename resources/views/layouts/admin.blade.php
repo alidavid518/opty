@@ -94,7 +94,7 @@
               <v-list-item-title>成約管理</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="{name:'admin.transfers'}" :exact="false">
+          <v-list-item :to="{name:'admin.transfer.index'}" :exact="false">
             <v-list-item-icon>
               <v-icon>$vuetify.icons.credit</v-icon>
             </v-list-item-icon>
