@@ -86,7 +86,7 @@
               <v-list-item-title>不正チェック</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="{name:'admin.contracts'}" :exact="false">
+          <v-list-item :to="{name:'admin.contract.index'}" :exact="false">
             <v-list-item-icon>
               <v-icon>$vuetify.icons.contract</v-icon>
             </v-list-item-icon>

@@ -2,7 +2,7 @@
   <div class="page_wrap_vue pa-3 qa-page">
     <v-card class="mx-auto">
       <v-card-title class="_header">
-        <h2>キャンペーン一覧</h2>
+        <h2>よくある質問</h2>
         <v-btn
           class="_header_button"
           @click="showNew"

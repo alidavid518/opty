@@ -29,7 +29,12 @@ const router = new Router({
         {
             name: 'admin.affiliate.index',
             path: '/admin/affiliate',
-            // component: require('./admin/affiliates/index'),
+            component: require('./admin/affiliate/index'),
+        },
+        {
+            name: 'admin.affiliate-team.index',
+            path: '/admin/affiliate-team',
+            component: require('./admin/affiliate-team/index'),
         },
         {
             name: 'admin.advertiser.index',
@@ -42,19 +47,19 @@ const router = new Router({
             component: require('./admin/manager/index'),
         },
         {
-            name: 'admin.affiliates',
-            path: '/admin/affiliates',
-            // component: require('./admin/affiliates/index'),
-        },
-        {
             name: 'admin.fraud-checks',
             path: '/admin/fraud-checks',
             // component: require('./admin/fraud-check/index'),
         },
         {
-            name: 'admin.contracts',
-            path: '/admin/contracts',
-            // component: require('./admin/contracts/index'),
+            name: 'admin.contract.index',
+            path: '/admin/contract',
+            component: require('./admin/contract/index'),
+        },
+        {
+            name: 'admin.contract.reservation',
+            path: '/admin/contract/reservation',
+            component: require('./admin/contract/reservation'),
         },
         {
             name: 'admin.transfers',
