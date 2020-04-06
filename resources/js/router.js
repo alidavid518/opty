@@ -77,9 +77,14 @@ const router = new Router({
             component: require('./admin/contract/reservation'),
         },
         {
-            name: 'admin.transfers',
-            path: '/admin/transfers',
-            // component: require('./admin/transfers/index'),
+            name: 'admin.manager-account.index',
+            path: '/admin/manager-account',
+            component: require('./admin/manager-account/index'),
+        },
+        {
+            name: 'admin.manager-account.bank-account',
+            path: '/admin/manager-account/bank-account',
+            component: require('./admin/manager-account/bank_account'),
         },
         {
             name: 'admin.analysis',
