@@ -8,17 +8,15 @@
       <v-card-text>
         <v-row>
           <v-col cols="6">
-            <v-datetime-picker
-              date-format="YYYY/MM/DD"
-              time-format="HH:mm"
+            <datetime
+              type="datetime"
               v-model="start"
               class="_dtp_start"
             /> から
           </v-col>
           <v-col cols="6">
-            <v-datetime-picker
-              date-format="YYYY/MM/DD"
-              time-format="HH:mm"
+            <datetime
+              type="datetime"
               v-model="end"
               class="_dtp_end"
             /> まで

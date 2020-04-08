@@ -20,12 +20,11 @@ import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
 import VueDayjs from 'vue-dayjs-plugin'
-import DatetimePicker from 'vuetify-datetime-picker'
+import { Datetime } from 'vue-datetime';
 
 Vue.use(Vuetify)
 Vue.use(VueDayjs)
 Vue.use(VueQuillEditor)
-Vue.use(DatetimePicker)
 
 Vue.use(VueProgressBar,{
     color: '#3f51b5',
@@ -44,7 +43,7 @@ Vue.use(VueProgressBar,{
 Vue.component('moon-loader', require('vue-spinner/src/MoonLoader.vue'));
 Vue.component('scale-loader', require('vue-spinner/src/ScaleLoader.vue'));
 Vue.component('clip-loader', require('vue-spinner/src/ClipLoader.vue'));
-
+Vue.component('datetime', Datetime);
 // app
 import router from './router';
 import store from './common/Store';

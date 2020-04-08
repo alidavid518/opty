@@ -12,16 +12,14 @@
           <v-row>
             <v-col cols="3">期間</v-col>
             <v-col cols="9">
-              <v-datetime-picker
+              <datetime
                 dense outlined
-                date-format="yyyy/MM/DD"
-                time-format="HH:mm"
+                type="datetime"
                 v-model="item.start"
               />から
-              <v-datetime-picker
+              <datetime
                 dense outlined
-                date-format="yyyy/MM/DD"
-                time-format="HH:mm"
+                type="datetime"
                 v-model="item.end"
               />まで
             </v-col>
