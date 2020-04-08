@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/','Front\HomeController@index')->name('front.home');
+//Route::get('/','Front\HomeController@index')->name('front.home');
 
 Auth::routes();
 
@@ -22,18 +22,18 @@ Route::middleware(['auth'])->group(function()
 });
 
 // admin
-Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function()
-{
-    // resource routes
-    Route::resource('users','UserController');
-});
+//Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function()
+//{
+//    // resource routes
+//    Route::resource('users','UserController');
+//});
 
 // user
-Route::prefix('user')->namespace('User')->middleware(['auth'])->group(function()
-{
-    // single page
-    Route::get('/', 'SinglePageController@displaySPA')->name('user.spa');
-
-    // resource routes
-    Route::resource('users','UserController');
-});
+//Route::prefix('user')->namespace('User')->middleware(['auth'])->group(function()
+//{
+//    // single page
+//    Route::get('/', 'SinglePageController@displaySPA')->name('user.spa');
+//
+//    // resource routes
+//    Route::resource('users','UserController');
+//});

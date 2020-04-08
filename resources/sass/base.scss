@@ -64,7 +64,9 @@ img.logo {
 #admin .snack {
   z-index: 500 !important;
 }
-
+.v-content__wrap {
+  padding-bottom: 30px;
+}
 .v-navigation-drawer {
   &__content {
     background-color: #385356;
