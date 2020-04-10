@@ -212,10 +212,7 @@
             </v-btn>
           </template>
           <v-list :tile="false" nav dense>
-            <form action="/logout" method="POST" ref="logoutForm">
-              @csrf
-            </form>
-            <v-list-item click="logout">
+            <v-list-item @click="clickLogout('{{route('logout')}}','{{url('/login')}}')">
               <v-list-item-icon>
                 <v-icon>mdi-power</v-icon>
               </v-list-item-icon>
@@ -283,15 +280,5 @@
 <script src="{{ asset('js/manifest.js') }}"></script>
 <script src="{{ asset('js/vendor.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
-
-<script>
-  export default {
-    methods: {
-      logout() {
-        this.$refs.logoutForm.submit()
-      }
-    }
-  }
-</script>
 </body>
 </html>

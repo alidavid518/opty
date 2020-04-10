@@ -185,7 +185,7 @@ const app = new Vue({
                 window.location.href = routeName;
             }
         },
-        clickLogout(logoutUrl,afterLogoutRedirectUrl) {
+        clickLogout(logoutUrl, afterLogoutRedirectUrl) {
             axios.post(logoutUrl).then((r)=>{
                 window.location.href = afterLogoutRedirectUrl;
             });
