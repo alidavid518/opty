@@ -211,11 +211,18 @@
               <v-icon>mdi-account-cog</v-icon>
             </v-btn>
           </template>
-
-          <v-list :tile="false" nav>
-            <v-list-item-title>item1</v-list-item-title>
-            <v-list-item-title>item2</v-list-item-title>
-            <v-list-item-title>item3</v-list-item-title>
+          <v-list :tile="false" nav dense>
+            <form action="/logout" method="POST" ref="logoutForm">
+              @csrf
+            </form>
+            <v-list-item click="logout">
+              <v-list-item-icon>
+                <v-icon>mdi-power</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>ログアウト</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
           </v-list>
         </v-menu>
 
@@ -239,34 +246,34 @@
   </div> --}}
 
   <!-- snackbar -->
-    <v-snackbar
-      :timeout="snackbarDuration"
-      :color="snackbarColor"
-      top
-      v-model="showSnackbar">
-      @{{ snackbarMessage }}
-    </v-snackbar>
+{{--    <v-snackbar--}}
+{{--      :timeout="snackbarDuration"--}}
+{{--      :color="snackbarColor"--}}
+{{--      top--}}
+{{--      v-model="showSnackbar">--}}
+{{--      @{{ snackbarMessage }}--}}
+{{--    </v-snackbar>--}}
 
     <!-- dialog confirm -->
-    <v-dialog v-show="showDialog" v-model="showDialog" absolute max-width="450px">
-      <v-card>
-        <v-card-title>
-          <div class="headline">
-            <v-icon v-if="dialogIcon">@{{dialogIcon}}</v-icon>
-            @{{ dialogTitle }}
-          </div>
-        </v-card-title>
-        <v-card-text>@{{ dialogMessage }}</v-card-text>
-        <v-card-actions v-if="dialogType=='confirm'">
-          <v-spacer></v-spacer>
-          <v-btn color="orange darken-1" text @click.native="dialogCancel">Cancel</v-btn>
-          <v-btn color="green darken-1" text @click.native="dialogOk">Ok</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+{{--    <v-dialog v-show="showDialog" v-model="showDialog" absolute max-width="450px">--}}
+{{--      <v-card>--}}
+{{--        <v-card-title>--}}
+{{--          <div class="headline">--}}
+{{--            <v-icon v-if="dialogIcon">@{{dialogIcon}}</v-icon>--}}
+{{--            @{{ dialogTitle }}--}}
+{{--          </div>--}}
+{{--        </v-card-title>--}}
+{{--        <v-card-text>@{{ dialogMessage }}</v-card-text>--}}
+{{--        <v-card-actions v-if="dialogType=='confirm'">--}}
+{{--          <v-spacer></v-spacer>--}}
+{{--          <v-btn color="orange darken-1" text @click.native="dialogCancel">Cancel</v-btn>--}}
+{{--          <v-btn color="green darken-1" text @click.native="dialogOk">Ok</v-btn>--}}
+{{--        </v-card-actions>--}}
+{{--      </v-card>--}}
+{{--    </v-dialog>--}}
 
     <!-- the progress bar -->
-    <vue-progress-bar></vue-progress-bar>
+{{--    <vue-progress-bar></vue-progress-bar>--}}
 
   </template>
 
@@ -276,5 +283,15 @@
 <script src="{{ asset('js/manifest.js') }}"></script>
 <script src="{{ asset('js/vendor.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+
+<script>
+  export default {
+    methods: {
+      logout() {
+        this.$refs.logoutForm.submit()
+      }
+    }
+  }
+</script>
 </body>
 </html>

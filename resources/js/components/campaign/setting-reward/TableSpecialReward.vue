@@ -48,7 +48,7 @@
       </v-card-text>
     </v-container>
 
-    <new-reward-dlg
+    <new-special-reward-dlg
       :show="show_new_dlg"
       @onNewClose="show_new_dlg=false"
       @onNew="saveNew"/>
@@ -70,13 +70,13 @@
 
 <script>
 
-  import NewRewardDlg from "./NewRewardDlg";
+  import NewSpecialRewardDlg from "./NewSpecialRewardDlg";
   import DeleteRewardDlg from "./DeleteRewardDlg";
   import DetailRewardDlg from "./DetailRewardDlg";
   import BulkEditRewardDlg from "./BulkEditRewardDlg";
   export default {
     name: "SettingStory",
-    components: {BulkEditRewardDlg, DetailRewardDlg, DeleteRewardDlg, NewRewardDlg},
+    components: {BulkEditRewardDlg, DetailRewardDlg, DeleteRewardDlg, NewSpecialRewardDlg},
     props: {
       rewards: {
         type: Array,

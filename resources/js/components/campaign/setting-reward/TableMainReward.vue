@@ -4,7 +4,7 @@
       <v-card-title>
         <v-row>
           <v-col cols="12" class="">
-            <v-btn>新規</v-btn>
+            <v-btn @click="show_new_dlg=true">新規</v-btn>
           </v-col>
         </v-row>
       </v-card-title>
@@ -43,11 +43,14 @@
         </v-row>
       </v-card-text>
     </v-container>
+    <add-main-reward :show="show_new_dlg" @onNewClose="show_new_dlg=false" @onNewReward="saveNewReward"/>
   </v-card>
 </template>
 
 <script>
+  import AddMainReward from "./AddMainRewardDlg";
   export default {
+    components: {AddMainReward},
     props: {
       items: {
         type: Array,
@@ -56,6 +59,7 @@
     },
     data() {
       return {
+        show_new_dlg: false,
         rewardType: '基本報酬',
         rewardTypes: ['基本報酬', '特別報酬', '先着報酬', '増加報酬'],
         ranks: ['VIP','S VIP','SS VIP','QUEEN','KING'],
@@ -68,8 +72,9 @@
       }
     },
     methods: {
-      addItem() {
-
+      saveNewReward(val) {
+        console.log(val)
+        this.show_new_dlg = false
       }
     }
   }

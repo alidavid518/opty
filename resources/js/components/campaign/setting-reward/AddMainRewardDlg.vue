@@ -1,15 +1,29 @@
 <template>
-  <v-row justify="center">
+  <v-container fluid>
     <v-dialog
-      class="_bulk-edit-reward-dlg"
-      persistent
       v-model="show"
-      max-width="600px"
+      persistent
+      width="500"
     >
       <v-card>
-        <v-card-title class="_title">一括編集</v-card-title>
-        <v-divider/>
-        <v-card-text class="_content pb-0">
+        <v-card-title
+          class="headline text-center"
+          primary-title
+        >
+          基本報酬追加
+        </v-card-title>
+
+        <v-card-text class="pb-0">
+          <v-row>
+            <v-col cols="3">RANK</v-col>
+            <v-col>
+              <v-select
+                outlined dense hide-details
+                :items="ranks" item-value="value" item-text="label"
+                v-model="item.rank"/>
+            </v-col>
+          </v-row>
+          <v-divider/>
           <v-row>
             <v-col cols="3">期間</v-col>
             <v-col cols="9" class="pa-0">
@@ -121,65 +135,70 @@
           <v-divider/>
           <v-row>
             <v-col cols="3">報酬金額</v-col>
-            <v-col cols="9">
-              <v-text-field
-                dense outlined hide-details
-                v-model="item.amount"
-                class="d-inline-flex"
-              /> 円
+            <v-col>
+              <v-text-field outlined dense hide-details v-model="item.amount" class="d-inline-flex"/> 円
             </v-col>
           </v-row>
           <v-divider/>
           <v-row>
             <v-col cols="3">表示の有無</v-col>
-            <v-col cols="9">
+            <v-col>
               <v-switch
                 v-model="item.is_show"
                 :true-value="1" :false-value="0"
                 hide-details class="mt-0"/>
             </v-col>
           </v-row>
+          <v-divider/>
         </v-card-text>
+
         <v-divider/>
-        <v-card-actions class="_action d-flex justify-center">
-          <v-btn @click="$emit('onEdited', item)">キャンセル</v-btn>
-          <v-btn
-            dark color="purple darken-1"
-            @click="$emit('onEdited', item)"
+
+        <v-card-actions class="d-flex justify-center">
+          <v-btn @click="$emit('onNewReward', item)">キャンセル</v-btn>
+          <v-btn dark color="pink darken-3"
+            @click="$emit('onNewClose')"
           >
             登録
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-row>
+  </v-container>
 </template>
 
 <script>
   export default {
     props: {
-      show: Boolean,
+      show: {type: Boolean, default: false},
     },
     data: vm => ({
       item: {
         id: 0,
-        startdate: new Date().toISOString().substr(0, 10),
+        rank: 1,
+        startdate: '',
         starttime: '',
-        enddate: new Date().toISOString().substr(0, 10),
+        enddate: '',
         endtime: '',
+        amount: '',
         is_show: 1,
       },
+      ranks: [
+        {label: 'VIP', value: 1},
+        {label: 'S VIP', value: 2},
+        {label: 'SS VIP', value: 3},
+        {label: 'QUEEN', value: 4},
+        {label: 'KING', value: 5},
+      ],
       menu_start_date: false,
       menu_start_time: false,
       menu_end_date: false,
       menu_end_time: false,
     }),
-    methods: {
-    }
   }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
   ._date-picker {
     width: 150px !important;
     display: inline-flex;
@@ -190,4 +209,5 @@
     display: inline-flex;
     margin-right: 10px;
   }
+
 </style>

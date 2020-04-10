@@ -12,7 +12,7 @@
       <v-card-text>
         <v-row>
           <v-col cols="12">
-            <v-btn>新規</v-btn>
+            <v-btn @click="show_new=true">新規</v-btn>
             <v-btn>下書き</v-btn>
           </v-col>
         </v-row>
@@ -33,27 +33,28 @@
         </v-row>
       </v-card-text>
     </v-container>
+    <NewLpDlg :show="show_new" @onNewClose="show_new=false" @onNewLp="saveNewLp"/>
   </v-card>
 </template>
 
 <script>
   import LpItem from "./LpItem"
+  import NewLpDlg from "./NewLpDlg";
   export default {
-    name: "SettingStory",
-    components: {LpItem},
+    components: {NewLpDlg, LpItem},
     props: {
       items: {
         type: Array,
         default: () => []
       }
     },
-    data() {
-      return {
-      }
-    },
+    data: vm => ({
+      show_new: false,
+    }),
     methods: {
-      addItem() {
-
+      saveNewLp(item) {
+        console.log(item)
+        this.show_new = false
       }
     }
   }

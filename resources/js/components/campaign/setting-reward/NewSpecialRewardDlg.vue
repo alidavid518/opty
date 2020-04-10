@@ -1,7 +1,8 @@
 <template>
   <v-row justify="center">
     <v-dialog
-      class="_bulk-edit-reward-dlg"
+      class="_new-main-reward-dlg"
+      persistent
       v-model="show"
       max-width="600px"
     >

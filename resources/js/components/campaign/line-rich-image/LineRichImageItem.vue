@@ -1,11 +1,9 @@
 <template>
-  <v-container fluid>
     <v-card class="_line-rich-image-item">
       <v-card-title>
         <v-row>
           <v-col cols="6">
             <h3 class="_title">{{item.title}}</h3>
-            <br/>
             <small class="_url">{{item.url}}</small>
           </v-col>
           <v-col cols="6" class="d-flex justify-end">
@@ -27,16 +25,11 @@
         </v-row>
       </v-card-title>
       <v-card-text class="_content">
-        <div v-for="(image, i) in item.images" :key="i">
-          <line-rich-image :item="image" @onDeleteImage="deleteImage"/>
-        </div>
+        <line-rich-image v-for="(image, i) in item.images" :key="i" :item="image" @onDeleteImage="deleteImage"/>
       </v-card-text>
+      <scale-loader color="orange darken--1" loading="loading" height="70" width="7"/>
 
     </v-card>
-
-    <scale-loader color="orange darken--1" loading="loading" height="70" width="7"/>
-
-  </v-container>
 </template>
 
 <script>
@@ -60,7 +53,7 @@
     }),
     methods: {
       deleteImage(img) {
-        const id = this.items.images.findIndex(v => v.id === img.id)
+        const id = this.item.images.findIndex(v => v.id === img.id)
         if(id === -1) return
         this.item.images.splice(id, 1)
       },
