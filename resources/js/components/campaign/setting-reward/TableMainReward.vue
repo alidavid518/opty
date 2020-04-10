@@ -4,16 +4,12 @@
       <v-card-title>
         <v-row>
           <v-col cols="12" class="">
+            <v-btn>新規</v-btn>
           </v-col>
         </v-row>
       </v-card-title>
 
       <v-card-text>
-        <v-row>
-          <v-col cols="12">
-            <v-btn>新規</v-btn>
-          </v-col>
-        </v-row>
         <v-row>
           <v-col>
             <v-simple-table>
@@ -45,21 +41,13 @@
             </v-simple-table>
           </v-col>
         </v-row>
-        <StoryItem
-          v-for="item in items"
-          :item="item"
-          :key="item.id"
-        />
       </v-card-text>
     </v-container>
   </v-card>
 </template>
 
 <script>
-  import StoryItem from "../setting-story/StoryItem";
   export default {
-    name: "SettingStory",
-    components: {StoryItem},
     props: {
       items: {
         type: Array,

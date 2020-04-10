@@ -31,16 +31,13 @@
 </template>
 
 <script>
-  import StoryItem from "../setting-story/StoryItem";
   export default {
-    name: "SettingStory",
-    components: {StoryItem},
     props: {
       item: {
         type: Object,
         id: {type: Number, default: 0},
-        start: {type: String, default: this.$date().toString()},
-        to: {type: String, default: this.$date().toString()},
+        start: {type: String, default: ''},
+        to: {type: String, default: ''},
       }
     },
     data() {

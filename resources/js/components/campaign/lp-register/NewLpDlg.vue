@@ -102,22 +102,13 @@
       dialog: Boolean,
       item: {
         type: Object,
-        id: Number,
-        url: String,
-        banner: String,
-        is_public: Number,
-        redirect_pc: String,
-        redirect_mobile: String,
-        show_type: String,
-        default: () => ({
-            id: 0,
-            url: '',
-            banner: '',
-            is_public: '',
-            redirect_pc: '',
-            redirect_mobile: '',
-            show_type: 'banner'
-        }),
+        id: {type: Number, default: 0},
+        url: {type: String, default: ''},
+        banner: {type: String, default: ''},
+        is_public: {type: Number, default: 1},
+        redirect_pc: {type: String, default: ''},
+        redirect_mobile: {type: String, default: ''},
+        show_type: {type: String, default: 'banner'},
       }
     },
     data: vm => ({

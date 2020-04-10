@@ -23,12 +23,12 @@
 
       <v-card-text>
         <table-main-reward
-          v-if="tab==='main'"
-          :rewards="main_rewards"
+          v-if="rewardType==='main'"
+          :rewards="items.main"
         />
         <table-special-reward
-          v-if="tab==='special'"
-          :rewards="special_rewards"
+          v-if="rewardType==='special'"
+          :rewards="items.special"
         />
       </v-card-text>
     </v-container>
@@ -42,8 +42,11 @@
     components: {TableMainReward, TableSpecialReward},
     props: {
       items: {
-        type: Array,
-        default: () => []
+        type: Object,
+        main: { type: Array, default: []},
+        special: { type: Array, default: []},
+        first_come: { type: Array, default: []},
+        append: { type: Array, default: []},
       }
     },
     data() {
@@ -56,18 +59,6 @@
           {value: 'increased', label: '増加報酬'},
         ],
         ranks: ['VIP','S VIP','SS VIP','QUEEN','KING'],
-        main_rewards: [
-          {id: 1, rank: 1, amount: 1000, is_show: 1, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          {id: 2, rank: 2, amount: 1000, is_show: 0, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          {id: 3, rank: 3, amount: 1000, is_show: 0, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          {id: 4, rank: 4, amount: 1000, is_show: 1, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-        ],
-        special_rewards: [
-          {id: 1, rank: 1, amount: 1000, is_show: 1, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          {id: 2, rank: 2, amount: 1000, is_show: 0, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          {id: 3, rank: 3, amount: 1000, is_show: 0, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          {id: 4, rank: 4, amount: 1000, is_show: 1, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-        ]
       }
     },
     methods: {

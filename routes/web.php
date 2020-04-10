@@ -19,21 +19,11 @@ Auth::routes();
 Route::middleware(['auth'])->group(function()
 {
     Route::get('/', 'SinglePageController@displaySPA')->name('admin.spa');
+    Route::fallback(function(){
+        return redirect('/');
+    });
 });
 
-// admin
-//Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function()
-//{
-//    // resource routes
-//    Route::resource('users','UserController');
-//});
-
-// user
-//Route::prefix('user')->namespace('User')->middleware(['auth'])->group(function()
-//{
-//    // single page
-//    Route::get('/', 'SinglePageController@displaySPA')->name('user.spa');
-//
-//    // resource routes
-//    Route::resource('users','UserController');
-//});
+Route::fallback(function(){
+    return redirect('/');
+});

@@ -4,8 +4,8 @@
       <v-card-title>
         <v-row>
           <v-col cols="12" class="d-flex justify-space-between">
-            <v-btn @click="show_special_new=true">新規</v-btn>
-            <v-btn @click="show_special_bulk_edit=true">一括編集</v-btn>
+            <v-btn @click="show_new_dlg=true">新規</v-btn>
+            <v-btn @click="show_bulk_edit_dlg=true">一括編集</v-btn>
           </v-col>
         </v-row>
       </v-card-title>
@@ -27,8 +27,9 @@
               </thead>
               <tbody>
                 <tr v-for="(r, i) in rewards" :key="i">
+                  <td><v-checkbox v-model="r.checked"/></td>
+                  <td>{{r.affiliate}}</td>
                   <td>{{ranks[r.rank-1]}}</td>
-                  <td>{{r.start}}から {{r.end}}まで </td>
                   <td>{{r.amount}}円 / 成約</td>
                   <td>{{r.is_show === 1 ? 'する' : 'No'}}</td>
                   <td>
@@ -61,7 +62,6 @@
       :show="show_detail_dlg"
       @onDetailClose="show_detail_dlg=false"/>
     <bulk-edit-reward-dlg
-      :items="bulks"
       :show="show_bulk_edit_dlg"
       @onEditClose="show_bulk_edit_dlg=false"
       @onEdited="saveEdited"/>
@@ -76,7 +76,7 @@
   import BulkEditRewardDlg from "./BulkEditRewardDlg";
   export default {
     name: "SettingStory",
-    components: {BulkEditRewardDlg, DetailRewardDlg, DeleteRewardDlg, NewRewardDlg, StoryItem},
+    components: {BulkEditRewardDlg, DetailRewardDlg, DeleteRewardDlg, NewRewardDlg},
     props: {
       rewards: {
         type: Array,
@@ -89,7 +89,8 @@
       show_delete_dlg: false,
       show_bulk_edit_dlg: false,
       selected: {},
-      bulks: []
+      bulks: [],
+      ranks: ['VIP','S VIP','SS VIP','QUEEN','KING']
     }),
     methods: {
       saveNew(val) {

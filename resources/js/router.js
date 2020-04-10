@@ -27,6 +27,12 @@ const router = new Router({
             component: require('./admin/campaign/new'),
         },
         {
+            name: 'admin.campaign.setting',
+            path: '/admin/campaign/setting',
+            component: require('./admin/campaign/setting'),
+            props: (route) => ({campaignId: route.params.id}),
+        },
+        {
             name: 'admin.affiliate.index',
             path: '/admin/affiliate',
             component: require('./admin/affiliate/index'),

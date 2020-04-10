@@ -4,11 +4,12 @@
       <v-row>
         <v-col cols="2" class="text-right">
           <v-label class=" story-item-label">
-            第{{item.no}}話
+            第{{item.id}}話
           </v-label>
         </v-col>
         <v-col>
           <v-text-field
+            dense outlined hide-details
             v-model="item.link"
             class="story-item_link"
           />

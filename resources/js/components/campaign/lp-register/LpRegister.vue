@@ -23,7 +23,7 @@
               hide-delimiter-background
             >
               <v-carousel-item
-                v-for="(lp, i) in LPs"
+                v-for="(lp, i) in items"
                 :key="i"
               >
                 <LpItem :item="lp" @onLpDetail="" @onLpDelete=""/>
@@ -49,15 +49,6 @@
     },
     data() {
       return {
-        rewardType: '基本報酬',
-        rewardTypes: ['基本報酬', '特別報酬', '先着報酬', '増加報酬'],
-        ranks: ['VIP','S VIP','SS VIP','QUEEN','KING'],
-        rewards: [
-          {id: 1, rank: 1, amount: 1000, is_show: 1, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          {id: 2, rank: 2, amount: 1000, is_show: 0, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          {id: 3, rank: 3, amount: 1000, is_show: 0, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          {id: 4, rank: 4, amount: 1000, is_show: 1, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-        ]
       }
     },
     methods: {

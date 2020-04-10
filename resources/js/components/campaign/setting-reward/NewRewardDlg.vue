@@ -52,6 +52,8 @@
   export default {
     props: {
       show: Boolean,
+    },
+    data: vm => ({
       item: {
         type: Object,
         id: {type: Number, default: 0},
@@ -59,8 +61,6 @@
         end: {type: String, default: ''},
         is_show: {type: Number, default: 1}
       }
-    },
-    data: vm => ({
     }),
     methods: {
     }

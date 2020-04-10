@@ -33,7 +33,12 @@
 
     <v-card-actions class="d-flex justify-center pb-4">
       <v-btn rounded color="#FF7777">実績</v-btn>
-      <v-btn rounded color="#5367FD">設定</v-btn>
+      <v-btn
+        rounded color="#5367FD"
+        to="/admin/campaign/setting"
+      >
+        設定
+      </v-btn>
       <v-btn
         rounded
         color="#1DE9B6"
@@ -50,49 +55,16 @@
     props: {
       item: {
         type: Object,
-        default() {
-          return null
-        },
-        id: {
-          type: Number,
-          required: false
-        },
-        title: {
-          type: String,
-          required: false
-        },
-        image: {
-          type: String,
-          required: false
-        },
-        date_start: {
-          type: String,
-          required: false
-        },
-        date_end: {
-          type: String,
-          required: false
-        },
-        register_number: {  // Number of registrations
-          type: Number,
-          required: false
-        },
-        expense: {
-          type: Number,
-          required: false
-        },
-        block_number: { // Number of blocks
-          type: Number,
-          required: false
-        },
-        block_rate: { // Number of blocks
-          type: Number,
-          required: false
-        },
-        average_lprr: { // Average LP registration rate
-          type: Number,
-          required: false
-        },
+        id: {type: Number, default: 0},
+        title: {type: String, default: ''},
+        image: {type: String, default: ''},
+        date_start: {type: String, default: ''},
+        date_end: {type: String, default: ''},
+        register_number: {type: Number, default: 0},
+        expense: {type: Number, default: 0},
+        block_number: {type: Number, default: 0},
+        block_rate: {type: Number, default: 0},
+        average_lprr: {type: Number, default: 0},
       }
     },
     methods: {
