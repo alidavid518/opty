@@ -44,14 +44,13 @@
   export default {
     props: {
       show: Boolean,
-      item: {
-        type: Object,
-        id: {type: Number, default: 0},
-        title: {type: String, default: ''},
-        content: {type: String, default: ''},
-      }
     },
     data: vm => ({
+      item: {
+        id: 0,
+        title: '',
+        content: '',
+      }
     }),
     methods: {
     }

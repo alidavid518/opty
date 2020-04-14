@@ -38,16 +38,19 @@
               <LpRegister :items="Lps"/>
             </v-tab-item>
             <v-tab-item value="mail-line-intro">
-              <MailLineIntroduction/>
+              <MailLineIntroduction :mail-introductions="mailIntroductions" :line-introductions="lineIntroductions"/>
             </v-tab-item>
             <v-tab-item value="period-set">
-              <PeriodSetting/>
+              <PeriodSetting @onPeriodSave="savePeriod"/>
             </v-tab-item>
             <v-tab-item value="reward-set">
               <RewardSetting :items="rewards"/>
             </v-tab-item>
             <v-tab-item value="line-rich-img">
               <LineRichImages :items="line_rich_items"/>
+            </v-tab-item>
+            <v-tab-item value="rank-except">
+              <RankExcept :items="except_items"/>
             </v-tab-item>
           </v-tabs-items>
         </v-col>
@@ -123,9 +126,12 @@
   import PeriodSetting from "../../components/campaign/setting-period/PeriodSetting";
   import RewardSetting from "../../components/campaign/setting-reward/RewardSetting";
   import LineRichImages from "../../components/campaign/line-rich-image/LineRichImages";
+  import RankExcept from "../../components/campaign/rank-except/RankExcept";
 
   export default {
-    components: {LineRichImages, RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting},
+    components: {
+      RankExcept,
+      LineRichImages, RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting},
     data() {
       return {
         tab: '',
@@ -145,7 +151,7 @@
           {text: '賞品登録', target: ''},
         ],
         otherSettingItems: [
-          {text: 'ランキング対象外者', target: ''},
+          {text: 'ランキング対象外者', target: 'rank-except'},
           {text: '成約除外IP設定', target: ''},
           {text: 'コンバージョン', target: ''},
           {text: 'ランキング集計', target: ''},
@@ -203,8 +209,23 @@
               {id: 9, url: '/img/sample/icons8-team.png'},
             ]
           },
+        ],
+        mailIntroductions: [
+          {id: 1, url: 'url1', title: 'LP1', mails: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
+          {id: 2, url: 'url2', title: 'LP2', mails: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
+          {id: 3, url: 'url3', title: 'LP3', mails: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
+        ],
+        lineIntroductions: [
+          {id: 1, url: 'url1', title: 'LP1', lines: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
+          {id: 2, url: 'url2', title: 'LP2', lines: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
+          {id: 3, url: 'url3', title: 'LP3', lines: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
+        ],
+        except_items: [
+          {id: 1, name: 'aff1', rank: 1},
+          {id: 2, name: 'aff2', rank: 2},
+          {id: 3, name: 'aff3', rank: 3},
+          {id: 4, name: 'aff4', rank: 4},
         ]
-
       }
     },
     mounted() {
@@ -219,6 +240,7 @@
     },
     methods: {
       selectCampaign() {},
+      savePeriod(val) { console.log(val) }
     },
     watch: {
       tab: (val, old) => {console.log(val)}

@@ -49,7 +49,7 @@
     },
     data: () => ({
       loading: false,
-      new_image: '',
+      new_image: null,
     }),
     methods: {
       deleteImage(img) {
@@ -101,7 +101,7 @@
 
 <style scoped lang="scss">
   ._line-rich-image-item {
-    height: 300px !important;
+    /*height: 300px !important;*/
     ._title {
       font-size: 1.2rem !important;
     }
@@ -109,8 +109,9 @@
       font-size: 0.8rem !important;
     }
     ._content {
-      width: 100% !important;
+      /*width: 100% !important;*/
       overflow-x: scroll;
+      display: flex;
     }
   }
 </style>

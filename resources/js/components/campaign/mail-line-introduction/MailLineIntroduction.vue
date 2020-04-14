@@ -22,10 +22,10 @@
       <v-card-text class="_content">
         <v-tabs-items v-model="tab">
           <v-tab-item key="mail">
-            <MailIntroductionList v-for="(mail_intro, i) in mailIntroductions" :key="i"/>
+            <MailIntroductionList v-for="(mail_intro, i) in mailIntroductions" :key="i" :item="mail_intro"/>
           </v-tab-item>
           <v-tab-item key="line">
-            <LineIntroductionList v-for="(line_intro, i) in lineIntroductions" :key="i"/>
+            <LineIntroductionList v-for="(line_intro, i) in lineIntroductions" :key="i" :item="line_intro"/>
           </v-tab-item>
         </v-tabs-items>
       </v-card-text>
@@ -39,36 +39,18 @@
   export default {
     components: {MailIntroductionList, LineIntroductionList},
     props: {
-      items: {
+      mailIntroductions: {
         type: Array,
         default: () => []
-      }
+      },
+      lineIntroductions: {
+        type: Array,
+        default: () => []
+      },
     },
     data() {
       return {
-        items: [
-          {id: 1, title: 'LP1', url: 'url1',
-            rich_images: [
-              {id: 1, url: '/img/sample/buzz-andersen.png'},
-              {id: 2, url: '/img/sample/buzz-andersen.png'},
-              {id: 3, url: '/img/sample/buzz-andersen.png'},
-            ]
-          },
-          {id: 2, title: 'LP2', url: 'url2',
-            rich_images: [
-              {id: 4, url: '/img/sample/daniel-monteiro.png'},
-              {id: 5, url: '/img/sample/daniel-monteiro.png'},
-              {id: 6, url: '/img/sample/daniel-monteiro.png'},
-            ]
-          },
-          {id: 3, title: 'LP3', url: 'url3',
-            rich_images: [
-              {id: 7, url: '/img/sample/icons8-team.png'},
-              {id: 8, url: '/img/sample/icons8-team.png'},
-              {id: 9, url: '/img/sample/icons8-team.png'},
-            ]
-          },
-        ]
+        tab: 'mail'
       }
     },
     methods: {

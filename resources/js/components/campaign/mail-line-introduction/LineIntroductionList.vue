@@ -5,26 +5,27 @@
         <v-row>
           <v-col cols="6">
             <h3 class="_title">{{item.title}}</h3>
-            <br/>
             <small class="_url">{{item.url}}</small>
           </v-col>
           <v-col cols="6" class="d-flex justify-end">
             <v-btn
-              dark color="success"
+              dark color="success" class="mr-2"
               @click="show_new_dlg=true"
-            />
+            >
+              新規
+            </v-btn>
             <v-btn
               dark color="primary"
               @click="save"
             >
-              登録
+              下書き
             </v-btn>
           </v-col>
         </v-row>
       </v-card-title>
       <v-card-text class="_content">
-        <div v-for="(intro, i) in item.mail_introductions" :key="i">
-          <mail-introduction-item
+        <div v-for="(intro, i) in item.lines" :key="i">
+          <LineIntroductionItem
             :item="intro"
             @onDelete="showDelete(intro)"
             @onDetail="showDetail(intro)"
@@ -50,20 +51,21 @@
 
 <script>
   import vuetifyToast from 'vuetify-toast'
-  import MailIntroductionItem from "./MailIntroductionItem";
   import NewIntroductionDlg from "./NewIntroductionDlg";
   import DeleteIntroductionDlg from "./DeleteIntroductionDlg";
   import DetailIntroductionDlg from "./DetailIntroductionDlg";
+  import LineIntroductionItem from "./LineIntroductionItem";
 
   export default {
-    components: {DetailIntroductionDlg, DeleteIntroductionDlg, NewIntroductionDlg, MailIntroductionItem},
+    components: {
+      LineIntroductionItem, DetailIntroductionDlg, DeleteIntroductionDlg, NewIntroductionDlg},
     props: {
       item: {
         type: Object,
         id: { type: Number, default: 0},
         title: {type: String, default: ''},
         url: {type: String, default: ''},
-        mail_introductions: {type: Array, default: []}
+        lines: {type: Array, default: []}
       }
     },
     data: () => ({
@@ -105,7 +107,6 @@
 
 <style scoped lang="scss">
   ._line-intro-list {
-    height: 300px !important;
     ._title {
       font-size: 1.2rem !important;
     }
@@ -113,7 +114,7 @@
       font-size: 0.8rem !important;
     }
     ._content {
-      width: 100% !important;
+      display: flex;
       overflow-x: scroll;
     }
   }
