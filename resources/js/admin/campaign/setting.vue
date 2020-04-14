@@ -58,6 +58,9 @@
             <v-tab-item value="lp-reward">
               <LpReward :items="lp_rewards"/>
             </v-tab-item>
+            <v-tab-item value="line-register">
+              <LineRegister/>
+            </v-tab-item>
           </v-tabs-items>
         </v-col>
       </v-row>
@@ -135,10 +138,11 @@
   import RankExcept from "../../components/campaign/rank-except/RankExcept";
   import LeadExtend from "../../components/campaign/lead-extend/LeadExtend";
   import LpReward from "../../components/campaign/lp-reward/LpReward";
+  import LineRegister from "../../components/campaign/line-register/LineRegister";
 
   export default {
     components: {
-      LpReward,
+      LpReward, LineRegister,
       RankExcept, LineRichImages, RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting, LeadExtend},
     data() {
       return {
@@ -149,7 +153,7 @@
           {text: '期間設定', target: 'period-set'},
           {text: 'LINE用リッチ画像', target: 'line-rich-img'},
           {text: 'メール/LINE紹介文', target: 'mail-line-intro'},
-          {text: 'LINE連携', target: 'line-link'},
+          {text: 'LINE連携', target: 'line-register'},
         ],
         transferSettingItems: [
           {text: '報酬額設定', target: 'reward-set'},
