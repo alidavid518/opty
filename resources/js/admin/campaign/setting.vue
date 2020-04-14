@@ -52,6 +52,9 @@
             <v-tab-item value="rank-except">
               <RankExcept :items="except_items"/>
             </v-tab-item>
+            <v-tab-item value="lead-extend">
+              <LeadExtend :vleads="lead_items" :vextends="extend_items"/>
+            </v-tab-item>
           </v-tabs-items>
         </v-col>
       </v-row>
@@ -127,11 +130,10 @@
   import RewardSetting from "../../components/campaign/setting-reward/RewardSetting";
   import LineRichImages from "../../components/campaign/line-rich-image/LineRichImages";
   import RankExcept from "../../components/campaign/rank-except/RankExcept";
+  import LeadExtend from "../../components/campaign/lead-extend/LeadExtend";
 
   export default {
-    components: {
-      RankExcept,
-      LineRichImages, RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting},
+    components: {RankExcept, LineRichImages, RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting, LeadExtend},
     data() {
       return {
         tab: '',
@@ -146,7 +148,7 @@
         transferSettingItems: [
           {text: '報酬額設定', target: 'reward-set'},
           {text: 'LP別報酬', target: 'lp-reward'},
-          {text: '先行 / 延長設定', target: ''},
+          {text: '先行 / 延長設定', target: 'lead-extend'},
           {text: '限定設定', target: ''},
           {text: '賞品登録', target: ''},
         ],
@@ -225,7 +227,17 @@
           {id: 2, name: 'aff2', rank: 2},
           {id: 3, name: 'aff3', rank: 3},
           {id: 4, name: 'aff4', rank: 4},
-        ]
+        ],
+        lead_items: [
+          {id: 1, affiliate: 'aff1', rank: 1, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
+          {id: 2, affiliate: 'aff2', rank: 2, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
+          {id: 3, affiliate: 'aff3', rank: 3, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
+        ],
+        extend_items: [
+          {id: 1, affiliate: 'aff1', rank: 4, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
+          {id: 2, affiliate: 'aff2', rank: 5, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
+          {id: 3, affiliate: 'aff3', rank: 3, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
+        ],
       }
     },
     mounted() {
