@@ -61,6 +61,9 @@
             <v-tab-item value="line-register">
               <LineRegister/>
             </v-tab-item>
+            <v-tab-item value="ip-except">
+              <ContractIpExcept :items="ip_excepts"/>
+            </v-tab-item>
           </v-tabs-items>
         </v-col>
       </v-row>
@@ -139,9 +142,11 @@
   import LeadExtend from "../../components/campaign/lead-extend/LeadExtend";
   import LpReward from "../../components/campaign/lp-reward/LpReward";
   import LineRegister from "../../components/campaign/line-register/LineRegister";
+  import ContractIpExcept from "../../components/campaign/contract-ip-except/ContractIpExcept";
 
   export default {
     components: {
+      ContractIpExcept,
       LpReward, LineRegister,
       RankExcept, LineRichImages, RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting, LeadExtend},
     data() {
@@ -164,7 +169,7 @@
         ],
         otherSettingItems: [
           {text: 'ランキング対象外者', target: 'rank-except'},
-          {text: '成約除外IP設定', target: ''},
+          {text: '成約除外IP設定', target: 'ip-except'},
           {text: 'コンバージョン', target: ''},
           {text: 'ランキング集計', target: ''},
         ],
@@ -262,6 +267,11 @@
             ]
           },
           {id: 3, title: 'title3', url: 'url3', is_public: 0, rewards: []},
+        ],
+        ip_excepts: [
+          {id: 1, lp_id: 1, ip: '111.111.111.111'},
+          {id: 2, lp_id: 1, ip: '222.111.111.111'},
+          {id: 3, lp_id: 1, ip: '333.111.111.111'},
         ]
       }
     },
