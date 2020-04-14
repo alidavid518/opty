@@ -47,7 +47,7 @@
               <v-col cols="12">
                 <label>開始日時</label>
                 <v-text-field type="date" outlined dense hide-details v-model="item.start_date" class="mr-2 d-inline-flex"/>
-                <v-text-field type="time" outlined dense hide-details v-model="item.start_time"/>
+                <v-text-field type="time" outlined dense hide-details v-model="item.start_time" class="d-inline-flex"/>
               </v-col>
             </v-row>
           </v-radio-group>

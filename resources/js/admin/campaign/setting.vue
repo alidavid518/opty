@@ -55,6 +55,9 @@
             <v-tab-item value="lead-extend">
               <LeadExtend :vleads="lead_items" :vextends="extend_items"/>
             </v-tab-item>
+            <v-tab-item value="lp-reward">
+              <LpReward :items="lp_rewards"/>
+            </v-tab-item>
           </v-tabs-items>
         </v-col>
       </v-row>
@@ -131,9 +134,12 @@
   import LineRichImages from "../../components/campaign/line-rich-image/LineRichImages";
   import RankExcept from "../../components/campaign/rank-except/RankExcept";
   import LeadExtend from "../../components/campaign/lead-extend/LeadExtend";
+  import LpReward from "../../components/campaign/lp-reward/LpReward";
 
   export default {
-    components: {RankExcept, LineRichImages, RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting, LeadExtend},
+    components: {
+      LpReward,
+      RankExcept, LineRichImages, RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting, LeadExtend},
     data() {
       return {
         tab: '',
@@ -238,6 +244,21 @@
           {id: 2, affiliate: 'aff2', rank: 5, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
           {id: 3, affiliate: 'aff3', rank: 3, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
         ],
+        lp_rewards: [
+          {id: 1, title: 'title1', url: 'url1', is_public: 1,
+            rewards: [
+              {id: 1, rank: 1, reward: 1000, start_date: '2020/01/05', start_time: '00:00', end_date: '2020/01/12', end_time: '12:00'},
+              {id: 2, rank: 3, reward: 3000, start_date: '2020/01/05', start_time: '00:00', end_date: '2020/01/12', end_time: '12:00'},
+            ]
+          },
+          {id: 2, title: 'title2', url: 'url2', is_public: 1,
+            rewards: [
+              {id: 1, rank: 2, reward: 2000, start_date: '2020/01/05', start_time: '00:00', end_date: '2020/01/12', end_time: '12:00'},
+              {id: 2, rank: 4, reward: 3000, start_date: '2020/01/05', start_time: '00:00', end_date: '2020/01/12', end_time: '12:00'},
+            ]
+          },
+          {id: 3, title: 'title3', url: 'url3', is_public: 0, rewards: []},
+        ]
       }
     },
     mounted() {

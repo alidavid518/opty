@@ -49,7 +49,7 @@
                   <v-col cols="12">開始日時</v-col>
                   <v-col cols="12">
                     <v-text-field type="date" outlined dense hide-details v-model="item.start_date" class="mr-2 d-inline-flex"/>
-                    <v-text-field type="time" outlined dense hide-details v-model="item.start_time"/>
+                    <v-text-field type="time" outlined dense hide-details v-model="item.start_time" class="d-inline-flex"/>
                   </v-col>
                 </v-row>
               </v-col>
@@ -57,8 +57,8 @@
           </v-radio-group>
         </v-card-text>
         <v-card-actions class="_action justify-center">
-          <v-btn @click="$emit('onNewLeadClose')">キャンセル</v-btn>
-          <v-btn dark color="success" @click="$emit('onNewLead', item)">保存</v-btn>
+          <v-btn @click="$emit('onNewExtendClose')">キャンセル</v-btn>
+          <v-btn dark color="success" @click="$emit('onNewExtend', item)">保存</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
