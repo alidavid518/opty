@@ -64,6 +64,12 @@
             <v-tab-item value="ip-except">
               <ContractIpExcept :items="ip_excepts"/>
             </v-tab-item>
+            <v-tab-item value="rank-summary">
+              <RankingSummary :items="ranking_summary_items"/>
+            </v-tab-item>
+            <v-tab-item value="prize-setting">
+              <PrizeSetting/>
+            </v-tab-item>
           </v-tabs-items>
         </v-col>
       </v-row>
@@ -143,11 +149,13 @@
   import LpReward from "../../components/campaign/lp-reward/LpReward";
   import LineRegister from "../../components/campaign/line-register/LineRegister";
   import ContractIpExcept from "../../components/campaign/contract-ip-except/ContractIpExcept";
+  import RankingSummary from "../../components/campaign/ranking-summary/RankingSummary";
+  import PrizeSetting from "../../components/campaign/prize-setting/PrizeSetting";
 
   export default {
     components: {
-      ContractIpExcept,
-      LpReward, LineRegister,
+      PrizeSetting,
+      RankingSummary, ContractIpExcept, LpReward, LineRegister,
       RankExcept, LineRichImages, RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting, LeadExtend},
     data() {
       return {
@@ -165,13 +173,13 @@
           {text: 'LP別報酬', target: 'lp-reward'},
           {text: '先行 / 延長設定', target: 'lead-extend'},
           {text: '限定設定', target: ''},
-          {text: '賞品登録', target: ''},
+          {text: '賞品登録', target: 'prize-setting'},
         ],
         otherSettingItems: [
           {text: 'ランキング対象外者', target: 'rank-except'},
           {text: '成約除外IP設定', target: 'ip-except'},
           {text: 'コンバージョン', target: ''},
-          {text: 'ランキング集計', target: ''},
+          {text: 'ランキング集計', target: 'rank-summary'},
         ],
         campaign: {
           id: 1,
@@ -272,6 +280,11 @@
           {id: 1, lp_id: 1, ip: '111.111.111.111'},
           {id: 2, lp_id: 1, ip: '222.111.111.111'},
           {id: 3, lp_id: 1, ip: '333.111.111.111'},
+        ],
+        ranking_summary_items: [
+          {affiliate: 'aaa', rank: 1, contract_number: 10, reward: 3000, ranking: 1},
+          {affiliate: 'bbb', rank: 2, contract_number: 9, reward: 2000, ranking: 2},
+          {affiliate: 'ccc', rank: 3, contract_number: 8, reward: 1000, ranking: 3},
         ]
       }
     },
