@@ -28,7 +28,10 @@
     </v-card-text>
 
     <v-card-actions class="d-flex justify-center mt-2">
-      <v-btn outlined>詳細</v-btn>
+      <v-btn
+        outlined
+        :to="{name:'admin.campaign.detail'}"
+      >詳細</v-btn>
     </v-card-actions>
 
     <v-card-actions class="d-flex justify-center pb-4">
