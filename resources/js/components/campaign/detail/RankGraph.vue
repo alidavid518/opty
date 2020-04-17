@@ -4,11 +4,11 @@
       <v-col cols="12">
         <label class="title">ランク別分析</label>
         <br/>
-        <v-btn outlined @click="$emit('onExpand', 'rank')">詳細</v-btn>
+        <v-btn outlined @click="$emit('onExpand', 1)">詳細</v-btn>
       </v-col>
     </v-card-title>
     <v-card-text>
-      <v-row>
+        <v-row>
         <v-col cols="6" xs="12">
           <donut-chart :chart-data="chartData" :options="chartOption"/>
         </v-col>

@@ -4,7 +4,7 @@
       <v-col cols="3">
         <label class="title">データ推移</label>
         <br/>
-        <v-btn outlined @click="$emit('onExpand', 'data')">詳細</v-btn>
+        <v-btn outlined @click="$emit('onExpand', 0)">詳細</v-btn>
       </v-col>
       <v-col cols="3" class="text-center">
         <p class="purple--text subtitle-1 mb-1">アクセス</p>
@@ -44,7 +44,17 @@
     data() {
       return {
         chartData: {},
-        chartOption: {}
+        chartOption: {
+          scales: {
+            yAxes: [
+              { id: 'Access', type: 'linear', position: 'left', },
+              { id: 'Register', type: 'linear', position: 'left',},
+              { id: 'Contract', type: 'linear', position: 'left',},
+            ]
+          },
+          responsive: true,
+          maintainAspectRatio: false
+        }
       }
     },
     mounted() {
@@ -64,17 +74,6 @@
             {label: '新規登録', yAxisID: 'Register', data: this.data.register.map(x => x.value), fill: false, backgroundColor: '#6AD7FF', borderColor: '#6AD7FF'},
             {label: '新規成約', yAxisID: 'Contract', data: this.data.contract.map(x => x.value), fill: false, backgroundColor: 'red', borderColor: 'red'},
           ]
-        }
-        this.chartOption = {
-          scales: {
-            yAxes: [
-              { id: 'Access', type: 'linear', position: 'left', },
-              { id: 'Register', type: 'linear', position: 'left',},
-              { id: 'Contract', type: 'linear', position: 'left',},
-            ]
-          },
-          responsive: true,
-          maintainAspectRatio: false
         }
       },
       total(arr) {

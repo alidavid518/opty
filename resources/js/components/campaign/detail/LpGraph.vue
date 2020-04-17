@@ -2,49 +2,38 @@
   <v-card>
     <v-card-title>
       <v-col cols="3">
-        <label class="title">データ推移</label>
+        <label class="title">LP分析</label>
         <br/>
-        <v-btn outlined @click="$emit('onExpand', 'data')">詳細</v-btn>
-      </v-col>
-      <v-col cols="3" class="text-center">
-        <p class="purple--text subtitle-1 mb-1">アクセス</p>
-        <p class="purple--text title font-weight-bold mb-1">{{total(data.access)}}</p>
-        <p class="subtitle-1 mb-1">前日比 {{diff(data.access)}}</p>
-      </v-col>
-      <v-col cols="3" class="text-center">
-        <p class="light-blue--text subtitle-1 mb-1">登録</p>
-        <p class="light-blue--text title font-weight-bold mb-1">{{total(data.register)}}</p>
-        <p class="subtitle-1 mb-1">前日比 {{diff(data.register)}}</p>
-      </v-col>
-      <v-col cols="3" class="text-center">
-        <p class="red--text subtitle-1 mb-1">成約</p>
-        <p class="red--text title font-weight-bold mb-1">{{total(data.contract)}}</p>
-        <p class="subtitle-1 mb-1">前日比 {{diff(data.contract)}}</p>
+        <v-btn outlined @click="$emit('onExpand', 2)">詳細</v-btn>
       </v-col>
     </v-card-title>
     <v-card-text>
-      <line-chart :chart-data="chartData" :options="chartOption"/>
+      <bar-chart :chart-data="chartData" :options="chartOption"/>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-  import LineChart from "../../common/LineChart";
+  import BarChart from "../../common/BarChart";
 
   export default {
-    components: {LineChart},
+    components: {BarChart},
     props: {
-      data: {
-        type: Object,
-        access: {type: Array, default: []},
-        register: {type: Array, default: []},
-        contract: {type: Array, default: []},
-      }
+      data: { type: Array, default: [] }
     },
     data() {
       return {
         chartData: {},
-        chartOption: {}
+        chartOption: {
+          scales: {
+            yAxes: [
+              { id: 'Click', type: 'linear', position: 'left', },
+              { id: 'Rate', type: 'linear', position: 'right', ticks: {suggestedMin: 0, suggestedMax: 100 }},
+            ]
+          },
+          responsive: true,
+          maintainAspectRatio: false
+        }
       }
     },
     mounted() {
@@ -58,36 +47,14 @@
     methods: {
       loadGraph() {
         this.chartData = {
-          labels: this.data.access.map(x => x.date),
+          labels: this.data.map(x => x.name),
           datasets: [
-            {label: 'アクセス', yAxisID: 'Access', data: this.data.access.map(x => x.value), fill: false, backgroundColor: 'purple', borderColor: 'purple'},
-            {label: '新規登録', yAxisID: 'Register', data: this.data.register.map(x => x.value), fill: false, backgroundColor: '#6AD7FF', borderColor: '#6AD7FF'},
-            {label: '新規成約', yAxisID: 'Contract', data: this.data.contract.map(x => x.value), fill: false, backgroundColor: 'red', borderColor: 'red'},
+            {label: 'クリック数', yAxisID: 'Click', data: this.data.map(x => x.click), fill: false, backgroundColor: '#6AD7FF', borderColor: '#6AD7FF'},
+            {label: '成約件数', yAxisID: 'Click', data: this.data.map(x => x.contract), fill: false, backgroundColor: 'red', borderColor: 'red'},
+            {label: '成約率', yAxisID: 'Rate', data: this.data.map(x => x.click === 0 ? 0 : (x.contract*100/x.click).toFixed(2)), fill: false, backgroundColor: 'purple', borderColor: 'purple'},
           ]
         }
-        this.chartOption = {
-          scales: {
-            yAxes: [
-              { id: 'Access', type: 'linear', position: 'left', },
-              { id: 'Register', type: 'linear', position: 'left',},
-              { id: 'Contract', type: 'linear', position: 'left',},
-            ]
-          },
-          responsive: true,
-          maintainAspectRatio: false
-        }
       },
-      total(arr) {
-        let sum = 0
-        arr.forEach(a => { sum += a.value})
-        return sum
-      } ,
-      diff(arr) {
-        const length = arr.length
-        if(length === 0) return 0
-        if(length === 1) return arr[0].value
-        if(length > 1) return arr[length-1].value - arr[length-2].value
-      }
     }
   }
 </script>
