@@ -105,10 +105,10 @@
 </template>
 
 <script>
-  import NotifyNewDlg from "../../../components/notify/NotifyNewDialog"
-  import NotifyEditDlg from "../../../components/notify/NotifyEditDialog"
-  import NotifyDetailDlg from "../../../components/notify/NotifyDetailDialog"
-  import NotifyDeleteDlg from "../../../components/notify/NotifyDeleteDialog"
+  import NotifyNewDlg from "../../../components/admin/notify/NotifyNewDialog"
+  import NotifyEditDlg from "../../../components/admin/notify/NotifyEditDialog"
+  import NotifyDetailDlg from "../../../components/admin/notify/NotifyDetailDialog"
+  import NotifyDeleteDlg from "../../../components/admin/notify/NotifyDeleteDialog"
 
   export default {
     components: {NotifyNewDlg, NotifyEditDlg, NotifyDeleteDlg, NotifyDetailDlg},

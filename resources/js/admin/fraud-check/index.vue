@@ -111,10 +111,10 @@
 </template>
 
 <script>
-  import DraftListDialog from "../../components/fraud-check/DraftListDialog";
-  import NewReserveDialog from "../../components/fraud-check/NewReservationDialog";
-  import EditDialog from "../../components/fraud-check/EditDialog";
-  import NewCandidateDialog from "../../components/fraud-check/NewCandidateDialog";
+  import DraftListDialog from "../../components/admin/fraud-check/DraftListDialog";
+  import NewReserveDialog from "../../components/admin/fraud-check/NewReservationDialog";
+  import EditDialog from "../../components/admin/fraud-check/EditDialog";
+  import NewCandidateDialog from "../../components/admin/fraud-check/NewCandidateDialog";
 
   export default {
     components: {NewCandidateDialog, EditDialog, NewReserveDialog, DraftListDialog},

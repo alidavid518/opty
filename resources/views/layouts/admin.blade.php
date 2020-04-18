@@ -193,11 +193,14 @@
           <v-icon>mdi-plus</v-icon>
         </v-btn>
 
+        @php($profile = Auth::user()->profile)
         <v-avatar left>
-          <v-img :src="'https://cdn.vuetifyjs.com/images/lists/3.jpg'"></v-img>
+          @if ($profile->avatar !== '')
+            <v-img src="{{$profile->avatar}}"></v-img>
+          @endif
         </v-avatar>
 
-        <v-btn text> John Doe</v-btn>
+        <v-btn text>{{$profile->first_name}} {{$profile->last_name}}</v-btn>
 
         <v-menu
           bottom
@@ -212,7 +215,7 @@
             </v-btn>
           </template>
           <v-list :tile="false" nav dense>
-            <v-list-item @click="clickLogout('{{route('logout')}}','{{url('/login')}}')">
+            <v-list-item @click="clickLogout('{{url('/logout')}}','{{url('/login')}}')">
               <v-list-item-icon>
                 <v-icon>mdi-power</v-icon>
               </v-list-item-icon>
@@ -236,42 +239,6 @@
         <span>&copy; {{ date('Y') }}</span>
       </v-footer>
     </v-app>
-
-    <!-- loader -->
-  {{-- <div v-if="showLoader" class="wask_loader bg_half_transparent">
-      <moon-loader color="red"></moon-loader>
-  </div> --}}
-
-  <!-- snackbar -->
-{{--    <v-snackbar--}}
-{{--      :timeout="snackbarDuration"--}}
-{{--      :color="snackbarColor"--}}
-{{--      top--}}
-{{--      v-model="showSnackbar">--}}
-{{--      @{{ snackbarMessage }}--}}
-{{--    </v-snackbar>--}}
-
-    <!-- dialog confirm -->
-{{--    <v-dialog v-show="showDialog" v-model="showDialog" absolute max-width="450px">--}}
-{{--      <v-card>--}}
-{{--        <v-card-title>--}}
-{{--          <div class="headline">--}}
-{{--            <v-icon v-if="dialogIcon">@{{dialogIcon}}</v-icon>--}}
-{{--            @{{ dialogTitle }}--}}
-{{--          </div>--}}
-{{--        </v-card-title>--}}
-{{--        <v-card-text>@{{ dialogMessage }}</v-card-text>--}}
-{{--        <v-card-actions v-if="dialogType=='confirm'">--}}
-{{--          <v-spacer></v-spacer>--}}
-{{--          <v-btn color="orange darken-1" text @click.native="dialogCancel">Cancel</v-btn>--}}
-{{--          <v-btn color="green darken-1" text @click.native="dialogOk">Ok</v-btn>--}}
-{{--        </v-card-actions>--}}
-{{--      </v-card>--}}
-{{--    </v-dialog>--}}
-
-    <!-- the progress bar -->
-{{--    <vue-progress-bar></vue-progress-bar>--}}
-
   </template>
 
 </div>

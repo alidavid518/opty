@@ -14,7 +14,6 @@ import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/dist/vuetify.min.css';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
-import VueProgressBar from 'vue-progressbar'
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
@@ -24,19 +23,6 @@ import VueDayjs from 'vue-dayjs-plugin'
 Vue.use(Vuetify)
 Vue.use(VueDayjs)
 Vue.use(VueQuillEditor)
-
-Vue.use(VueProgressBar,{
-    color: '#3f51b5',
-    failedColor: '#b71c1c',
-    thickness: '5px',
-    transition: {
-        speed: '0.2s',
-        opacity: '0.6s',
-        termination: 300
-    },
-    autoRevert: true,
-    inverse: false
-});
 
 // global component registrations here
 Vue.component('moon-loader', require('vue-spinner/src/MoonLoader.vue'));
@@ -121,11 +107,11 @@ const app = new Vue({
     mounted() {
         const self = this;
         // progress bar top
-        AxiosAjaxDetect.init(()=>{
-            self.$Progress.start();
-        },()=>{
-            self.$Progress.finish();
-        });
+        // AxiosAjaxDetect.init(()=>{
+        //     self.$Progress.start();
+        // },()=>{
+        //     self.$Progress.finish();
+        // });
     },
     computed: {
         getBreadcrumbs() {

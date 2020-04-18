@@ -24,6 +24,7 @@ class CreateProfilesTable extends Migration
             $table->string('gender')->default('none')->comment('gender of user: male, female, none');
             $table->date('dob')->nullable();
             $table->string('site')->nullable();
+            $table->string('avatar')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

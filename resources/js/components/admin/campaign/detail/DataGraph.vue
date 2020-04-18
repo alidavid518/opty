@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import LineChart from "../../common/LineChart";
+  import LineChart from "../../../common/LineChart";
 
   export default {
     components: {LineChart},

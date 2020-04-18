@@ -129,11 +129,11 @@
 </template>
 
 <script>
-  import DraftListDialog from "../../components/transfer/DraftListDialog";
-  import NewDialog from "../../components/transfer/NewDialog";
-  import EditDialog from "../../components/transfer/EditDialog";
-  import DeleteDialog from "../../components/transfer/DeleteDialog";
-  import DetailDialog from "../../components/transfer/DetailDialog";
+  import DraftListDialog from "../../components/admin/transfer/DraftListDialog";
+  import NewDialog from "../../components/admin/transfer/NewDialog";
+  import EditDialog from "../../components/admin/transfer/EditDialog";
+  import DeleteDialog from "../../components/admin/transfer/DeleteDialog";
+  import DetailDialog from "../../components/admin/transfer/DetailDialog";
 
   export default {
     components: {DetailDialog, DeleteDialog, EditDialog, NewDialog, DraftListDialog},

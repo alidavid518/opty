@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import DonutChart from "../../common/DonutChart";
+  import DonutChart from "../../../common/DonutChart";
 
   export default {
     components: {DonutChart},

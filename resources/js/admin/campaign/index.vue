@@ -53,9 +53,9 @@
 </template>
 
 <script>
-  import CampaignItem from "../../components/campaign/CampaignItem";
-  import NewCampaignDialog from "../../components/campaign/NewCampaignDialog";
-  import EditCampaignDialog from "../../components/campaign/EditCampaignDialog";
+  import CampaignItem from "../../components/admin/campaign/CampaignItem";
+  import NewCampaignDialog from "../../components/admin/campaign/NewCampaignDialog";
+  import EditCampaignDialog from "../../components/admin/campaign/EditCampaignDialog";
 
   export default {
     components: {CampaignItem, NewCampaignDialog, EditCampaignDialog},

@@ -9,7 +9,7 @@
     >
       <v-card>
         <v-card-title class="campaign-dialog_title headline">
-          キャンペーン新規登録
+          キャンペーン登録
         </v-card-title>
         <hr/>
         <v-card-text class="campaign-dialog_content">
@@ -65,7 +65,7 @@
                 <v-label>Youtube予告URL</v-label>
               </v-col>
               <v-col cols="8" class="campaign-dialog_block_control">
-                <v-text-field placeholder="Youtube予告URL"/>
+                <v-text-field/>
               </v-col>
             </v-row>
             <!-- アフィリエイター向け PR文 -->
@@ -74,22 +74,15 @@
                 <v-label>
                   アフィリエイター向け PR文
                 </v-label>
+                <br/>
+                <v-btn
+                  @click="prDlgShow = true"
+                >
+                  詳細編集画面
+                </v-btn>
               </v-col>
               <v-col cols="8" class="campaign-dialog_block_control">
-                <v-row>
-                  <v-col>
-                    <v-textarea outlined placeholder="アフィリエイター向け PR文"/>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <v-btn
-                      @click="prDlgShow = true"
-                    >
-                      詳細編集画面
-                    </v-btn>
-                  </v-col>
-                </v-row>
+                <v-textarea outlined placeholder="アフィリエイター向け PR文"/>
               </v-col>
             </v-row>
             <!-- 成約除外メアドリダイレクトURL -->
@@ -102,7 +95,7 @@
               <v-col cols="8" class="campaign-dialog_block_control">
                 <v-text-field
                   placeholder="成約除外メアドリダイレクトURL"
-                  hint="www.example.com/page"
+                  hint="成約除外メールアドレスに登録された方が応募した際にリダイレクトさせるURLを入力してください。"
                   persistent-hint
                 />
               </v-col>
@@ -130,8 +123,6 @@
                         <v-text-field
                           v-model="dateFromFormatted"
                           label="Date"
-                          hint="MM/DD/YYYY format"
-                          persistent-hint
                           prepend-icon="event"
                           suffix="から"
                           @blur="dateFrom = parseDate(dateFrom)"
@@ -345,3 +336,37 @@
     },
   }
 </script>
+<style scoped lang="scss">
+  .campaign-dialog {
+
+    &_title {
+      text-align: center;
+      display:block !important;
+    }
+
+    &_block {
+      padding-right: 20px;
+      padding-left: 20px;
+      border-bottom: 1px solid #777;
+    }
+
+    &_block_label {
+      display: flex;
+      align-items: center;
+    }
+
+    &_content {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    &_action {
+      justify-content: center;
+      padding: 10px 0 20px !important;
+
+      .v-btn__content {
+        color: white;
+      }
+    }
+  }
+</style>

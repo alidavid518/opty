@@ -62,7 +62,7 @@
 </template>
 
 <script>
-  import BarChart from "../../common/BarChart";
+  import BarChart from "../../../common/BarChart";
   export default {
     components: {BarChart},
     props: {

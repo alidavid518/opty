@@ -121,11 +121,11 @@
 </template>
 
 <script>
-  import ContactNewDlg from "../../../components/contact/ContactNewDialog";
-  import ContactEditDlg from "../../../components/contact/ContactEditDialog";
-  import ContactDetailDlg from "../../../components/contact/ContactDetailDialog";
-  import ContactDeleteDlg from "../../../components/contact/ContactDeleteDialog";
-  import ContactDraftListDlg from "../../../components/contact/ContactDraftListDialog";
+  import ContactNewDlg from "../../../components/admin/contact/ContactNewDialog";
+  import ContactEditDlg from "../../../components/admin/contact/ContactEditDialog";
+  import ContactDetailDlg from "../../../components/admin/contact/ContactDetailDialog";
+  import ContactDeleteDlg from "../../../components/admin/contact/ContactDeleteDialog";
+  import ContactDraftListDlg from "../../../components/admin/contact/ContactDraftListDialog";
 
   export default {
     components: {ContactNewDlg, ContactEditDlg, ContactDetailDlg, ContactDeleteDlg, ContactDraftListDlg},

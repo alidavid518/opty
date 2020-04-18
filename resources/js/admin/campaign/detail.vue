@@ -55,16 +55,16 @@
 </template>
 
 <script>
-  import TopPanel from "../../components/campaign/detail/TopPanel";
-  import DataGraph from "../../components/campaign/detail/DataGraph";
-  import DataDetailGraph from "../../components/campaign/detail/DataDetailGraph";
-  import AffiliateGraph from "../../components/campaign/detail/AffiliateGraph";
-  import AffiliateDetailGraph from "../../components/campaign/detail/AffiliateDetailGraph";
-  import LpGraph from "../../components/campaign/detail/LpGraph";
-  import LpDetailGraph from "../../components/campaign/detail/LpDetailGraph";
-  import WpDetailGraph from "../../components/campaign/detail/WpDetailGraph";
-  import RankGraph from "../../components/campaign/detail/RankGraph";
-  import RankDetailGraph from "../../components/campaign/detail/RankDetailGraph";
+  import TopPanel from "../../components/admin/campaign/detail/TopPanel";
+  import DataGraph from "../../components/admin/campaign/detail/DataGraph";
+  import DataDetailGraph from "../../components/admin/campaign/detail/DataDetailGraph";
+  import AffiliateGraph from "../../components/admin/campaign/detail/AffiliateGraph";
+  import AffiliateDetailGraph from "../../components/admin/campaign/detail/AffiliateDetailGraph";
+  import LpGraph from "../../components/admin/campaign/detail/LpGraph";
+  import LpDetailGraph from "../../components/admin/campaign/detail/LpDetailGraph";
+  import WpDetailGraph from "../../components/admin/campaign/detail/WpDetailGraph";
+  import RankGraph from "../../components/admin/campaign/detail/RankGraph";
+  import RankDetailGraph from "../../components/admin/campaign/detail/RankDetailGraph";
 
   export default {
     components: {TopPanel, DataGraph, DataDetailGraph, AffiliateGraph, AffiliateDetailGraph, LpGraph, LpDetailGraph, WpDetailGraph, RankGraph, RankDetailGraph},

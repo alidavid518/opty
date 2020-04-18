@@ -71,8 +71,8 @@
       }
     },
     methods: {
-      format(val) {
-        return val.toFixed(0).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+      format(val,digs=0) {
+        return val.toFixed(digs).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
       },
       edit() {
         this.$router.push(`/admin/campaign/edit/${this.item.id}`)
@@ -81,6 +81,27 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .campaign-item {
+    height: 500px;
 
+    .v-image {
+      height: 200px;
+    }
+
+    &_title, &_subtitle, &_text {
+      text-align: center;
+      padding: 10px 16px 0 !important;
+    }
+
+    &_text {
+      text-align: center;
+      padding: 7px 16px 0 !important;
+    }
+
+    &_title {
+      font-size: 1.1rem !important;
+      font-weight: 600;
+    }
+  }
 </style>

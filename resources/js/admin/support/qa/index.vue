@@ -91,10 +91,10 @@
 </template>
 
 <script>
-  import QaNewDialog from "../../../components/qa/QaNewDialog";
-  import QaEditDialog from "../../../components/qa/QaEditDialog";
-  import QaDetailDialog from "../../../components/qa/QaDetailDialog";
-  import QaDeleteDialog from "../../../components/qa/QaDeleteDialog";
+  import QaNewDialog from "../../../components/admin/qa/QaNewDialog";
+  import QaEditDialog from "../../../components/admin/qa/QaEditDialog";
+  import QaDetailDialog from "../../../components/admin/qa/QaDetailDialog";
+  import QaDeleteDialog from "../../../components/admin/qa/QaDeleteDialog";
 
   export default {
     components: {QaNewDialog, QaEditDialog, QaDetailDialog, QaDeleteDialog},

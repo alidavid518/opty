@@ -22,25 +22,25 @@
             :items="['日間チャート']"
           />
         </v-col>
-<!--        <v-col cols="12">-->
-<!--          <v-select-->
-<!--            outlined dense hide-details-->
-<!--            :items="['全体表示']"-->
-<!--          />-->
-<!--        </v-col>-->
+        <v-col cols="12">
+          <v-select
+            outlined dense hide-details
+            :items="['全体表示']"
+          />
+        </v-col>
         <v-col cols="12">
           <v-card>
-            <v-card-subtitle>誘導数</v-card-subtitle>
+            <v-card-subtitle>経費</v-card-subtitle>
             <v-card-text class="text-center font-weight-bold title">
-              {{format(last(data.induction))}}
+              {{format(data.expense)}}
             </v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12">
           <v-card>
-            <v-card-subtitle>誘導率</v-card-subtitle>
+            <v-card-subtitle>成約数 / 率</v-card-subtitle>
             <v-card-text class="text-center font-weight-bold title">
-              {{format(last(data.induction_rate),2)}}%
+              {{format(last(data.contract))}}/{{format(last(data.contract_rate),2)}}%
             </v-card-text>
           </v-card>
         </v-col>
@@ -51,9 +51,9 @@
       <v-row>
         <v-col cols="4">
           <v-card>
-            <v-card-subtitle>平均移行率</v-card-subtitle>
+            <v-card-subtitle>稼働アフィリエイター数</v-card-subtitle>
             <v-card-text class="text-center title font-weight-bold">
-              {{format(last(data.average_induction_rate))}}
+              {{format(last(data.workings))}}
             </v-card-text>
           </v-card>
         </v-col>
@@ -67,9 +67,9 @@
         </v-col>
         <v-col cols="4">
           <v-card>
-            <v-card-subtitle>最終残存率</v-card-subtitle>
+            <v-card-subtitle>クリック単価 / 平均単価</v-card-subtitle>
             <v-card-text class="text-center title font-weight-bold">
-              {{format(last(data.final_rate))}}
+              {{format(last(data.click_unit))}}
             </v-card-text>
           </v-card>
         </v-col>
@@ -84,7 +84,7 @@
 </template>
 
 <script>
-  import LineChart from "../../common/LineChart";
+  import LineChart from "../../../common/LineChart";
   export default {
     name: "LpItem",
     components: {LineChart},
@@ -95,13 +95,15 @@
         image: {type: String, default: ''},
         name: {type: String, default: ''},
         title: {type: String, default: ''},
+        expense: {type: Number, default: 0},
         datetime: {type: Array, default: []},
-        induction: {type: Array, default: []},
-        induction_rate: {type: Array, default: []},
+        contract: {type: Array, default: []},
+        contract_rate: {type: Array, default: []},
+        workings: {type: Array, default: []},
         clicks: {type: Array, default: []},
         uniques: {type: Array, default: []},
-        average_induction_rate:{type: Array, default: []},
-        final_rate:{type: Array, default: []},
+        click_unit: {type: Array, default: []},
+        average_unit: {type: Array, default: []},
       }
     },
     data() {
@@ -137,8 +139,11 @@
         this.chartData = {
           labels: this.data.datetime,
           datasets: [
-            {label: '視聴数',yAxisID: 'Number',data: this.data.induction,fill: false,backgroundColor: '#89DFFF',borderColor: '#89DFFF'},
-            {label: '視聴率',yAxisID: 'Percent',data: this.data.induction_rate,fill: false,backgroundColor: '#FF8997',borderColor: '#FF8997'},
+            {label: '稼働アフィリエイター数',yAxisID: 'Number',data: this.data.workings,fill: false,backgroundColor: 'grey',borderColor: 'grey'},
+            {label: 'クリック数',yAxisID: 'Number',data: this.data.clicks,fill: false,backgroundColor: '#2DF96C',borderColor: '#2DF96C'},
+            {label: '成約数',yAxisID: 'Number',data: this.data.contract,fill: false,backgroundColor: 'red',borderColor: 'red'},
+            {label: 'ユニーク数',yAxisID: 'Number',data: this.data.uniques,fill: false,backgroundColor: '#007DAC',borderColor: '#007DAC'},
+            {label: '成約率',yAxisID: 'Percent',data: this.data.contract_rate,fill: false,backgroundColor: 'pink',borderColor: 'pink'},
           ]
         }
       },

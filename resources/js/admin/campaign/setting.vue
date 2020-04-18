@@ -138,19 +138,19 @@
 </template>
 
 <script>
-  import SettingStory from "../../components/campaign/setting-story/SettingStory";
-  import LpRegister from "../../components/campaign/lp-register/LpRegister";
-  import MailLineIntroduction from "../../components/campaign/mail-line-introduction/MailLineIntroduction";
-  import PeriodSetting from "../../components/campaign/setting-period/PeriodSetting";
-  import RewardSetting from "../../components/campaign/setting-reward/RewardSetting";
-  import LineRichImages from "../../components/campaign/line-rich-image/LineRichImages";
-  import RankExcept from "../../components/campaign/rank-except/RankExcept";
-  import LeadExtend from "../../components/campaign/lead-extend/LeadExtend";
-  import LpReward from "../../components/campaign/lp-reward/LpReward";
-  import LineRegister from "../../components/campaign/line-register/LineRegister";
-  import ContractIpExcept from "../../components/campaign/contract-ip-except/ContractIpExcept";
-  import RankingSummary from "../../components/campaign/ranking-summary/RankingSummary";
-  import PrizeSetting from "../../components/campaign/prize-setting/PrizeSetting";
+  import SettingStory from "../../components/admin/campaign/setting-story/SettingStory";
+  import LpRegister from "../../components/admin/campaign/lp-register/LpRegister";
+  import MailLineIntroduction from "../../components/admin/campaign/mail-line-introduction/MailLineIntroduction";
+  import PeriodSetting from "../../components/admin/campaign/setting-period/PeriodSetting";
+  import RewardSetting from "../../components/admin/campaign/setting-reward/RewardSetting";
+  import LineRichImages from "../../components/admin/campaign/line-rich-image/LineRichImages";
+  import RankExcept from "../../components/admin/campaign/rank-except/RankExcept";
+  import LeadExtend from "../../components/admin/campaign/lead-extend/LeadExtend";
+  import LpReward from "../../components/admin/campaign/lp-reward/LpReward";
+  import LineRegister from "../../components/admin/campaign/line-register/LineRegister";
+  import ContractIpExcept from "../../components/admin/campaign/contract-ip-except/ContractIpExcept";
+  import RankingSummary from "../../components/admin/campaign/ranking-summary/RankingSummary";
+  import PrizeSetting from "../../components/admin/campaign/prize-setting/PrizeSetting";
 
   export default {
     components: {

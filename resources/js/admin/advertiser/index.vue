@@ -100,11 +100,11 @@
 </template>
 
 <script>
-  import NewDlg from "../../components/advertiser/NewDialog";
-  import EditDlg from "../../components/advertiser/EditDialog";
-  import DetailDlg from "../../components/advertiser/DetailDialog";
-  import DeleteDlg from "../../components/advertiser/DeleteDialog";
-  import DraftListDlg from "../../components/advertiser/DraftListDialog";
+  import NewDlg from "../../components/admin/advertiser/NewDialog";
+  import EditDlg from "../../components/admin/advertiser/EditDialog";
+  import DetailDlg from "../../components/admin/advertiser/DetailDialog";
+  import DeleteDlg from "../../components/admin/advertiser/DeleteDialog";
+  import DraftListDlg from "../../components/admin/advertiser/DraftListDialog";
 
   export default {
     components: {NewDlg, EditDlg, DetailDlg, DeleteDlg, DraftListDlg},

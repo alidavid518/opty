@@ -136,11 +136,11 @@
 </template>
 
 <script>
-  import DraftListDialog from "../../components/affiliate/DraftListDialog";
-  import NewDialog from "../../components/affiliate/NewDialog";
-  import EditDialog from "../../components/affiliate/EditDialog";
-  import DeleteDialog from "../../components/affiliate/DeleteDialog";
-  import DetailDialog from "../../components/affiliate/DetailDialog";
+  import DraftListDialog from "../../components/admin/affiliate/DraftListDialog";
+  import NewDialog from "../../components/admin/affiliate/NewDialog";
+  import EditDialog from "../../components/admin/affiliate/EditDialog";
+  import DeleteDialog from "../../components/admin/affiliate/DeleteDialog";
+  import DetailDialog from "../../components/admin/affiliate/DetailDialog";
 
   export default {
     components: {DetailDialog, DeleteDialog, EditDialog, NewDialog, DraftListDialog},

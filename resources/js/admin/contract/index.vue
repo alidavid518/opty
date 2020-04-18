@@ -111,11 +111,11 @@
 </template>
 
 <script>
-  import NewDlg from "../../components/manager/NewDialog";
-  import EditDlg from "../../components/manager/EditDialog";
-  import DetailDlg from "../../components/manager/DetailDialog";
-  import DeleteDlg from "../../components/manager/DeleteDialog";
-  import AccountDlg from "../../components/manager/AccountDialog";
+  import NewDlg from "../../components/admin/manager/NewDialog";
+  import EditDlg from "../../components/admin/manager/EditDialog";
+  import DetailDlg from "../../components/admin/manager/DetailDialog";
+  import DeleteDlg from "../../components/admin/manager/DeleteDialog";
+  import AccountDlg from "../../components/admin/manager/AccountDialog";
 
   export default {
     components: {AccountDlg, NewDlg, EditDlg, DetailDlg, DeleteDlg},
