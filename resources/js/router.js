@@ -52,13 +52,20 @@ const router = new Router({
     },
 
     /** USER Routes **/
-      {name: 'user.asp.index', path: '/user/asp/index', component: require('./user/asp/index')},
-      {
-        name: 'user.asp.campaign',
-        path: '/user/asp/campaigns/:id',
-        component: require('./user/asp/campaigns'),
-        props: (route) => ({aspId: route.params.id})
-      },
+    {name: 'user.asp.index', path: '/user/asp/index', component: require('./user/asp/index')},
+    {
+      name: 'user.asp.campaign',
+      path: '/user/asp/campaigns/:id',
+      component: require('./user/asp/campaigns'),
+      props: (route) => ({aspId: route.params.id})
+    },
+    {name: 'user.campaign.index', path: '/user/campaign/index', component: require('./user/campaign/index')},
+    {name: 'user.contract.index', path: '/user/contract/index', component: require('./user/contract/index')},
+    {name: 'user.contract.show', path: '/user/contract/show', component: require('./user/contract/detail')},
+    {name: 'user.transfer.index', path: '/user/transfer/index', component: require('./user/transfer/index')},
+    {name: 'user.transfer.show', path: '/user/transfer/show', component: require('./user/transfer/detail')},
+    {name: 'user.contact.index', path: '/user/contact/index', component: require('./user/contact/index')},
+    {name: 'user.qa.index', path: '/user/qa/index', component: require('./user/qa/index')},
   ],
 });
 

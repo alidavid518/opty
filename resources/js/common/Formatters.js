@@ -12,6 +12,10 @@ export default {
             formatMbToBytes (mb) {
                 return (mb * 1048576).toFixed(2);
             },
+            format(val,digs=0) {
+                return val.toFixed(digs).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+            },
+
         }
     }
 }

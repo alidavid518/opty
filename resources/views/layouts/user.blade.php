@@ -54,7 +54,7 @@
               <v-list-item-title>ASP一覧</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item to="" :exact="false">
+          <v-list-item :to="{name:'user.campaign.index'}" :exact="false">
             <v-list-item-icon>
               <v-icon>$vuetify.icons.campaign</v-icon>
             </v-list-item-icon>
@@ -143,6 +143,9 @@
         <v-spacer></v-spacer>
 
         <v-btn icon>
+          <v-icon>mdi-bell</v-icon>
+        </v-btn>
+        <v-btn icon class="mr-4">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
         @php($profile = Auth::user()->profile)
