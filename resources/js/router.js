@@ -66,6 +66,8 @@ const router = new Router({
     {name: 'user.transfer.show', path: '/user/transfer/show', component: require('./user/transfer/detail')},
     {name: 'user.contact.index', path: '/user/contact/index', component: require('./user/contact/index')},
     {name: 'user.qa.index', path: '/user/qa/index', component: require('./user/qa/index')},
+    {name: 'user.account.index', path: '/user/account/index', component: require('./user/account/index')},
+    {name: 'user.account.bank', path: '/user/account/bank', component: require('./user/account/bank_account')},
   ],
 });
 

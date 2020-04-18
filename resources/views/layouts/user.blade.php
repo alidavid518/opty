@@ -125,7 +125,7 @@
             </v-list-item-icon>
             <v-list-item-title>よくある質問</v-list-item-title>
           </v-list-item>
-          <v-list-item :to="{name:'user.manager-account.index'}" :exact="false">
+          <v-list-item :to="{name:'user.account.index'}" :exact="false">
             <v-list-item-icon>
               <v-icon>$vuetify.icons.account</v-icon>
             </v-list-item-icon>
