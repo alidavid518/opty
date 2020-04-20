@@ -39,142 +39,142 @@
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name: 'admin.campaign.index'}" :exact="true">
-            <v-list-item-icon>
-              <v-icon>$vuetify.icons.home</v-icon>
-            </v-list-item-icon>
+            <v-list-item-avatar left tile>
+              <v-img class="_icon" contain src="/img/svg-icons/home.svg"/>
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>Home</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'admin.campaign.index'}" :exact="false">
-            <v-list-item-icon>
-              <v-icon>$vuetify.icons.campaign</v-icon>
-            </v-list-item-icon>
+            <v-list-item-avatar left tile>
+              <v-img class="_icon" contain src="/img/svg-icons/campain.svg"/>
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>キャンペーン一覧</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'admin.affiliate.index'}" :exact="false">
-            <v-list-item-icon>
-              <v-icon>$vuetify.icons.affiliate</v-icon>
-            </v-list-item-icon>
+            <v-list-item-avatar left tile>
+              <v-img class="_icon" contain src="/img/svg-icons/profile.svg"/>
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>アフィリエイター</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'admin.advertiser.index'}" :exact="false">
-            <v-list-item-icon>
-              <v-icon>$vuetify.icons.affiliate</v-icon>
-            </v-list-item-icon>
+            <v-list-item-avatar left tile>
+              <v-img class="_icon" contain src="/img/svg-icons/profile.svg"/>
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>広告主管理</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'admin.manager.index'}" :exact="false">
-            <v-list-item-icon>
-              <v-icon>$vuetify.icons.affiliate</v-icon>
-            </v-list-item-icon>
+            <v-list-item-avatar left tile>
+              <v-img class="_icon" contain src="/img/svg-icons/profile.svg"/>
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>管理者管理</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'admin.fraud-check.index'}" :exact="false">
-            <v-list-item-icon>
-              <v-icon>$vuetify.icons.eye</v-icon>
-            </v-list-item-icon>
+            <v-list-item-avatar left tile>
+              <v-img class="_icon" contain src="/img/svg-icons/eye.svg"/>
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>不正チェック</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'admin.contract.index'}" :exact="false">
-            <v-list-item-icon>
-              <v-icon>$vuetify.icons.contract</v-icon>
-            </v-list-item-icon>
+            <v-list-item-avatar left tile>
+              <v-img class="_icon" contain src="/img/svg-icons/contract.svg"/>
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>成約管理</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'admin.transfer.index'}" :exact="false">
-            <v-list-item-icon>
-              <v-icon>$vuetify.icons.credit</v-icon>
-            </v-list-item-icon>
+            <v-list-item-avatar left tile>
+              <v-img class="_icon" contain src="/img/svg-icons/coins.svg"/>
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>振込管理</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-group value="true">
             <template v-slot:activator>
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.graph</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/graph.svg"/>
+              </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title>案件分析</v-list-item-title>
               </v-list-item-content>
             </template>
 
             <v-list-item :to="{name:'admin.analysis.data'}" :exact="false">
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.data_analysis</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/data.svg"/>
+              </v-list-item-avatar>
               <v-list-item-title>データ推移</v-list-item-title>
             </v-list-item>
             <v-list-item :to="{name:'admin.analysis.lp'}" :exact="false">
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.lp_analysis</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/lp.svg"/>
+              </v-list-item-avatar>
               <v-list-item-title>LP分析</v-list-item-title>
             </v-list-item>
             <v-list-item :to="{name:'admin.analysis.wp'}" :exact="false">
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.wp_analysis</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/wp.svg"/>
+              </v-list-item-avatar>
               <v-list-item-title>WP分析</v-list-item-title>
             </v-list-item>
             <v-list-item :to="{name:'admin.analysis.affiliate'}" :exact="false">
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.affiliate_analysis</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/vcard.svg"/>
+              </v-list-item-avatar>
               <v-list-item-title>アフィリエイター分析</v-list-item-title>
             </v-list-item>
           </v-list-group>
           <v-list-group value="true">
             <template v-slot:activator>
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.support</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/book.svg"/>
+              </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title>サポート・連絡</v-list-item-title>
               </v-list-item-content>
             </template>
 
             <v-list-item :to="{name:'admin.support.notify'}" :exact="false">
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.notify</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/alarm.svg"/>
+              </v-list-item-avatar>
               <v-list-item-title>お知らせ</v-list-item-title>
             </v-list-item>
             <v-list-item :to="{name:'admin.support.history'}" :exact="false">
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.history</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/pointer.svg"/>
+              </v-list-item-avatar>
               <v-list-item-title>操作履歴</v-list-item-title>
             </v-list-item>
             <v-list-item :to="{name:'admin.support.qa.index'}" :exact="false">
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.qa</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/question.svg"/>
+              </v-list-item-avatar>
               <v-list-item-title>よくある質問</v-list-item-title>
             </v-list-item>
             <v-list-item :to="{name:'admin.manager-account.index'}" :exact="false">
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.account</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/account.svg"/>
+              </v-list-item-avatar>
               <v-list-item-title>管理アカウント</v-list-item-title>
             </v-list-item>
             <v-list-item :to="{name:'admin.support.contact'}" :exact="false">
-              <v-list-item-icon>
-                <v-icon>$vuetify.icons.contact</v-icon>
-              </v-list-item-icon>
+              <v-list-item-avatar left tile>
+                <v-img class="_icon" contain src="/img/svg-icons/speak.svg"/>
+              </v-list-item-avatar>
               <v-list-item-title>お問い合わせ</v-list-item-title>
             </v-list-item>
           </v-list-group>
@@ -242,10 +242,17 @@
   </template>
 
 </div>
+<style scoped>
+  ._icon {
+    max-width: 25px;
+    max-height: 25px;
+  }
+</style>
 
 <!-- Scripts -->
 <script src="{{ asset('js/manifest.js') }}"></script>
 <script src="{{ asset('js/vendor.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>

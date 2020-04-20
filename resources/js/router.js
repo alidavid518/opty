@@ -59,6 +59,8 @@ const router = new Router({
       component: require('./user/asp/campaigns'),
       props: (route) => ({aspId: route.params.id})
     },
+
+    {name: 'user.dashboard.index', path: '/user/dashboard/index', component: require('./user/dashboard/index')},
     {name: 'user.campaign.index', path: '/user/campaign/index', component: require('./user/campaign/index')},
     {name: 'user.contract.index', path: '/user/contract/index', component: require('./user/contract/index')},
     {name: 'user.contract.show', path: '/user/contract/show', component: require('./user/contract/detail')},
