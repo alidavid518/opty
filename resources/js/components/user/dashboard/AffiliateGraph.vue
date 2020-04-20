@@ -2,7 +2,7 @@
   <v-card>
     <v-card-title>
       <v-col cols="6">
-        <label class="title">アフィリエイター分析</label>
+        <label class="title">WP分析</label>
         <br/>
         <v-btn outlined @click="$emit('onExpand', 3)">詳細</v-btn>
       </v-col>
@@ -41,8 +41,8 @@
           labels: this.data.map(x => x.name),
           datasets: [
             {label: 'クリック数', yAxisID: 'Click', data: this.data.map(x => x.click), fill: false, backgroundColor: '#6AD7FF', borderColor: '#6AD7FF'},
-            {label: '成約件数', yAxisID: 'Click', data: this.data.map(x => x.contract), fill: false, backgroundColor: 'red', borderColor: 'red'},
-            {label: '成約率', yAxisID: 'Rate', data: this.data.map(x => x.click === 0 ? 0 : (x.contract*100/x.click).toFixed(2)), fill: false, backgroundColor: 'purple', borderColor: 'purple'},
+            {label: '移行件数', yAxisID: 'Click', data: this.data.map(x => x.contract), fill: false, backgroundColor: 'red', borderColor: 'red'},
+            {label: '移行率', yAxisID: 'Rate', data: this.data.map(x => x.click === 0 ? 0 : (x.contract*100/x.click).toFixed(2)), fill: false, backgroundColor: 'purple', borderColor: 'purple'},
           ]
         }
         this.chartOption = {

@@ -15,39 +15,39 @@
               <p class="subtitle-2 mb-1">前日比 {{diff(data, 'access')}}</p>
             </div>
             <div class="text-center pr-2">
-              <p class="light-blue--text subtitle-1 mb-0">登録</p>
+              <p class="light-blue--text subtitle-1 mb-0">登録数</p>
               <p class="light-blue--text title font-weight-bold mb-0 _lh-1">{{last(data, 'register')}}</p>
               <p class="subtitle-2 mb-1">前日比 {{diff(data, 'register')}}</p>
             </div>
             <div class="text-center pr-2">
-              <p class="red--text subtitle-1 mb-0">成約</p>
+              <p class="red--text subtitle-1 mb-0">承認数</p>
               <p class="red--text title font-weight-bold mb-0 _lh-1">{{last(data, 'contract')}}</p>
               <p class="subtitle-2 mb-1">前日比 {{diff(data, 'contract')}}</p>
             </div>
             <div class="text-center">
-              <p class="black--text subtitle-1 mb-0">成約</p>
+              <p class="black--text subtitle-1 mb-0">棄却数</p>
               <p class="black--text title font-weight-bold mb-0 _lh-1">{{last(data, 'block')}}</p>
               <p class="subtitle-2 mb-1">前日比 {{diff(data, 'block')}}</p>
             </div>
           </v-col>
           <v-col cols="12" class="d-flex justify-end py-0">
             <div class="text-center pr-2">
-              <p class="subtitle-1 mb-0" style="color:#00B593">LINE登録</p>
+              <p class="subtitle-1 mb-0" style="color:#00B593">LINEアクセス</p>
               <p class="title font-weight-bold mb-0 _lh-1" style="color:#00B593">{{last(data, 'line_register')}}</p>
               <p class="subtitle-2 mb-1">前日比 {{diff(data, 'line_register')}}</p>
-            </div>
-            <div class="text-center pr-2">
-              <p class="subtitle-1 mb-0" style="color:#3100FF">LINE承認</p>
-              <p class="title font-weight-bold mb-0 _lh-1" style="color:#3100FF">{{last(data, 'line_accept')}}</p>
-              <p class="subtitle-2 mb-1">前日比 {{diff(data, 'line_accept')}}</p>
             </div>
             <div class="text-center pr-2">
               <p class="subtitle-1 mb-0" style="color:#55F774">LINE成約</p>
               <p class="title font-weight-bold mb-0 _lh-1" style="color:#55F774">{{last(data.line_contract)}}</p>
               <p class="subtitle-2 mb-1">前日比 {{diff(data.line_contract)}}</p>
             </div>
+            <div class="text-center pr-2">
+              <p class="subtitle-1 mb-0" style="color:#3100FF">LINE承認</p>
+              <p class="title font-weight-bold mb-0 _lh-1" style="color:#3100FF">{{last(data, 'line_accept')}}</p>
+              <p class="subtitle-2 mb-1">前日比 {{diff(data, 'line_accept')}}</p>
+            </div>
             <div class="text-center">
-              <p class="black--text subtitle-1 mb-0">ブロック率</p>
+              <p class="black--text subtitle-1 mb-0">棄却率</p>
               <p class="black--text title font-weight-bold mb-0 _lh-1">{{last(data, 'block_rate').toFixed(2)}}%</p>
               <p class="subtitle-2 mb-1">前日比 {{diff(data, 'block_rate').toFixed(2)}}%</p>
             </div>

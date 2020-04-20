@@ -12,14 +12,14 @@
         <p class="subtitle-1 mb-1">前日比 {{diff(data.access)}}</p>
       </v-col>
       <v-col cols="3" class="text-center">
-        <p class="light-blue--text subtitle-1 mb-1">登録</p>
-        <p class="light-blue--text title font-weight-bold mb-1">{{total(data.register)}}</p>
-        <p class="subtitle-1 mb-1">前日比 {{diff(data.register)}}</p>
-      </v-col>
-      <v-col cols="3" class="text-center">
-        <p class="red--text subtitle-1 mb-1">成約</p>
+        <p class="red--text subtitle-1 mb-1">成約数</p>
         <p class="red--text title font-weight-bold mb-1">{{total(data.contract)}}</p>
         <p class="subtitle-1 mb-1">前日比 {{diff(data.contract)}}</p>
+      </v-col>
+      <v-col cols="3" class="text-center">
+        <p class="light-blue--text subtitle-1 mb-1">承認数</p>
+        <p class="light-blue--text title font-weight-bold mb-1">{{total(data.register)}}</p>
+        <p class="subtitle-1 mb-1">前日比 {{diff(data.register)}}</p>
       </v-col>
     </v-card-title>
     <v-card-text>
@@ -71,8 +71,8 @@
           labels: this.data.access.map(x => x.date),
           datasets: [
             {label: 'アクセス', yAxisID: 'Access', data: this.data.access.map(x => x.value), fill: false, backgroundColor: 'purple', borderColor: 'purple'},
-            {label: '新規登録', yAxisID: 'Register', data: this.data.register.map(x => x.value), fill: false, backgroundColor: '#6AD7FF', borderColor: '#6AD7FF'},
-            {label: '新規成約', yAxisID: 'Contract', data: this.data.contract.map(x => x.value), fill: false, backgroundColor: 'red', borderColor: 'red'},
+            {label: '成約数', yAxisID: 'Register', data: this.data.register.map(x => x.value), fill: false, backgroundColor: '#6AD7FF', borderColor: '#6AD7FF'},
+            {label: '承認数', yAxisID: 'Contract', data: this.data.contract.map(x => x.value), fill: false, backgroundColor: 'red', borderColor: 'red'},
           ]
         }
       },
