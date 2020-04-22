@@ -33,8 +33,8 @@
         left
       >
         <v-list dense>
-          <v-list-item>
-            <v-list-item-content>
+          <v-list-item :to="{name: 'admin.campaign.index'}">
+            <v-list-item-content >
               <img class="logo" src="{{  url('/img/logo.png') }}"/>
             </v-list-item-content>
           </v-list-item>

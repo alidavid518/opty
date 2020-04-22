@@ -4,7 +4,7 @@
       <v-col cols="3">
         <label class="title">LP分析</label>
         <br/>
-        <v-btn outlined @click="$emit('onExpand', 2)">詳細</v-btn>
+        <v-btn outlined @click="$emit('onExpand', 1)">詳細</v-btn>
       </v-col>
     </v-card-title>
     <v-card-text>

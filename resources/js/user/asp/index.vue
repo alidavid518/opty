@@ -21,6 +21,12 @@
             />
           </v-col>
         </v-row>
+        <v-icon
+          class="_calendar" large
+          @click="show_calendar=true"
+        >
+          mdi-calendar-month
+        </v-icon>
       </v-container>
 
       <v-container class="asp-page_container" fluid>
@@ -35,16 +41,21 @@
         </v-row>
       </v-container>
     </v-card>
+
+    <CalendarDlg :show="show_calendar"/>
   </div>
+
 </template>
 
 <script>
   import AspItem from "../../components/user/asp/AspItem";
+  import CalendarDlg from "../../components/user/calendar/CalendarDlg";
 
   export default {
-    components: {AspItem},
+    components: {CalendarDlg, AspItem},
     data() {
       return {
+        show_calendar: false,
         show_new_campaign_dlg: false,
         show_edit_campaign_dlg: false,
         sort_orders: [
@@ -132,12 +143,12 @@
       }
     },
     mounted() {
-
       const self = this;
-
       self.$store.commit('setBreadcrumbs', [
         {label: 'Dashboard', name: ''}
       ]);
+    },
+    methods: {
     }
   }
 </script>
@@ -145,5 +156,10 @@
 <style scoped lang="scss">
   ._toolbar_sort {
     flex:none;
+  }
+  ._calendar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
   }
 </style>

@@ -4,7 +4,7 @@
       <v-col cols="6">
         <label class="title">WP分析</label>
         <br/>
-        <v-btn outlined @click="$emit('onExpand', 3)">詳細</v-btn>
+        <v-btn outlined @click="$emit('onExpand', 2)">詳細</v-btn>
       </v-col>
     </v-card-title>
     <v-card-text>

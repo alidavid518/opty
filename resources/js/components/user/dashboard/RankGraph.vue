@@ -2,9 +2,9 @@
   <v-card>
     <v-card-title>
       <v-col cols="12">
-        <label class="title">ランク別分析</label>
+        <label class="title">アフィリエイター分析</label>
         <br/>
-        <v-btn outlined @click="$emit('onExpand', 1)">詳細</v-btn>
+        <v-btn outlined @click="$emit('onExpand', 3)">詳細</v-btn>
       </v-col>
     </v-card-title>
     <v-card-text>

@@ -11,7 +11,10 @@
     <v-card-text class="campaign-item_title">
       {{item.title}}
     </v-card-text>
-    <v-card-text class="campaign-item_subtitle">
+    <v-card-text class="campaign-item_subtitle" v-if="ended">
+      <strong>開催終了</strong>
+    </v-card-text>
+    <v-card-text class="campaign-item_subtitle" v-else>
       {{item.date_start}} - {{item.date_end}}
     </v-card-text>
     <v-card-text class="campaign-item_text">
@@ -68,6 +71,11 @@
         block_number: {type: Number, default: 0},
         block_rate: {type: Number, default: 0},
         average_lprr: {type: Number, default: 0},
+      }
+    },
+    computed: {
+      ended() {
+        return this.$date(this.item.date_end).isBefore(this.$date())
       }
     },
     methods: {

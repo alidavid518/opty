@@ -25,12 +25,12 @@
             <data-detail-graph :data="detail_data" @onShrink="onShrink"/>
           </v-expansion-panel-content>
         </v-expansion-panel>
-        <v-expansion-panel>
-          <v-expansion-panel-header>ランク別分析</v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <rank-detail-graph :data="detail_rank" @onShrink="onShrink"/>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
+<!--        <v-expansion-panel>-->
+<!--          <v-expansion-panel-header>ランク別分析</v-expansion-panel-header>-->
+<!--          <v-expansion-panel-content>-->
+<!--            <rank-detail-graph :data="detail_rank" @onShrink="onShrink"/>-->
+<!--          </v-expansion-panel-content>-->
+<!--        </v-expansion-panel>-->
         <v-expansion-panel>
           <v-expansion-panel-header>LP分析</v-expansion-panel-header>
           <v-expansion-panel-content>

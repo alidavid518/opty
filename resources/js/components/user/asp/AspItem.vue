@@ -11,7 +11,10 @@
     <v-card-text class="">
       <v-row>
         <v-col cols="12" class="_item-title">{{item.title}}</v-col>
-        <v-col cols="12" class="_item-subtitle">
+        <v-col cols="12" class="_item-subtitle" v-if="$date(item.date_end).isBefore(today)">
+          開催終了
+        </v-col>
+        <v-col cols="12" class="_item-subtitle" v-else>
           {{item.date_start}} - {{item.date_end}}
         </v-col>
         <v-col cols="12" class="_item-text">
@@ -58,6 +61,9 @@
         average_unit: {type: Number, default: 0},
       }
     },
+    data: () => ({
+      today : this.$date()
+    }),
     methods: {
       format(val,digs=0) {
         return val.toFixed(digs).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
