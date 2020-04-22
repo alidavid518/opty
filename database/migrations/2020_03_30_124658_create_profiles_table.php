@@ -25,6 +25,8 @@ class CreateProfilesTable extends Migration
             $table->date('dob')->nullable();
             $table->string('site')->nullable();
             $table->string('avatar')->nullable();
+            $table->tinyInteger('mailmaga')->default(0)->comment('setting of mailmaga receipt');
+            $table->tinyInteger('contract_notify')->default(0)->comment('setting of contract notification receipt');
             $table->timestamps();
 
             $table->foreign('user_id')

@@ -10,8 +10,6 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 // 3rd party
-import '@mdi/font/css/materialdesignicons.min.css'
-import 'vuetify/dist/vuetify.min.css';
 import Vue from 'vue';
 import Vuetify from 'vuetify/dist/vuetify.min.js';
 import VueDayjs from 'vue-dayjs-plugin'

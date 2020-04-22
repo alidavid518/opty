@@ -17,4 +17,5 @@ mix.copyDirectory('resources/img', 'public/img')
     .js('resources/js/app.js', 'public/js')
     .sass('resources/sass/admin.scss', 'public/css')
     .sass('resources/sass/user.scss', 'public/css')
-    .extract(['vue','jquery','vue-router','moment','axios','lodash','dropzone']);
+    .extract(['vue','jquery','vue-router','moment','axios','lodash']);
+    // .extract(['vue','jquery','vue-router','moment','axios','lodash','dropzone']);
