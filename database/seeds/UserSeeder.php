@@ -21,15 +21,12 @@ class UserSeeder extends Seeder
       'password' => bcrypt('12345678'),
       'role' => 'admin',
       'remember_token' => Str::random(10),
-    ]);
-    $profile = Profile::create([
-      'user_id' => $Admin->id,
-      'first_name' => 'John',
-      'last_name' => 'Doe',
-      'furi_first_name' => 'ジョン',
-      'furi_last_name' => 'ドウ',
-      'nick_name' => 'Admin-John',
       'avatar' => 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+      'furi_first' => 'ジョン',
+      'furi_last' => 'ドウ',
+      'nick_name' => 'Admin-John',
+      'name_first' => 'John',
+      'name_last' => 'Doe',
     ]);
     // create normal user
     $user = User::create([
@@ -38,13 +35,10 @@ class UserSeeder extends Seeder
       'password' => bcrypt('12345678'),
       'role' => 'user',
       'remember_token' => Str::random(10),
-    ]);
-    $profile = Profile::create([
-      'user_id' => $user->id,
-      'first_name' => 'Uri',
-      'last_name' => 'Solomin',
-      'furi_first_name' => 'ジョン',
-      'furi_last_name' => 'ドウ',
+      'name_first' => 'Uri',
+      'name_last' => 'Solomin',
+      'furi_first' => 'ジョン',
+      'furi_last' => 'ドウ',
       'nick_name' => 'User-Solomin',
       'avatar' => 'https://cdn.vuetifyjs.com/images/john.jpg',
     ]);

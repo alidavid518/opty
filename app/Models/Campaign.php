@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Campaign extends Model
 {
     protected $fillable = [
-        'advertiser', 'title', 'image',
+        'advertiser_id', 'title', 'image',
         'youtube_url',  // Youtube予告URL
         'statement',    // アフィリエイター向け PR文
         'mail_redirect_url',    // 成約除外メアドリダイレクトURL
@@ -27,10 +27,19 @@ class Campaign extends Model
     ];
 
     public function stories() {
-      return $this->hasMany('App\Model\Story');
+      return $this->hasMany('App\Models\Story');
     }
 
     public function main_rewards() {
-      return $this->hasMany('App\Model\MainReward');
+      return $this->hasMany('App\Models\MainReward');
     }
-}
+
+    public function special_rewards() {
+      return $this->hasMany('App\Models\SpecialReward');
+    }
+
+    public function lps() {
+      return $this->hasMany('App\Models\Lp');
+    }
+
+ }

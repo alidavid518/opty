@@ -58,10 +58,10 @@
             <v-row>
               <v-col cols="3" class="text-right py-0">フリガナ</v-col>
               <v-col cols="4" class="py-0">
-                <v-text-field outlined dense label="セイ" v-model="name_furi_last"/>
+                <v-text-field outlined dense label="セイ" v-model="furi_last"/>
               </v-col>
               <v-col cols="4" class="py-0">
-                <v-text-field outlined dense label="メイ" v-model="name_furi_first"/>
+                <v-text-field outlined dense label="メイ" v-model="furi_first"/>
               </v-col>
               <v-col cols="1" class="py-0">
                 <v-chip color="#04282C" class="white--text">必須</v-chip>
@@ -193,8 +193,8 @@
       return {
         name_last: '',
         name_first: '',
-        name_furi_last: '',
-        name_furi_first: '',
+        furi_last: '',
+        furi_first: '',
         avatar: '',
         nickname: '',
         gender: '',

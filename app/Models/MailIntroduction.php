@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MainReward extends Model
+class MailIntroduction extends Model
 {
-    protected $fillable = [
-      'campaign_id', 'date_start', 'time_start', 'date_end', 'time_end', 'amount', 'is_show'
-    ];
+    protected $fillable = ['campaign_id', 'title', 'title'];
 
     public function campaign() {
       return $this->belongsTo('App\Models\Campaign');

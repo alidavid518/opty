@@ -17,7 +17,7 @@
               </v-col>
               <v-col cols="9">
                 <v-text-field
-                  outlined
+                  outlined dense hide-details
                   v-model="ntype"
                 />
               </v-col>
@@ -32,7 +32,7 @@
                   :items="users"
                   item-text="name"
                   item-value="id"
-                  outlined
+                  outlined dense hide-details
                   v-model="user"
                 />
               </v-col>
@@ -58,6 +58,7 @@
                 <v-text-field
                   v-if="showTitleInput"
                   v-model="text"
+                  outlined dense hide-details
                   label="全体"
                 />
               </v-col>
@@ -69,7 +70,7 @@
               </v-col>
               <v-col cols="9">
                 <v-textarea
-                  outlined
+                  outlined dense hide-details
                   v-model="content"
                 />
               </v-col>

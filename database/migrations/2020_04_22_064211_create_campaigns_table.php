@@ -15,7 +15,7 @@ class CreateCampaignsTable extends Migration
     {
         Schema::create('campaigns', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('advertiser');
+            $table->string('advertiser_id')->comment('出稿広告主');
             $table->string('title');
             $table->string('image');
             $table->string('youtube_url');
