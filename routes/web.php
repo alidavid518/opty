@@ -11,36 +11,44 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 //Route::get('/','Front\HomeController@index')->name('front.home');
 
 Auth::routes();
 
 // single page
-Route::middleware(['auth'])->group(function()
-{
-    Route::get('/', 'SinglePageController@displaySPA')->name('admin.spa');
+Route::middleware(['auth'])->group(function () {
+  // admin route group
+  Route::prefix('admin')->namespace('Admin')->group(function () {
+    Route::post('/account/save', 'Account\AccountController@new');
+    Route::post('/account/bank/save', 'Bank\BankController@new');
 
-    // admin side routes
+    // QA
+    Route::get('/qa/list', 'Qa\QaController@list');
+    Route::get('/qa/list/{id}', 'Qa\QaController@detail');
+    Route::post('/qa/new', 'Qa\QaController@new');
+    // category
+    Route::get('/category/list', 'Category\CategoryController@list');
+    Route::post('/category/new', 'Category\CategoryController@new');
+  });
 
-    Route::prefix('admin')->namespace('Admin')->group(function() {
-        // admin/accounts
-        Route::get('accounts','Account/AccountController@list');
-        Route::get('accounts/get','Account/AccountController@get');
-        Route::get('accounts/edit','Account/AccountController@edit');
-        Route::get('accounts/new','Account/AccountController@new');
-        // admin/banks
-        Route::get('bank_accounts','Account/AccountController@list');
-        Route::get('bank_accounts/get','Account/AccountController@get');
-        Route::get('bank_accounts/edit','Account/AccountController@edit');
-        Route::get('bank_accounts/new','Account/AccountController@new');
-
+  // user route group
+  Route::prefix('user')->namespace('User')->group(function () {
+    Route::get('/test', function () {
+      echo 'user/test';
     });
 
-    Route::fallback(function(){
-        return redirect('/');
-    });
+  });
+
+  // single page
+  Route::get('/', 'SinglePageController@displaySPA')->name('spa');
+
+  Route::fallback(function () {
+    return redirect('/');
+  });
 });
 
-Route::fallback(function(){
-    return redirect('/');
+Route::fallback(function () {
+  return redirect('/');
 });

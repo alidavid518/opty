@@ -25,9 +25,9 @@
         <v-row>
           <v-col cols="3" class="text-right py-0">国内外口座選択</v-col>
           <v-col cols="9" class="py-0">
-            <v-radio-group v-model="oversea" row class="mt-0">
-              <v-radio label="国内" value="1" />
-              <v-radio label="国外" value="0"/>
+            <v-radio-group v-model="bank_type" row class="mt-0">
+              <v-radio label="国内" :value="1" />
+              <v-radio label="国外" :value="0"/>
             </v-radio-group>
           </v-col>
         </v-row>
@@ -41,21 +41,21 @@
         <v-row>
           <v-col cols="3" class="text-right py-0">銀行番号</v-col>
           <v-col cols="3" class="py-0">
-            <v-text-field outlined dense v-model="bank_no"/>
+            <v-text-field outlined dense v-model="bank_code"/>
           </v-col>
           <v-col class="py-0">例）0005  ご不明の場合はこちらの金融機関コード・銀行コード検索から検索をお願い致します。</v-col>
         </v-row>
         <v-row>
           <v-col cols="3" class="text-right py-0">支店名</v-col>
           <v-col cols="3" class="py-0">
-            <v-text-field outlined dense v-model="branch"/>
+            <v-text-field outlined dense v-model="branch_name"/>
           </v-col>
           <v-col class="py-0">例）浅草橋支店</v-col>
         </v-row>
         <v-row>
           <v-col cols="3" class="text-right py-0">支店番号</v-col>
           <v-col cols="3" class="py-0">
-            <v-text-field outlined dense v-model="branch_no"/>
+            <v-text-field outlined dense v-model="branch_code"/>
           </v-col>
           <v-col class="py-0">
             例）069  ご不明の場合はこちらの金融機関コード・銀行コード検索から検索をお願い致します。
@@ -71,7 +71,7 @@
         <v-row>
           <v-col cols="3" class="text-right py-0">口座番号</v-col>
           <v-col cols="5" class="py-0">
-            <v-text-field outlined dense v-model="account_no"/>
+            <v-text-field outlined dense v-model="account_number"/>
           </v-col>
           <v-col class="py-0">例）1234567</v-col>
         </v-row>
@@ -100,16 +100,17 @@
 </template>
 
 <script>
+  import vuetifyToast from 'vuetify-toast'
   export default {
     data() {
       return {
-        oversea: '1',
+        bank_type: 1,
         bank_name: '',
-        bank_no: '',
-        branch: '',
-        branch_no: '',
+        bank_code: '',
+        branch_name: '',
+        branch_code: '',
         account_type: '',
-        account_no: '',
+        account_number: '',
         account_holder: 0,
       }
     },
@@ -120,7 +121,42 @@
     },
     methods: {
       save() {
+        const invalid = this.bank_name === '' || this.bank_code === '' ||
+          this.branch_name === '' || this.branch_code === '' ||
+          this.account_type === '' || this.account_number === '' || this.account_holder === ''
 
+        if(invalid) {
+          vuetifyToast.error('すべてのフィールドに入力してください。')
+          return
+        }
+
+        const user_id = this.$store.getters.getAccountId
+        console.log(user_id)
+        if(!user_id) {
+          vuetifyToast.error('保存されたユーザーはありません。')
+          return
+        }
+
+        const data = {
+          user_id: user_id,
+          bank_type: this.bank_type,
+          bank_name: this.bank_name,
+          bank_code: this.bank_code,
+          branch_name: this.branch_name,
+          branch_code: this.branch_code,
+          account_type: this.account_type,
+          account_number: this.account_number,
+          account_holder: this.account_holder
+        }
+        console.log(data)
+        axios.post('/admin/account/bank/save', data)
+          .then(res => {
+            vuetifyToast.success('アカウントは正常に保存されました。')
+          })
+          .catch(e => {
+            vuetifyToast.error('アカウントを保存できませんでした。')
+            console.log(e)
+          })
       }
     }
   }

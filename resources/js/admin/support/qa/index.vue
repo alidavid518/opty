@@ -5,7 +5,7 @@
         <h2>よくある質問</h2>
         <v-btn
           class="_header_button"
-          @click="showNew"
+          @click="show_new_dlg = true"
         >
           新規作成
         </v-btn>
@@ -28,7 +28,7 @@
             <tr v-for="item in items" :key="item.id">
               <td>{{ item.id }}</td>
               <td>{{ item.title }}</td>
-              <td>{{ item.category }}</td>
+              <td>{{ item.category.name }}</td>
               <td>{{ item.question }}</td>
               <td>{{ item.answer }}</td>
               <td>
@@ -65,26 +65,26 @@
     <QaNewDialog
       :dialog="show_new_dlg"
       :categories="categories"
-      @onNewDlgClose="hideNew"
+      @onNewDlgClose="show_new_dlg = false"
       @onCreated="onNewQa"
     />
     <QaEditDialog
       :dialog="show_edit_dlg"
       :categories="categories"
       :item="selected"
-      @onEditDlgClose="hideEdit"
+      @onEditDlgClose="show_edit_dlg = false"
       @onEdited="onEditQa"
     />
     <QaDetailDialog
       :dialog="show_detail_dlg"
       :categories="categories"
       :item="selected"
-      @onDetailDlgClose="hideDetail"
+      @onDetailDlgClose="show_detail_dlg = false"
     />
     <QaDeleteDialog
       :dialog="show_delete_dlg"
       :item="selected"
-      @onDeleteDlgClose="hideDelete"
+      @onDeleteDlgClose="show_delete_dlg = false"
       @onDeleted="onDeleteQa"
     />
   </div>
@@ -95,6 +95,7 @@
   import QaEditDialog from "../../../components/admin/qa/QaEditDialog";
   import QaDetailDialog from "../../../components/admin/qa/QaDetailDialog";
   import QaDeleteDialog from "../../../components/admin/qa/QaDeleteDialog";
+  import vuetifyToast from 'vuetify-toast'
 
   export default {
     components: {QaNewDialog, QaEditDialog, QaDetailDialog, QaDeleteDialog},
@@ -114,20 +115,16 @@
     },
     mounted() {
       // load categories and QAs
-      this.all_items = [
-        {id: 1, title: 'title1', category: 'category1', question: 'question1', answer: 'answer1'},
-        {id: 2, title: 'title2', category: 'category2', question: 'question2', answer: 'answer2'},
-        {id: 3, title: 'title3', category: 'category3', question: 'question3', answer: 'answer3'},
-        {id: 4, title: 'title4', category: 'category4', question: 'question4', answer: 'answer4'},
-        {id: 5, title: 'title5', category: 'category5', question: 'question5', answer: 'answer5'},
-        {id: 6, title: 'title6', category: 'category6', question: 'question6', answer: 'answer6'},
-        {id: 7, title: 'title7', category: 'category7', question: 'question7', answer: 'answer7'},
-        {id: 8, title: 'title8', category: 'category8', question: 'question8', answer: 'answer8'},
-        {id: 9, title: 'title9', category: 'category9', question: 'question9', answer: 'answer9'},
-        {id: 10, title: 'title10', category: 'category10', question: 'question10', answer: 'answer10'},
-      ]
-      this.categories = ['category1', 'category2', 'category3']
-      this.loadItem(this.limit)
+      axios.get('/admin/qa/list')
+      .then(res => {
+        console.log(res.data)
+        this.all_items = res.data.questions
+        this.categories = res.data.categories
+        this.loadItem(this.limit)
+      })
+      .catch(e => {
+        vuetifyToast.error('データベースからQ＆Aを読み取ることができません。')
+      })
     },
     computed: {
       limit() {
@@ -152,40 +149,34 @@
         this.selected = item
         return true
       },
-      showNew() {
-        this.show_new_dlg = true
-      },
-      hideNew() {
-        this.show_new_dlg = false
-      },
       showEdit(qid) {
         if (!this.findItem(qid)) return
         this.show_edit_dlg = true
-      },
-      hideEdit() {
-        this.show_edit_dlg = false
       },
       showDetail(qid) {
         if (!this.findItem(qid)) return
         this.show_detail_dlg = true
       },
-      hideDetail() {
-        this.show_detail_dlg = false
-      },
       showDelete(qid) {
         if (!this.findItem(qid)) return
         this.show_delete_dlg = true
-      },
-      hideDelete() {
-        this.show_delete_dlg = false
       },
       onNewQa(qa, categories) {
         /**
          * save new Qa to server
          */
-        this.all_items.unshift(qa)
-        this.categories = categories
-        this.loadItem(this.limit)
+        console.log(qa)
+        console.log(categories)
+        this.categories = categories.map(e => e)
+        axios.post('/admin/qa/new', qa)
+        .then(res => {
+          this.all_items = res.data.questions.map(e => e)
+          this.loadItem(this.limit)
+        })
+        .catch(e => {
+          vuetifyToast.error('新しい質問を保存できません。')
+        })
+        // this.all_items.unshift(qa)
         this.show_new_dlg = false
       },
       onEditQa(val) {

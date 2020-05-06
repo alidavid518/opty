@@ -147,14 +147,14 @@
         <v-btn icon class="mr-4">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
-        @php($profile = Auth::user()->profile)
         <v-avatar left>
-          @if ($profile->avatar !== '')
-            <v-img src="{{$profile->avatar}}"></v-img>
+          @php($user=Auth::user())
+          @if ($user->avatar !== '')
+            <v-img src="{{$user->avatar}}"></v-img>
           @endif
         </v-avatar>
 
-        <v-btn text>{{$profile->first_name}} {{$profile->last_name}}</v-btn>
+        <v-btn text>{{$user->name_last}} {{$user->name_first}}</v-btn>
 
         <v-menu
           bottom

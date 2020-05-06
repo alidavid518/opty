@@ -18,7 +18,9 @@
               <v-col cols="9" class="select-wrap">
                 <v-select
                   v-model="category"
-                  :items="categories"
+                  :items="items"
+                  item-text="name"
+                  item-value="id"
                   class="qa-category"
                 />
                 <v-btn
@@ -76,6 +78,8 @@
 
 <script>
   import CategoryNewDialog from "./CategoryNewDialog";
+  import vuetifyToast from 'vuetify-toast'
+
   export default {
     components: {CategoryNewDialog},
     props: {
@@ -91,7 +95,13 @@
         show_category_dlg: false,
         category: '',
         question: '',
-        answer: ''
+        answer: '',
+        items: []
+      }
+    },
+    watch: {
+      categories(val) {
+        this.items = val.map(e => e)
       }
     },
     methods: {
@@ -105,13 +115,19 @@
         /**
          * save new category to server
          */
-        this.categories.push(val)
+        axios.post('/admin/category/new', {name: val})
+        .then(res => {
+          this.items = res.data.categories
+        })
+        .catch(e => {
+          vuetifyToast.error('新しいカテゴリを保存できません。')
+        })
         this.hideCatDlg()
       },
       save() {
         this.hide()
         const val = {
-          category: this.category,
+          category_id: this.category,
           question: this.question,
           answer: this.answer
         }

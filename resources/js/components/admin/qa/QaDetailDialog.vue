@@ -19,6 +19,8 @@
                 <v-select
                   v-model="category"
                   :items="categories"
+                  item-value="id"
+                  item-text="name"
                   class="qa-category"
                 />
               </v-col>

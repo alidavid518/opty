@@ -154,9 +154,9 @@
 
   export default {
     components: {
-      PrizeSetting,
-      RankingSummary, ContractIpExcept, LpReward, LineRegister,
-      RankExcept, LineRichImages, RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting, LeadExtend},
+      PrizeSetting, RankingSummary, ContractIpExcept, LpReward, LineRegister, RankExcept, LineRichImages,
+      RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting, LeadExtend
+    },
     data() {
       return {
         tab: '',

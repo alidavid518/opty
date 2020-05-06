@@ -24,11 +24,13 @@ Vue.component('scale-loader', require('vue-spinner/src/ScaleLoader.vue'));
 import router from './router';
 import store from './common/Store';
 import eventBus from './common/Event';
+import utils from './common/Utils';
 // import formatters from './common/Formatters';
 // import AxiosAjaxDetect from './common/AxiosAjaxDetect';
 
 // Vue.use(formatters);
 Vue.use(eventBus);
+Vue.use(utils);
 
 const app = new Vue({
     vuetify: new Vuetify({
