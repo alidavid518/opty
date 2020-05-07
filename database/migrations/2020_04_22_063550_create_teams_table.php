@@ -16,6 +16,7 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->bigInteger('campaign_id')->nullable();
             $table->string('bank_account')->nullable();
             $table->string('blacklist')->nullable();
             $table->string('penalty')->nullable();

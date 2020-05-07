@@ -39,6 +39,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/affiliate/new', 'Affiliate\AffiliateController@new');
     Route::get('/affiliate/delete', 'Affiliate\AffiliateController@delete');
     Route::get('/affiliate/get/{id}', 'Affiliate\AffiliateController@get');
+    // team
+    Route::get('/team/list', 'Team\TeamController@list');
+    Route::post('/team/new', 'Team\TeamController@new');
+    Route::post('/team/add_member', 'Team\TeamController@addMember');
+    Route::get('/team/delete', 'Team\TeamController@delete');
+    Route::get('/team/get/{id}', 'Team\TeamController@get');
+
   });
 
   // user route group
