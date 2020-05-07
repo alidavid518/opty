@@ -16,17 +16,17 @@
           <v-container fluid class="py-0">
             <v-row>
               <v-col cols="3">Mail Address</v-col>
-              <v-col cols="9">{{ val.mail }}</v-col>
+              <v-col cols="9">{{ val.email }}</v-col>
             </v-row>
             <v-divider/>
             <v-row>
               <v-col cols="3">RANK</v-col>
-              <v-col cols="9">{{ val.rank }}</v-col>
+              <v-col cols="9">{{ val.rank.name }}</v-col>
             </v-row>
             <v-divider/>
             <v-row>
               <v-col cols="3">登録状況</v-col>
-              <v-col cols="9">{{ val.status }}</v-col>
+              <v-col cols="9">{{ val.status_label }}</v-col>
             </v-row>
             <v-divider/>
             <v-row>

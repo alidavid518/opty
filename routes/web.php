@@ -28,9 +28,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/qa/list', 'Qa\QaController@list');
     Route::get('/qa/list/{id}', 'Qa\QaController@detail');
     Route::post('/qa/new', 'Qa\QaController@new');
+    Route::get('/qa/delete/{id}', 'Qa\QaController@delete');
     // category
     Route::get('/category/list', 'Category\CategoryController@list');
     Route::post('/category/new', 'Category\CategoryController@new');
+    // contact us
+    Route::get('/contact/list/{status}', 'Contacts\ContactController@list');
+    // affiliate
+    Route::get('/affiliate/list', 'Affiliate\AffiliateController@list');
+    Route::post('/affiliate/new', 'Affiliate\AffiliateController@new');
+    Route::get('/affiliate/delete', 'Affiliate\AffiliateController@delete');
+    Route::get('/affiliate/get/{id}', 'Affiliate\AffiliateController@get');
   });
 
   // user route group

@@ -8,7 +8,6 @@ class CreateAffiliatesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
      * @return void
      */
     public function up()
@@ -23,7 +22,8 @@ class CreateAffiliatesTable extends Migration
             $table->string('password');
             $table->string('nickname');
             $table->tinyInteger('rank_id');
-            $table->string('note');
+            $table->string('note')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
@@ -37,4 +37,5 @@ class CreateAffiliatesTable extends Migration
     {
         Schema::dropIfExists('affiliates');
     }
+
 }

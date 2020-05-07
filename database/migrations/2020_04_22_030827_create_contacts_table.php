@@ -16,6 +16,7 @@ class CreateContactsTable extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('affiliate_id')->comment('アフィリエイターID');
+            $table->bigInteger('parent_id')->comment('id of parent message');
             $table->string('title');
             $table->string('content', 1024);
             $table->tinyInteger('status')->default(0)->comment('0:新規,1:返信済,2:リプライ,3;完了');

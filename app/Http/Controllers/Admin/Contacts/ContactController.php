@@ -1,31 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Qa;
+namespace App\Http\Controllers\Admin\Contacts;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use App\Models\QuestionCategory;
 use Illuminate\Http\Request;
 use App\Models\Question;
 use Illuminate\Support\Facades\Validator;
 
-class QaController extends Controller
+class ContactController extends Controller
 {
-
-  public function list()
+  public function list(Request $request, $status)
   {
-    $lists = [];
-    $categories = [];
     try {
-      $lists = Question::with('category')->get();
+      $lists = Contact::where('status', $status);
+      if($request->has('keyword')) {
+        $keyword = trim($request->get('keyword'));
+        $lists = $lists->where('title', 'like', "%$keyword%");
+      }
+      $lists = $lists->latest()->get();
+      return response()->json(['contacts' => $lists]);
     } catch (\Exception $e) {
       return response()->json(['error' => $e->getMessage()], 400);
     }
-    try {
-      $categories = QuestionCategory::get();
-    } catch (\Exception $e) {
-      return response()->json(['error' => $e->getMessage()], 400);
-    }
-    return response()->json(['questions' =>$lists, 'categories' => $categories]);
   }
 
   public function new(Request $request) {

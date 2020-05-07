@@ -179,23 +179,20 @@
         // this.all_items.unshift(qa)
         this.show_new_dlg = false
       },
-      onEditQa(val) {
-        /**
-        * save edited Qa to server
-        */
-        const id = this.all_items.findIndex(m => m.id === val.id)
-        if(id === -1) return
-        this.all_items[id] = val
-        this.loadItem(this.limit)
-      },
       onDeleteQa(val) {
         /**
         * delete Qa from server
         */
-        const id = this.all_items.findIndex(m => m.id === val.id)
-        if(id === -1) return
-        this.all_items.splice(id, 1)
-        this.loadItem(this.limit)
+        axios.get(`/admin/qa/delete/${val.id}`)
+        .then(res => {
+          const id = this.all_items.findIndex(m => m.id === val.id)
+          if(id === -1) return
+          this.all_items.splice(id, 1)
+          this.loadItem(this.limit)
+        })
+        .catch(e => {
+          vuetifyToast.error('質問は削除できません。')
+        })
         this.show_delete_dlg = false
       },
     }

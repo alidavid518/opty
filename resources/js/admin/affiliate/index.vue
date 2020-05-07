@@ -10,15 +10,15 @@
             <v-col class="d-flex justify-end">
               <v-btn
                 class="mr-2"
-                color="success"
-                @click="showDrafts"
+                color="error" dark
+                @click="show_delete_dlg = true"
               >
-                下書き
+                削除
               </v-btn>
               <v-btn
                 class="mr-2"
-                color="info"
-                @click="showNew"
+                color="info" dark
+                @click="show_new_dlg = true"
               >
                 新規
               </v-btn>
@@ -51,18 +51,17 @@
                 column
                 active-class="primary white--text"
               >
-                <v-chip v-for="rank in ranks" :key="rank.value" :value="rank.value">
-                  {{ rank.text }}
+                <v-chip :value="0">全て</v-chip>
+                <v-chip v-for="rank in ranks" :key="rank.id" :value="rank.id">
+                  {{ rank.name }}
                 </v-chip>
               </v-chip-group>
               <v-select
                 label="表示順"
-                outlined
-                dense
+                outlined dense
                 v-model="sort"
                 :items="sorts"
-                item-text="text"
-                item-value="value"
+                item-text="text" item-value="value"
                 class="sort"
               />
             </v-col>
@@ -75,6 +74,7 @@
           <template v-slot:default>
             <thead>
             <tr>
+              <th><v-checkbox v-model="checkAll"/></th>
               <th class="text-left" id="_th1">ID</th>
               <th class="text-left" id="_th2">User name / Name</th>
               <th class="text-left" id="_th3">RANK</th>
@@ -86,11 +86,12 @@
             </thead>
             <tbody>
             <tr v-for="item in items" :key="item.id">
+              <th><v-checkbox v-model="item.checked"/></th>
               <td>{{ item.id }}</td>
               <td>{{ item.name_last }} {{ item.name_first }}</td>
-              <td>{{ ranks[item.rank].text }}</td>
-              <td>{{ item.mail }}</td>
-              <td>{{ item.status }}</td>
+              <td>{{ item.rank.name }}</td>
+              <td>{{ item.email }}</td>
+              <td>{{ item.status_label }}</td>
               <td>{{ $date(item.created_at).format('YYYY/MM/DD HH:mm') }}</td>
               <td>
                 <v-btn color="#C694F9" dark @click="showDetail(item)">
@@ -112,45 +113,39 @@
 
     <NewDialog
       :dialog="show_new_dlg"
+      :ranks="ranks"
       @onNewDlgClose="show_new_dlg=false"
       @onCreated="onNew"
-    />
-    <EditDialog
-      :dialog="show_edit_dlg"
-      :item="selected"
-      @onEditDlgClose="show_edit_dlg=false"
-      @onEdited="onEdit"
     />
     <DetailDialog
       :dialog="show_detail_dlg"
       :item="selected"
       @onDetailDlgClose="show_detail_dlg=false"
     />
-    <DraftListDialog
-      :dialog="show_draft_dlg"
-      :items="drafts"
-      @onDraftDlgClose="show_draft_dlg=false"
-      @onEditDraft="showEdit"
+    <DeleteDialog
+      :dialog="show_delete_dlg"
+      @onDeleteDlgCancel="show_delete_dlg=false"
+      @onDeleteDlgOk="onDelete"
     />
   </div>
 </template>
 
 <script>
-  import DraftListDialog from "../../components/admin/affiliate/DraftListDialog";
   import NewDialog from "../../components/admin/affiliate/NewDialog";
   import EditDialog from "../../components/admin/affiliate/EditDialog";
   import DeleteDialog from "../../components/admin/affiliate/DeleteDialog";
   import DetailDialog from "../../components/admin/affiliate/DetailDialog";
+  import vuetifyToast from 'vuetify-toast'
 
   export default {
-    components: {DetailDialog, DeleteDialog, EditDialog, NewDialog, DraftListDialog},
+    components: {DetailDialog, DeleteDialog, EditDialog, NewDialog, },
     data() {
       return {
         show_new_dlg: false,
         show_edit_dlg: false,
         show_detail_dlg: false,
         show_delete_dlg: false,
-        show_draft_dlg: false,
+        checkAll: false,
         selected: null,
         page: 0,
         size: 5,
@@ -158,41 +153,28 @@
         all_items: [],
         affiliates: [],
         items: [],
-        filter: 'all',
-        ranks:[
-          {text: '全て', value:'all'},
-          {text: 'VIP', value:'VIP'},
-          {text: 'S VIP', value:'S VIP'},
-          {text: 'SS VIP', value:'SS VIP'},
-          {text: 'QUEEN', value:'QUEEN'},
-          {text: 'KING', value:'KING'},
-        ],
+        filter: 0,
+        ranks:[],
         drafts: [],
         sort: '',
         sorts: [
           {text: 'ID番号順', value: 'id'},
-          {text: '登録日時順', value: 'joined'},
+          {text: '登録日時順', value: 'date'},
           {text: 'ランク順', value: 'rank'},
         ]
       }
     },
     mounted() {
-      // load categories and QAs
-      this.all_items = [
-        {id: 1, name_first: 'first', name_last: 'last', mail: 'adv@mail.com', status: '本登録', rank: 5, created_at: '2020-01-01 12:20', updated_at: '2020-01-01 12:20'},
-        {id: 2, name_first: 'first', name_last: 'last', mail: 'adv@mail.com', status: '本登録', rank: 4, created_at: '2020-01-02 12:20', updated_at: '2020-01-01 12:20'},
-        {id: 3, name_first: 'first', name_last: 'last', mail: 'adv@mail.com', status: '本登録', rank: 1, created_at: '2020-01-05 12:20', updated_at: '2020-01-01 12:20'},
-        {id: 4, name_first: 'first', name_last: 'last', mail: 'adv@mail.com', status: '本登録', rank: 2, created_at: '2020-01-03 12:20', updated_at: '2020-01-01 12:20'},
-        {id: 5, name_first: 'first', name_last: 'last', mail: 'adv@mail.com', status: '本登録', rank: 3, created_at: '2020-01-01 15:20', updated_at: '2020-01-01 12:20'},
-        {id: 6, name_first: 'first', name_last: 'last', mail: 'adv@mail.com', status: '本登録', rank: 1, created_at: '2020-01-06 12:20', updated_at: '2020-01-01 12:20'},
-        {id: 7, name_first: 'first', name_last: 'last', mail: 'adv@mail.com', status: '本登録', rank: 5, created_at: '2020-01-03 10:20', updated_at: '2020-01-01 12:20'},
-      ]
-      this.drafts = [
-        {id: 1, name_first: 'first', name_last: 'last', mail: 'adv@mail.com', status: '本登録', rank: 5, created_at: '2020-01-01 12:20', updated_at: '2020-01-01 12:20'},
-        {id: 2, name_first: 'first', name_last: 'last', mail: 'adv@mail.com', status: '本登録', rank: 4, created_at: '2020-01-02 12:20', updated_at: '2020-01-01 12:20'},
-        {id: 3, name_first: 'first', name_last: 'last', mail: 'adv@mail.com', status: '本登録', rank: 1, created_at: '2020-01-05 12:20', updated_at: '2020-01-01 12:20'},
-      ]
-      this.loadItem(this.limit)
+      axios.get('/admin/affiliate/list')
+      .then(res => {
+        this.all_items = res.data.affiliates
+        this.all_items.forEach(item => item.checked = false)
+        this.ranks = res.data.ranks
+        this.loadItem(this.limit)
+      })
+      .catch(e => {
+        vuetifyToast.error('アフィリエイトデータを取得できません。')
+      })
     },
     computed: {
       limit() {
@@ -200,6 +182,9 @@
       }
     },
     watch: {
+      checkAll(val) {
+        this.items.forEach(item => item.checked = val)
+      },
       sort() {
         this.loadItem(this.limit)
       },
@@ -210,13 +195,13 @@
     methods: {
       getItems() {
         let tmp = this.all_items
-        if(this.filter !== 'all') {
-          tmp = tmp.filter(item => item.rank === this.filter)
+        if(this.filter !== 0) {
+          tmp = tmp.filter(item => item.rank_id === this.filter)
         }
         if(this.sort === 'id') {
           tmp.sort((a, b) => a.id - b.id)
         }
-        if(this.sort === 'joined') {
+        if(this.sort === 'date') {
           tmp.sort(function(a, b) {
             const atime = new Date(a.created_at).getTime()
             const btime = new Date(b.created_at).getTime()
@@ -224,7 +209,7 @@
           })
         }
         if(this.sort === 'rank') {
-          tmp.sort((a, b) => a.rank - b.rank)
+          tmp.sort((a, b) => a.rank_id - b.rank_id)
         }
         return tmp
       },
@@ -248,64 +233,37 @@
         this.selected = item
         return true
       },
-      showEdit(val) {
-        this.selected = val
-        this.show_draft_dlg = false
-        this.show_edit_dlg = true
-      },
-      showDrafts() {
-        this.show_draft_dlg = true
-      },
-      showNew() {
-        this.show_new_dlg = true
-      },
       showDetail(item) {
         this.selected = item
+        // axios.get('/admin/affiliate/get/')
         this.show_detail_dlg = true
       },
-      showDelete(item) {
-        this.selected = item
-        this.show_delete_dlg = true
-      },
-      onNew(val, flag) {
-        /**
-         * save new advertiser to server
-         * flag=1 => save draft, flag=2 => register
-         */
-        val.created_at = this.$date().format('YYYY-MM-DD HH:mm')
-        val.updated_at = val.created_at
-        this.all_items.unshift(val)
+      onNew(val) {
+        this.all_items = val
         this.loadItem(this.limit)
         this.show_new_dlg = false
       },
-      onNewAccount(val) {
-        /**
-         * save new advertiser to server
-         * flag=1 => save draft, flag=2 => register
-         */
-        // this.all_items.unshift(val)
-        // this.loadItem(this.limit)
-        this.show_account_dlg = false
-      },
-      onEdit(val, flag) {
-        /**
-         * save new advertiser to server
-         * flag=1 => save draft, flag=2 => register
-         */
-        const index = this.all_items.findIndex(m => m.id === val.id)
-        if(index === -1) return
-        this.all_items[index] = val
-        this.loadItem(this.limit)
-      },
-      onDelete(val) {
+      onDelete() {
+        this.show_delete_dlg = false
         /**
         * delete Qa from server
         */
-        const id = this.all_items.findIndex(m => m.id === val.id)
-        if(id === -1) return
-        this.all_items.splice(id, 1)
-        this.loadItem(this.limit)
-        this.show_delete_dlg = false
+        const ids = []
+        this.items.forEach(item => {if(item.checked) ids.push(item.id)})
+        if(ids.length === 0) {
+          vuetifyToast.error('削除するアフィリエイトを選択してください。')
+          return
+        }
+
+        const sids = ids.join()
+        axios.get(`/admin/affiliate/delete?ids=${sids}`)
+        .then(res => {
+          this.all_items = res.data.affiliates
+          this.loadItem(this.limit)
+        })
+        .catch(e => {
+          vuetifyToast.error('アフィリエイトを削除できません。マネージャーに連絡するか、後で試してください。')
+        })
       },
     }
   }
