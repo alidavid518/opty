@@ -13,21 +13,21 @@
                 <th>ランク</th>
                 <th>ステータス</th>
                 <th>保存日</th>
-                <th> </th>
+<!--                <th> </th>-->
               </tr>
             </thead>
             <tbody>
             <tr v-for="item in drafts" :key="item.id">
-              <td>{{item.name_last}} {{item.name_first}}</td>
-              <td>{{item.name_furi_last}} {{item.name_furi_first}}</td>
-              <td>{{item.rank}}</td>
-              <td>{{item.status}}</td>
+              <td>{{item.name_full}}</td>
+              <td>{{item.furi_full}}</td>
+              <td>{{item.rank_name}}</td>
+              <td>{{item.status_label}}</td>
               <td>{{$date(item.created_at).format('YYYY/MM/DD')}}</td>
-              <td>
-                <v-btn color="primary" dark @click="editDraft(item)">
-                  編集
-                </v-btn>
-              </td>
+<!--              <td>-->
+<!--                <v-btn color="primary" dark @click="editDraft(item)">-->
+<!--                  編集-->
+<!--                </v-btn>-->
+<!--              </td>-->
             </tr>
             </tbody>
           </template>

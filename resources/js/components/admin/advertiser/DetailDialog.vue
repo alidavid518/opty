@@ -8,7 +8,7 @@
     >
       <v-card>
         <v-card-title class="text-center justify-center">
-          {{ val.name_last }} {{ val.name_first }}
+          {{ val.name_full }}
         </v-card-title>
         <v-card-subtitle class="text-center">{{ val.id }}</v-card-subtitle>
         <v-divider/>
@@ -16,17 +16,17 @@
           <v-container fluid class="py-0">
             <v-row>
               <v-col cols="3">Mail Address</v-col>
-              <v-col cols="9">{{ val.mail }}</v-col>
+              <v-col cols="9">{{ val.email }}</v-col>
             </v-row>
             <v-divider/>
             <v-row>
               <v-col cols="3">RANK</v-col>
-              <v-col cols="9">{{ val.rank }}</v-col>
+              <v-col cols="9">{{ val.rank_name }}</v-col>
             </v-row>
             <v-divider/>
             <v-row>
               <v-col cols="3">登録状況</v-col>
-              <v-col cols="9">{{ val.status }}</v-col>
+              <v-col cols="9">{{ val.status_label }}</v-col>
             </v-row>
             <v-divider/>
             <v-row>
@@ -51,7 +51,7 @@
             <v-divider/>
             <v-row>
               <v-col cols="3">郵便番号</v-col>
-              <v-col cols="9">{{ val.zip }}</v-col>
+              <v-col cols="9">{{ val.zipcode }}</v-col>
             </v-row>
             <v-divider/>
             <v-row>
@@ -84,27 +84,16 @@
   export default {
     props: {
       dialog: false,
-      item: {
-        type: Object,
-        default() {
-          return {
-            id: 0, name_first: '', name_last: '', name_furi_first: '',
-            name_furi_last: '', mail: '', password: '****', rank: '',
-            company: '', company_furi: '', phone: '', address: '',
-            zip: '', status: '', created_at: '', updated_at: ''
-          }
-        }
-      }
+      item: {type: Object, default: null}
     },
     data() {
       console.log(this.item)
       return {
         show: false,
         val: {
-          id: 0, name_first: '', name_last: '', name_furi_first: '',
-          name_furi_last: '', mail: '', password: '****', rank: '',
+          id: 0, name_full: '', furi_full: '', email: '', rank_name: '',
           company: '', company_furi: '', phone: '', address: '',
-          zip: '', status: '', created_at: '', updated_at: ''
+          zipcode: '', status_label: '', created_at: '', updated_at: ''
         }
       }
     },

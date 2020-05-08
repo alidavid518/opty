@@ -42,10 +42,10 @@
             <tbody>
             <tr v-for="item in items" :key="item.id">
               <td>{{ item.id }}</td>
-              <td>{{ item.name_last }} {{ item.name_first }}</td>
-              <td>{{ item.name_furi_last }} {{item.name_furi_first}}</td>
-              <td>{{ item.rank }}</td>
-              <td>{{ item.status }}</td>
+              <td>{{ item.name_full }}</td>
+              <td>{{ item.furi_full }}</td>
+              <td>{{ item.rank_name }}</td>
+              <td>{{ item.status_label }}</td>
               <td>{{ $date(item.created_at).format('YYYY/MM/DD') }}</td>
               <td>
                 <v-btn color="#C694F9" dark @click="showDetail(item)">
@@ -70,14 +70,9 @@
 
     <NewDlg
       :dialog="show_new_dlg"
+      :ranks="ranks"
       @onNewDlgClose="show_new_dlg=false"
       @onCreated="onNew"
-    />
-    <EditDlg
-      :dialog="show_edit_dlg"
-      :item="selected"
-      @onEditDlgClose="show_edit_dlg=false"
-      @onEdited="onEdit"
     />
     <DetailDlg
       :dialog="show_detail_dlg"
@@ -88,30 +83,30 @@
       :dialog="show_delete_dlg"
       :item="selected"
       @onDeleteDlgClose="show_delete_dlg=false"
-      @onDeleted="onDelete"
+      @onDeleteDlgOk="onDelete"
     />
     <DraftListDlg
       :dialog="show_draft_dlg"
       :drafts="drafts"
       @onDraftDlgClose="show_draft_dlg=false"
-      @onEditDraft="showEdit"
     />
   </div>
 </template>
 
 <script>
   import NewDlg from "../../components/admin/advertiser/NewDialog";
-  import EditDlg from "../../components/admin/advertiser/EditDialog";
+  // import EditDlg from "../../components/admin/advertiser/EditDialog";
   import DetailDlg from "../../components/admin/advertiser/DetailDialog";
   import DeleteDlg from "../../components/admin/advertiser/DeleteDialog";
   import DraftListDlg from "../../components/admin/advertiser/DraftListDialog";
+  import vuetifyToast from "vuetify-toast"
 
   export default {
-    components: {NewDlg, EditDlg, DetailDlg, DeleteDlg, DraftListDlg},
+    components: {NewDlg, /*EditDlg,*/ DetailDlg, DeleteDlg, DraftListDlg},
     data() {
       return {
         show_new_dlg: false,
-        show_edit_dlg: false,
+        // show_edit_dlg: false,
         show_detail_dlg: false,
         show_delete_dlg: false,
         show_draft_dlg: false,
@@ -124,25 +119,21 @@
         items: [],
         filter: '',
         drafts: [],
+        ranks: []
       }
     },
     mounted() {
-      // load categories and QAs
-      this.all_items = [
-        {id: 1, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', rank: 'SS VIP', company: 'company co ltd', company_furi: 'caom furi', phone: '123-4567-8901', address: '', zip: '123-4567', status: '本登録', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 2, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', rank: 'SS VIP', company: 'company co ltd', company_furi: 'caom furi', phone: '123-4567-8901', address: '', zip: '123-4567', status: '本登録', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 3, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', rank: 'SS VIP', company: 'company co ltd', company_furi: 'caom furi', phone: '123-4567-8901', address: '', zip: '123-4567', status: '本登録', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 4, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', rank: 'SS VIP', company: 'company co ltd', company_furi: 'caom furi', phone: '123-4567-8901', address: '', zip: '123-4567', status: '本登録', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 5, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', rank: 'SS VIP', company: 'company co ltd', company_furi: 'caom furi', phone: '123-4567-8901', address: '', zip: '123-4567', status: '本登録', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 6, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', rank: 'SS VIP', company: 'company co ltd', company_furi: 'caom furi', phone: '123-4567-8901', address: '', zip: '123-4567', status: '本登録', created_at: '2020-01-01', updated_at: '2020-01-01'},
-      ]
-      this.drafts = [
-        {id: 7, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', rank: 'SS VIP', company: 'company co ltd', company_furi: 'caom furi', phone: '123-4567-8901', address: '', zip: '123-4567', status: '本登録', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 8, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', rank: 'SS VIP', company: 'company co ltd', company_furi: 'caom furi', phone: '123-4567-8901', address: '', zip: '123-4567', status: '本登録', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 9, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', rank: 'SS VIP', company: 'company co ltd', company_furi: 'caom furi', phone: '123-4567-8901', address: '', zip: '123-4567', status: '本登録', created_at: '2020-01-01', updated_at: '2020-01-01'},
-      ]
-      // this.selected = this.all_items[0]
-      this.loadItem(this.limit)
+      // load advertiser list
+      axios.get('/admin/advertiser/list')
+      .then(res => {
+        this.all_items = res.data.advertisers.filter(a => a.status === 1)
+        this.drafts = res.data.advertisers.filter(a => a.status === 0)
+        this.ranks = res.data.ranks
+        this.loadItem(this.limit)
+      })
+      .catch(e => {
+        vuetifyToast.error('広告主リストを読み取ることができません。 マネージャーに連絡するか、後で試してください。')
+      })
     },
     computed: {
       limit() {
@@ -150,6 +141,10 @@
       }
     },
     methods: {
+      filterItems(items) {
+        this.all_items = items.filter(item => item.status === 1)
+        this.drafts = items.filter(item => item.status === 0)
+      },
       showMore() {
         this.page++
         const start = this.page * this.size
@@ -158,7 +153,6 @@
         this.items = [...this.items, ...new_items]
       },
       loadItem(limit) {
-        console.log(limit)
         this.items = this.all_items.slice(0, limit)
       },
       findItem(qid) {
@@ -166,12 +160,6 @@
         if (item === undefined) return false
         this.selected = item
         return true
-      },
-      showEdit(val) {
-        console.log(val)
-        this.selected = val
-        this.show_draft_dlg = false
-        this.show_edit_dlg = true
       },
       showDrafts() {
         this.show_draft_dlg = true
@@ -187,32 +175,13 @@
         this.selected = item
         this.show_delete_dlg = true
       },
-      onNew(val, flag) {
-        /**
-         * save new advertiser to server
-         * flag=1 => save draft, flag=2 => register
-         */
-        this.all_items.unshift(val)
+      onNew(val) {
+        this.filterItems(val)
         this.loadItem(this.limit)
         this.show_new_dlg = false
       },
-      onEdit(val, flag) {
-        /**
-         * save new advertiser to server
-         * flag=1 => save draft, flag=2 => register
-         */
-        const index = this.all_items.findIndex(m => m.id === val.id)
-        if(index === -1) return
-        this.all_items[index] = val
-        this.loadItem(this.limit)
-      },
       onDelete(val) {
-        /**
-        * delete Qa from server
-        */
-        const id = this.all_items.findIndex(m => m.id === val.id)
-        if(id === -1) return
-        this.all_items.splice(id, 1)
+        this.filterItems(val)
         this.loadItem(this.limit)
         this.show_delete_dlg = false
       },

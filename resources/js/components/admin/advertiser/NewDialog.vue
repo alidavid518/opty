@@ -38,14 +38,14 @@
                 <v-text-field
                   outlined dense
                   label="姓"
-                  v-model="item.name_furi_last"
+                  v-model="item.furi_last"
                 />
               </v-col>
               <v-col cols="4" class="pb-0">
                 <v-text-field
                   label="名"
                   outlined dense
-                  v-model="item.name_furi_first"
+                  v-model="item.furi_first"
                 />
               </v-col>
             </v-row>
@@ -57,7 +57,7 @@
               <v-col cols="8" class="pb-0">
                 <v-text-field
                   outlined dense
-                  v-model="item.mail"
+                  v-model="item.email"
                 />
               </v-col>
             </v-row>
@@ -70,6 +70,8 @@
                 <v-text-field
                   outlined dense
                   v-model="item.password"
+                  hint="8文字以上"
+                  persistent-hint
                 />
               </v-col>
             </v-row>
@@ -81,7 +83,9 @@
               <v-col cols="8" class="pb-0">
                 <v-text-field
                   outlined dense
-                  v-model="item.password_confirm"
+                  hint="8文字以上。パスワードと一致"
+                  persistent-hint
+                  v-model="item.password_confirmation"
                 />
               </v-col>
             </v-row>
@@ -91,9 +95,11 @@
                 <v-label>ランク</v-label>
               </v-col>
               <v-col cols="8" class="pb-0">
-                <v-text-field
+                <v-select
                   outlined dense
-                  v-model="item.rank"
+                  :items="ranks"
+                  item-text="name" item-value="id"
+                  v-model="item.rank_id"
                 />
               </v-col>
             </v-row>
@@ -129,7 +135,7 @@
               <v-col cols="8" class="pb-0">
                 <v-text-field
                   outlined dense
-                  v-model="item.zip"
+                  v-model="item.zipcode"
                   hint="000-0000"
                   persistent-hint
                 />
@@ -141,8 +147,8 @@
                 <v-label>住所</v-label>
               </v-col>
               <v-col cols="8" class="pb-0">
-                <v-textarea
-                  outlined
+                <v-text-field
+                  outlined dense
                   v-model="item.address"
                 />
               </v-col>
@@ -166,8 +172,8 @@
         <v-divider/>
         <v-card-actions class="d-flex justify-center">
           <v-btn color="alert" dark @click="$emit('onNewDlgClose')">キャンセル</v-btn>
-          <v-btn color="#5367FD" dark @click="save(1)">下書き</v-btn>
-          <v-btn color="#C694F9" dark @click="save(2)">登録する</v-btn>
+          <v-btn color="#5367FD" dark @click="save(0)">下書き</v-btn>
+          <v-btn color="#C694F9" dark @click="save(1)">登録する</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -175,24 +181,27 @@
 </template>
 
 <script>
+  import vuetifyToast from "vuetify-toast"
+
   export default {
     props: {
       dialog: false,
+      ranks: {type: Array, default: []}
     },
     data() {
       return {
         item: {
           name_last: '',
           name_first: '',
-          name_furi_last: '',
-          name_furi_first: '',
-          mail: '',
+          furi_last: '',
+          furi_first: '',
+          email: '',
           password: '',
-          password_confirm: '',
-          rank: '',
+          password_confirmation: '',
+          rank_id: '',
           company: '',
           company_furi: '',
-          zip: '',
+          zipcode: '',
           address: '',
           phone: ''
         }
@@ -200,7 +209,31 @@
     },
     methods: {
       save(flag) {
-        this.$emit('onCreated', this.item, flag)
+        this.item.status = flag
+
+        axios.post('/admin/advertiser/new', this.item)
+        .then(res => {
+          this.$emit('onCreated', res.data.advertisers)
+        })
+        .catch(e => {
+          if(e.response.status === 400) {
+            const errors = e.response.data.errors
+            if(errors.hasOwnProperty('name_last')) vuetifyToast.error('名前を入力してください。')
+            if(errors.hasOwnProperty('name_first')) vuetifyToast.error('名前を入力してください。')
+            if(errors.hasOwnProperty('furi_last')) vuetifyToast.error('名前を入力してください。')
+            if(errors.hasOwnProperty('furi_first')) vuetifyToast.error('名前を入力してください。')
+            if(errors.hasOwnProperty('email')) vuetifyToast.error('メールアドレスを入力してください。')
+            if(errors.hasOwnProperty('password')) vuetifyToast.error('パスワードを入力してください。')
+            if(errors.hasOwnProperty('rank_id')) vuetifyToast.error('ランクを選択してください。')
+            if(errors.hasOwnProperty('company')) vuetifyToast.error('会社名を入力してください。')
+            if(errors.hasOwnProperty('company_furi')) vuetifyToast.error('会社名を入力してください。')
+            if(errors.hasOwnProperty('zipcode')) vuetifyToast.error('郵便番号を入力してください。')
+            if(errors.hasOwnProperty('address')) vuetifyToast.error('住所を入力してください。')
+            if(errors.hasOwnProperty('phone')) vuetifyToast.error('電話番号を入力してください。')
+          } else {
+            vuetifyToast.error('サーバーエラー。 マネージャーに連絡するか、後で試してください。')
+          }
+        })
       }
     }
   }

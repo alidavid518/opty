@@ -23,18 +23,13 @@
 </template>
 
 <script>
+  import vuetifyToast from "vuetify-toast";
   export default {
     props: {
       dialog: false,
       item: {
         type: Object,
-        default() {
-          return {
-            id: 0,
-            name_first: '',
-            name_last: '',
-          }
-        }
+        default:() => ({id: 0, name_full: ''})
       },
     },
     data() {
@@ -43,17 +38,20 @@
       }
     },
     watch: {
-      item(val) {
-        if(val === null) return
-        this.name = val.name_last + ' ' + val.name_first
-      } ,
+      item(val) {this.name = val.name_full}
     },
     methods: {
       hide() {
         this.$emit('onDeleteDlgClose')
       },
       deleted() {
-        this.$emit('onDeleted', this.item)
+        axios.get(`/admin/advertiser/delete/${this.item.id}`)
+        .then(res => {
+          this.$emit('onDeleteDlgOk', res.data.advertisers)
+        })
+        .catch(e => {
+          vuetifyToast.error('広告主を削除できません。 後で試してください。')
+        })
       }
     }
   }

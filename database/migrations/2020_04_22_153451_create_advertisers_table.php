@@ -21,12 +21,13 @@ class CreateAdvertisersTable extends Migration
             $table->string('furi_first');
             $table->string('email');
             $table->string('password');
-            $table->tinyInteger('rank');
+            $table->tinyInteger('rank_id');
             $table->string('company');
             $table->string('company_furi');
             $table->string('zipcode');
             $table->string('address');
             $table->string('phone');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

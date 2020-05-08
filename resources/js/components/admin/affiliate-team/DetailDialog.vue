@@ -8,27 +8,12 @@
     >
       <v-card>
         <v-card-title class="text-center justify-center">
-          {{ val.name_last }} {{ val.name_first }}
+          {{ val.name }}
         </v-card-title>
         <v-card-subtitle class="text-center">{{ val.id }}</v-card-subtitle>
         <v-divider/>
         <v-card-text class="py-0">
           <v-container fluid class="py-0">
-            <v-row>
-              <v-col cols="3">Mail Address</v-col>
-              <v-col cols="9">{{ val.mail }}</v-col>
-            </v-row>
-            <v-divider/>
-            <v-row>
-              <v-col cols="3">RANK</v-col>
-              <v-col cols="9">{{ val.rank }}</v-col>
-            </v-row>
-            <v-divider/>
-            <v-row>
-              <v-col cols="3">登録状況</v-col>
-              <v-col cols="9">{{ val.status }}</v-col>
-            </v-row>
-            <v-divider/>
             <v-row>
               <v-col cols="3">登録日時</v-col>
               <v-col cols="9">{{ $date(val.created_at).format('YYYY/MM/DD') }}</v-col>
@@ -37,11 +22,6 @@
             <v-row>
               <v-col cols="3">最終更新日時</v-col>
               <v-col cols="9">{{ $date(val.updated_at).format('YYYY/MM/DD') }}</v-col>
-            </v-row>
-            <v-divider/>
-            <v-row>
-              <v-col cols="3">メルマガ配信</v-col>
-              <v-col cols="9">{{ val.mailmaga }}</v-col>
             </v-row>
             <v-divider/>
             <v-row>
@@ -72,6 +52,14 @@
             <v-row>
               <v-col cols="3">不正情報履歴</v-col>
               <v-col cols="9">{{val.fraud_history}} </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <h3>メンバー一覧</h3>
+              </v-col>
+              <v-col cols="12" v-for="member in val.members" :key="member.id">
+                {{member.name_full}}
+              </v-col>
             </v-row>
           </v-container>
         </v-card-text>

@@ -45,6 +45,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/team/add_member', 'Team\TeamController@addMember');
     Route::get('/team/delete', 'Team\TeamController@delete');
     Route::get('/team/get/{id}', 'Team\TeamController@get');
+    // advertiser
+    Route::get('/advertiser/list', 'Advertiser\AdvertiserController@list');
+    Route::post('/advertiser/new', 'Advertiser\AdvertiserController@new');
+    Route::get('/advertiser/delete/{id}', 'Advertiser\AdvertiserController@delete');
+    Route::get('/advertiser/get/{id}', 'Advertiser\AdvertiserController@get');
 
   });
 
