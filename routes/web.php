@@ -50,7 +50,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/advertiser/new', 'Advertiser\AdvertiserController@new');
     Route::get('/advertiser/delete/{id}', 'Advertiser\AdvertiserController@delete');
     Route::get('/advertiser/get/{id}', 'Advertiser\AdvertiserController@get');
-
+    // manager
+    Route::get('/manager/list', 'Manager\ManagerController@list');
+    Route::post('/manager/new', 'Manager\ManagerController@new');
   });
 
   // user route group

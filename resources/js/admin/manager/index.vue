@@ -11,14 +11,14 @@
               <v-btn
                 class="mr-2"
                 color="success"
-                @click="showNew"
+                @click="show_new_dlg=true"
               >
                 管理主登録
               </v-btn>
               <v-btn
                 class="mr-2"
                 color="info"
-                @click="showAccount"
+                @click="show_account_dlg=true"
               >
                 アカウント管理
               </v-btn>
@@ -34,7 +34,7 @@
             <tr>
               <th class="text-left" id="_th1">ID</th>
               <th class="text-left" id="_th2">名前</th>
-              <th class="text-left" id="_th3">フリガナ</th>
+<!--              <th class="text-left" id="_th3">フリガナ</th>-->
               <th class="text-left" id="_th4">メールアドレス</th>
               <th class="text-left" id="_th5">権限</th>
               <th class="text-left" id="_th6">登録状況</th>
@@ -44,11 +44,11 @@
             <tbody>
             <tr v-for="item in items" :key="item.id">
               <td>{{ item.id }}</td>
-              <td>{{ item.name_last }} {{ item.name_first }}</td>
-              <td>{{ item.name_furi_last }} {{item.name_furi_first}}</td>
-              <td>{{ item.mail }}</td>
-              <td>{{ item.permission }}</td>
-              <td>{{ item.status }}</td>
+              <td>{{ item.name_full }}</td>
+<!--              <td>{{ item.furi_full}}</td>-->
+              <td>{{ item.email }}</td>
+              <td>{{ item.permission_label }}</td>
+              <td>{{ item.status_label }}</td>
 <!--              <td>-->
 <!--                <v-btn color="#C694F9" dark @click="showDetail(item)">-->
 <!--                  詳細-->
@@ -75,23 +75,6 @@
       @onNewDlgClose="show_new_dlg=false"
       @onCreated="onNew"
     />
-    <EditDlg
-      :dialog="show_edit_dlg"
-      :item="selected"
-      @onEditDlgClose="show_edit_dlg=false"
-      @onEdited="onEdit"
-    />
-    <DetailDlg
-      :dialog="show_detail_dlg"
-      :item="selected"
-      @onDetailDlgClose="show_detail_dlg=false"
-    />
-    <DeleteDlg
-      :dialog="show_delete_dlg"
-      :item="selected"
-      @onDeleteDlgClose="show_delete_dlg=false"
-      @onDeleted="onDelete"
-    />
     <AccountDlg
       :dialog="show_account_dlg"
       @onAccountClose="show_account_dlg=false"
@@ -102,41 +85,33 @@
 
 <script>
   import NewDlg from "../../components/admin/manager/NewDialog";
-  import EditDlg from "../../components/admin/manager/EditDialog";
-  import DetailDlg from "../../components/admin/manager/DetailDialog";
-  import DeleteDlg from "../../components/admin/manager/DeleteDialog";
   import AccountDlg from "../../components/admin/manager/AccountDialog";
+  import vuetifyToast from "vuetify-toast"
 
   export default {
-    components: {AccountDlg, NewDlg, EditDlg, DetailDlg, DeleteDlg},
+    components: {AccountDlg, NewDlg},
     data() {
       return {
         show_new_dlg: false,
-        show_edit_dlg: false,
-        show_detail_dlg: false,
-        show_delete_dlg: false,
         show_account_dlg: false,
         selected: null,
         page: 0,
         size: 5,
-        filters: [],
         all_items: [],
-        affiliates: [],
+        permissions: [],
         items: [],
-        filter: '',
       }
     },
     mounted() {
-      // load categories and QAs
-      this.all_items = [
-        {id: 1, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', status: '本登録', permission: '権限', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 2, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', status: '本登録', permission: '権限', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 3, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', status: '本登録', permission: '権限', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 4, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', status: '本登録', permission: '権限', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 5, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', status: '本登録', permission: '権限', created_at: '2020-01-01', updated_at: '2020-01-01'},
-        {id: 6, name_first: 'first', name_last: 'last', name_furi_first: 'furi first', name_furi_last: 'furi_last', mail: 'adv@mail.com', password: '****', status: '本登録', permission: '権限', created_at: '2020-01-01', updated_at: '2020-01-01'},
-      ]
-      this.loadItem(this.limit)
+      // load managers
+      axios.get('/admin/manager/list')
+      .then(res => {
+        this.all_items = res.data.managers
+        this.loadItem(this.limit)
+      })
+      .catch(e => {
+        vuetifyToast.error('管理者リストを取得できません。 後で試してください。')
+      })
     },
     computed: {
       limit() {
@@ -161,35 +136,14 @@
         this.selected = item
         return true
       },
-      showEdit(val) {
-        console.log(val)
-        this.selected = val
-        this.show_draft_dlg = false
-        this.show_edit_dlg = true
-      },
-      showDrafts() {
-        this.show_draft_dlg = true
-      },
       showNew() {
         this.show_new_dlg = true
       },
       showAccount() {
         this.show_account_dlg = true
       },
-      showDetail(item) {
-        this.selected = item
-        this.show_detail_dlg = true
-      },
-      showDelete(item) {
-        this.selected = item
-        this.show_delete_dlg = true
-      },
-      onNew(val, flag) {
-        /**
-         * save new advertiser to server
-         * flag=1 => save draft, flag=2 => register
-         */
-        this.all_items.unshift(val)
+      onNew(val) {
+        this.all_items = val.map(v => v)
         this.loadItem(this.limit)
         this.show_new_dlg = false
       },
@@ -201,26 +155,6 @@
         // this.all_items.unshift(val)
         // this.loadItem(this.limit)
         this.show_account_dlg = false
-      },
-      onEdit(val, flag) {
-        /**
-         * save new advertiser to server
-         * flag=1 => save draft, flag=2 => register
-         */
-        const index = this.all_items.findIndex(m => m.id === val.id)
-        if(index === -1) return
-        this.all_items[index] = val
-        this.loadItem(this.limit)
-      },
-      onDelete(val) {
-        /**
-        * delete Qa from server
-        */
-        const id = this.all_items.findIndex(m => m.id === val.id)
-        if(id === -1) return
-        this.all_items.splice(id, 1)
-        this.loadItem(this.limit)
-        this.show_delete_dlg = false
       },
     }
   }

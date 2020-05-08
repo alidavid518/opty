@@ -32,32 +32,12 @@
             <v-divider/>
             <v-row>
               <v-col cols="4" class="pb-0">
-                <v-label>フリガナ</v-label>
-              </v-col>
-              <v-col cols="4" class="pb-0">
-                <v-text-field
-                  outlined dense
-                  label="姓"
-                  v-model="item.name_furi_last"
-                />
-              </v-col>
-              <v-col cols="4" class="pb-0">
-                <v-text-field
-                  label="名"
-                  outlined dense
-                  v-model="item.name_furi_first"
-                />
-              </v-col>
-            </v-row>
-            <v-divider/>
-            <v-row>
-              <v-col cols="4" class="pb-0">
                 <v-label>Mail Address</v-label>
               </v-col>
               <v-col cols="8" class="pb-0">
                 <v-text-field
                   outlined dense
-                  v-model="item.mail"
+                  v-model="item.email"
                 />
               </v-col>
             </v-row>
@@ -68,7 +48,10 @@
               </v-col>
               <v-col cols="8" class="pb-0">
                 <v-text-field
+                  type="password"
                   outlined dense
+                  hint="8文字以上。"
+                  persistent-hint
                   v-model="item.password"
                 />
               </v-col>
@@ -81,7 +64,10 @@
               <v-col cols="8" class="pb-0">
                 <v-text-field
                   outlined dense
-                  v-model="item.password_confirm"
+                  hint="8文字以上。 パスワードと同じ。"
+                  persistent-hint
+                  type="password"
+                  v-model="item.password_confirmation"
                 />
               </v-col>
             </v-row>
@@ -91,8 +77,10 @@
                 <v-label>権限</v-label>
               </v-col>
               <v-col cols="8" class="pb-0">
-                <v-text-field
+                <v-select
                   outlined dense
+                  :items="permissions"
+                  item-value="permission" item-text="name"
                   v-model="item.permission"
                 />
               </v-col>
@@ -111,25 +99,44 @@
 </template>
 
 <script>
+  import vuetifyToast from "vuetify-toast"
+
   export default {
     props: {
       dialog: false,
     },
     data() {
       return {
+        permissions: [{permission:0, name: '管理者'}, {permission:1, name: 'super管理者'}],
         item: {
           name_last: '',
           name_first: '',
-          mail: '',
+          email: '',
           password: '',
-          password_confirm: '',
+          password_confirmation: '',
           permission: '',
         }
       }
     },
     methods: {
       save() {
-        this.$emit('onCreated', this.item)
+        axios.post('/admin/manager/new', this.item)
+        .then(res => {
+          this.$emit('onCreated', res.data.managers)
+        })
+        .catch(e => {
+          if(e.response.status === 500) {
+            vuetifyToast.error('マネージャーを保存できません。 後で試してください。')
+          } else {
+            const errors = e.response.data.errors
+
+            if(errors.hasOwnProperty('name_last')) vuetifyToast.error('名前を入力してください。')
+            if(errors.hasOwnProperty('name_first')) vuetifyToast.error('')
+            if(errors.hasOwnProperty('email')) vuetifyToast.error('正しいメールアドレスを入力してください。')
+            if(errors.hasOwnProperty('password')) vuetifyToast.error('パスワードを正しく入力してください。')
+            if(errors.hasOwnProperty('permission')) vuetifyToast.error('権限を選択してください。')
+          }
+        })
       }
     }
   }
