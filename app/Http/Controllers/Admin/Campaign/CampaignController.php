@@ -72,11 +72,25 @@ class CampaignController extends Controller
   public function edit(Request $request, $flag) {
     $input = $request->all();
 
+    if($request->has('image')) {
+      $validator = Validator::make($input, [
+        'image' => 'file|image|dimensions:width=800,height=200',  // アイキャッチ画像
+      ]);
+      if($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 400);
+      }
+      // save banner
+      $file = $request->file('image');
+      $fname = time() . $file->getClientOriginalName();
+      $file->storeAs('public/campaign-banner', $fname);
+      $url = url('/storage/campaign-banner/'. $fname);
+      $input['image'] = $url;
+    }
+
     $validator = Validator::make($input, [
       'id' => 'required',
       'advertiser_id'   => 'required', // 出稿広告主
       'title'           => 'required',  // キャンペーン名
-      'image'           => 'required|file|image|dimensions:width=800,height=200',  // アイキャッチ画像
       'date_start'      => 'required|date',
       'time_start'      => 'required',
       'date_end'        => 'required|date',     // キャンペーン期間
@@ -100,13 +114,6 @@ class CampaignController extends Controller
     if ($validator->fails()) {
       return response()->json(['errors' => $validator->errors()], 400);
     }
-
-    // save banner
-    $file = $request->file('image');
-    $fname = time() . $file->getClientOriginalName();
-    $file->storeAs('public/campaign-banner', $fname);
-    $url = url('/storage/campaign-banner/'. $fname);
-    $input['image'] = $url;
 
     // set flag
     $input['status'] = $flag;

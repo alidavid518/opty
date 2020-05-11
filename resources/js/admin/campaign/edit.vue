@@ -66,7 +66,7 @@
                         persistent-hint
                         ref="avatar"
                         @change="imgSelect"
-                        v-model="item.image"
+                        v-model="file"
                       />
                     </v-col>
                   </v-row>
@@ -144,12 +144,12 @@
                 @focus="toggleFocus($event)"
                 @blur="toggleFocus($event, false)"
               />
-              <input
-                type="file"
-                id="getFile"
-                @change="uploadFunction($event)"
-                hidden
-              />
+<!--              <input-->
+<!--                type="file"-->
+<!--                id="getFile"-->
+<!--                @change="uploadFunction($event)"-->
+<!--                hidden-->
+<!--              />-->
             </v-col>
             <v-col cols="4" class="_control">
               <v-label>記載注意事項</v-label>
@@ -321,7 +321,7 @@
           id: 0,
           advertiser_id: 0, // 出稿広告主
           title: '', // キャンペーン名
-          image: '', // アイキャッチ画像
+          image: null, // アイキャッチ画像
           date_start: '',
           time_start: '',
           date_end: '',     // キャンペーン期間
@@ -344,13 +344,15 @@
         campaign_id: this.$route.params.id,
         advertisers: [],
         preview_url: '',
-        valid: false
+        valid: false,
+        file: null
       }
     },
     mounted() {
       axios.get(`admin/campaign/get/${this.campaign_id}`)
       .then(res => {
         this.item = res.data.campaign
+        // this.item.image = null
         this.preview_url = this.item.image
       })
       .catch(e => {
@@ -371,11 +373,14 @@
         if(this.item.image) {
           let formData = new FormData()
 
+          if(this.file) {
+            formData.append('image', this.file, this.file.name)
+          }
+
           // for(let file of this.avatar) {
           formData.append('id', this.item.id)
           formData.append('advertiser_id', this.item.advertiser_id)
           formData.append('title', this.item.title)
-          formData.append('image', this.item.image, this.item.image.name)
           formData.append('date_start', this.item.date_start)
           formData.append('time_start', this.item.time_start)
           formData.append('date_end', this.item.date_end)
@@ -436,7 +441,7 @@
         }
       },
       imgSelect() {
-        this.preview_url = URL.createObjectURL(this.item.image)
+        this.preview_url = URL.createObjectURL(this.file)
       },
       toggleFocus(event, id, focused = true) {
         this.cursorLocation = event.getSelection() ? event.getSelection().index : 0

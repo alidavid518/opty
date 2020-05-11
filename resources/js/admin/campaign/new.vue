@@ -70,10 +70,9 @@
                           label="ファイルを選択"
                           hint="横800px, 縦200pxの画像をアップロードしてください。"
                           persistent-hint
-                          v-model="item.image"
                           ref="avatar"
                           @change="imgSelect"
-                          :rules="textRule" required
+                          v-model="file"
                         />
                       </v-col>
                     </v-row>
@@ -158,12 +157,12 @@
                   @blur="toggleFocus($event, false)"
                   :rules="textRule" required
                 />
-                <input
-                  type="file"
-                  id="getFile"
-                  @change="uploadFunction($event)"
-                  hidden
-                />
+<!--                <input-->
+<!--                  type="file"-->
+<!--                  id="getFile"-->
+<!--                  @change="uploadFunction($event)"-->
+<!--                  hidden-->
+<!--                />-->
               </v-col>
               <v-col cols="4" class="_control">
                 <v-label>記載注意事項</v-label>
@@ -341,6 +340,7 @@
         advertisers: [],
         // img: null,
         preview_url: '',
+        file: null,
         item: {
           advertiser_id: 0, // 出稿広告主
           title: '', // キャンペーン名
@@ -378,13 +378,12 @@
     methods: {
       save(flag) {
         // flag: 0 => draft, 1: save
-        if(this.item.image) {
+        if(this.file) {
           let formData = new FormData()
 
-          // for(let file of this.avatar) {
           formData.append('advertiser_id', this.item.advertiser_id)
           formData.append('title', this.item.title)
-          formData.append('image', this.item.image, this.item.image.name)
+          formData.append('image', this.file, this.file.name)
           formData.append('date_start', this.item.date_start)
           formData.append('time_start', this.item.time_start)
           formData.append('date_end', this.item.date_end)
@@ -441,11 +440,10 @@
             })
         } else {
           vuetifyToast.error('バナー画像を選択してください。');// アイキャッチ画像
-          return
         }
       },
       imgSelect() {
-        this.preview_url = URL.createObjectURL(this.item.image)
+        this.preview_url = URL.createObjectURL(this.file)
       },
       toggleFocus(event, id, focused = true) {
         this.cursorLocation = event.getSelection() ? event.getSelection().index : 0
