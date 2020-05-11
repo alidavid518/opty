@@ -131,7 +131,7 @@
             const errors = e.response.data.errors
 
             if(errors.hasOwnProperty('name_last')) vuetifyToast.error('名前を入力してください。')
-            if(errors.hasOwnProperty('name_first')) vuetifyToast.error('')
+            if(errors.hasOwnProperty('name_first')) vuetifyToast.error('名前を入力してください。')
             if(errors.hasOwnProperty('email')) vuetifyToast.error('正しいメールアドレスを入力してください。')
             if(errors.hasOwnProperty('password')) vuetifyToast.error('パスワードを正しく入力してください。')
             if(errors.hasOwnProperty('permission')) vuetifyToast.error('権限を選択してください。')

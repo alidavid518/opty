@@ -14,7 +14,7 @@
           <v-col cols="12">
             <v-btn
               class="campaign-page_header_toolbar_button"
-              @click="show_new_campaign_dlg = true"
+              to="/admin/campaign/new"
             >
               新規作成
             </v-btn>
@@ -47,18 +47,18 @@
         </v-row>
       </v-container>
     </v-card>
-    <NewCampaignDialog :dialog="show_new_campaign_dlg"/>
+<!--    <NewCampaignDialog :dialog="show_new_campaign_dlg"/>-->
     <EditCampaignDialog :dialog="show_edit_campaign_dlg"/>
   </div>
 </template>
 
 <script>
   import CampaignItem from "../../components/admin/campaign/CampaignItem";
-  import NewCampaignDialog from "../../components/admin/campaign/NewCampaignDialog";
+  // import NewCampaignDialog from "../../components/admin/campaign/NewCampaignDialog";
   import EditCampaignDialog from "../../components/admin/campaign/EditCampaignDialog";
 
   export default {
-    components: {CampaignItem, NewCampaignDialog, EditCampaignDialog},
+    components: {CampaignItem, /*NewCampaignDialog,*/ EditCampaignDialog},
     data() {
       return {
         show_new_campaign_dlg: false,
@@ -145,12 +145,6 @@
       }
     },
     mounted() {
-
-      const self = this;
-
-      self.$store.commit('setBreadcrumbs', [
-        {label: 'Dashboard', name: ''}
-      ]);
     }
   }
 </script>

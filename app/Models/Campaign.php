@@ -6,40 +6,50 @@ use Illuminate\Database\Eloquent\Model;
 
 class Campaign extends Model
 {
-    protected $fillable = [
-        'advertiser_id', 'title', 'image',
-        'youtube_url',  // Youtube予告URL
-        'statement',    // アフィリエイター向け PR文
-        'mail_redirect_url',    // 成約除外メアドリダイレクトURL
-        'date_start',
-        'date_end',     // キャンペーン期間
-        'detail_pdf',   // 詳細PDF
-        'opt_in_method',    // オプトイン方式
-        'notes',        // 注意事項
-        'content_type', // コンテンツタイプ
-        'company_show', // 会社名表示
-        'show_setting',  // 表示設定
-        'always_posting',       // 常時掲載案件化
-        'campaign_summary',     // キャンペーン概要
-        'deposit_amount',     // デポジット金額
-        'contracts_limit',     // 成約上限数
-        'remarks',      // 備考
-    ];
+  protected $fillable = [
+    'advertiser_id', // 出稿広告主
+    'title', // キャンペーン名
+    'image', // アイキャッチ画像
+    'date_start',
+    'date_end',     // キャンペーン期間
+    'youtube_url',  // Youtube予告URL
+    'affiliate_pr',    // アフィリエイター向け PR文
+    'notes',        // 注意事項
+    'mail_redirect_url',    // 成約除外メアドリダイレクトURL
+    'detail_pdf',   // 詳細PDF
+    'opt_in_method',    // オプトイン方式
+    'content_type', // コンテンツタイプ
+    'company_show', // 会社名表示
+    'always_posting',       // 常時掲載案件化
+    'show_setting',  // 表示設定
+    'campaign_summary',     // キャンペーン概要
+    'deposit_amount',     // デポジット金額
+    'contracts_limit',     // 成約上限数
+    'remarks',      // 備考
+    'status',   // 0: draft, 1: post
+  ];
 
-    public function stories() {
-      return $this->hasMany('App\Models\Story');
-    }
+  public function stories()
+  {
+    return $this->hasMany('App\Models\Story');
+  }
 
-    public function main_rewards() {
-      return $this->hasMany('App\Models\MainReward');
-    }
+  public function main_rewards()
+  {
+    return $this->hasMany('App\Models\MainReward');
+  }
 
-    public function special_rewards() {
-      return $this->hasMany('App\Models\SpecialReward');
-    }
+  public function special_rewards()
+  {
+    return $this->hasMany('App\Models\SpecialReward');
+  }
 
-    public function lps() {
-      return $this->hasMany('App\Models\Lp');
-    }
+  public function lps()
+  {
+    return $this->hasMany('App\Models\Lp');
+  }
 
- }
+  public function advertiser() {
+    return $this->belongsTo('App\Models\Advertiser');
+  }
+}

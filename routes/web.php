@@ -53,6 +53,12 @@ Route::middleware(['auth'])->group(function () {
     // manager
     Route::get('/manager/list', 'Manager\ManagerController@list');
     Route::post('/manager/new', 'Manager\ManagerController@new');
+    // campaign
+    Route::get('/campaign/list', 'Campaign\CampaignController@list');
+    Route::post('/campaign/new/{flag}', 'Campaign\CampaignController@new');
+    Route::get('/campaign/get/{id}', 'Campaign\CampaignController@get');
+    Route::post('/campaign/edit/{id}', 'Campaign\CampaignController@edit');
+    Route::get('/campaign/advertisers', 'Campaign\CampaignController@activeAdvertisers');
   });
 
   // user route group
