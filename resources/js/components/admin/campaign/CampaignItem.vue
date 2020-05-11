@@ -4,9 +4,7 @@
       :src="item.image"
       class="white--text align-end campaign-item_img"
       gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-      height="200px"
-    >
-    </v-img>
+    />
 
     <v-card-text class="campaign-item_title">
       {{item.title}}
@@ -27,7 +25,7 @@
       ブロック数 {{format(item.block_number)}}({{format(item.block_rate)}}%)
     </v-card-text>
     <v-card-text class="campaign-item_text">
-      平均LP登録率 {{item.average_lprr}}%
+      平均LP登録率 {{item.average_lp_register_rate}}%
     </v-card-text>
 
     <v-card-actions class="d-flex justify-center mt-2">
@@ -91,11 +89,7 @@
 
 <style scoped lang="scss">
   .campaign-item {
-    height: 500px;
-
-    .v-image {
-      height: 200px;
-    }
+    /*height: 500px;*/
 
     &_title, &_subtitle, &_text {
       text-align: center;

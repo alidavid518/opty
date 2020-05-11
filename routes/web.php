@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/manager/list', 'Manager\ManagerController@list');
     Route::post('/manager/new', 'Manager\ManagerController@new');
     // campaign
-    Route::get('/campaign/list', 'Campaign\CampaignController@list');
+    Route::get('/campaign/list/{flag}', 'Campaign\CampaignController@list');
     Route::post('/campaign/new/{flag}', 'Campaign\CampaignController@new');
     Route::get('/campaign/get/{id}', 'Campaign\CampaignController@get');
     Route::post('/campaign/edit/{id}', 'Campaign\CampaignController@edit');

@@ -16,10 +16,12 @@ class CreateCampaignsTable extends Migration
     Schema::create('campaigns', function (Blueprint $table) {
       $table->bigIncrements('id');
       $table->string('title')->comment('キャンペーン名');
-      $table->string('advertiser_id')->comment('出稿広告主');
+      $table->bigInteger('advertiser_id')->comment('出稿広告主');
       $table->string('image')->comment('アイキャッチ画像');
-      $table->dateTime('date_start')->comment('キャンペーン期間');
-      $table->dateTime('date_end')->comment('キャンペーン期間');
+      $table->string('date_start')->comment('キャンペーン期間');
+      $table->string('time_start')->comment('キャンペーン期間');
+      $table->string('date_end')->comment('キャンペーン期間');
+      $table->string('time_end')->comment('キャンペーン期間');
       $table->string('youtube_url')->comment('Youtube予告URL');
       $table->string('affiliate_pr')->comment('アフィリエイター向け PR文');
       $table->string('notes')->comment('記載注意事項');
@@ -34,6 +36,10 @@ class CreateCampaignsTable extends Migration
       $table->string('remarks')->comment('備考');
       $table->integer('deposit_amount')->default(0)->comment('デポジット金額');
       $table->integer('contracts_limit')->default(0)->comment('成約上限数');
+      $table->increments('register_number')->default(0)->comment('登録数');
+      $table->increments('expense')->default(0)->comment('経費');
+      $table->increments('block_number')->default(0)->comment('ブロック数');
+      $table->increments('average_lp_register_rate')->default(0)->comment('平均LP登録率');
       $table->tinyInteger('status')->default(0)->comment('0: draft, 1:post');
       $table->timestamps();
     });

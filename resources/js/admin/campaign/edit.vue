@@ -16,13 +16,21 @@
       </v-card-title>
 
       <v-card-text class="_contents">
-        <v-container fluid>
+        <v-form
+          ref="form"
+          v-model="valid"
+          :lazy-validation="false"
+        >
+          <v-container fluid>
           <v-row class="_block">
             <v-col cols="2" class="_label">
-              <v-label>キャンペーン編集</v-label>
+              <v-label>キャンペーン名</v-label>
             </v-col>
             <v-col cols="10" class="_control">
-              <v-text-field/>
+              <v-text-field
+                dense outlined hide-details
+                v-model="item.title"
+              />
             </v-col>
           </v-row>
           <v-row>
@@ -34,7 +42,9 @@
                 <v-col cols="8" class="_control">
                   <v-select
                     placeholder="選択してください"
-                    :items="['man1', 'man2', 'man3']"
+                    :items="advertisers"
+                    item-text="name_full" item-value="id"
+                    v-model="item.advertiser_id"
                   />
                 </v-col>
               </v-row>
@@ -45,7 +55,7 @@
                 <v-col cols="8" class="_control">
                   <v-row>
                     <v-col>
-                      <v-img class="_img_preview"/>
+                      <v-img class="_img_preview" :src="preview_url"/>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -54,6 +64,9 @@
                         label="ファイルを選択"
                         hint="横800px, 縦200pxの画像をアップロードしてください。"
                         persistent-hint
+                        ref="avatar"
+                        @change="imgSelect"
+                        v-model="item.image"
                       />
                     </v-col>
                   </v-row>
@@ -72,12 +85,14 @@
                         v-mask="maskDate"
                         class="_date_start"
                         placeholder="YYYY/MM/DD"
+                        v-model="item.date_start"
                       />
                       &nbsp;
                       <v-text-field
                         v-mask="maskTime"
                         class="_time_start"
                         placeholder="00:00"
+                        v-model="item.time_start"
                       />
                       &nbsp;
                       <span>から</span>
@@ -89,12 +104,14 @@
                         v-mask="maskDate"
                         class="_date_end"
                         placeholder="YYYY/MM/DD"
+                        v-model="item.date_end"
                       />
                       &nbsp;
                       <v-text-field
                         v-mask="maskTime"
                         class="_time_end"
                         placeholder="00:00"
+                        v-model="item.time_end"
                       />
                       &nbsp;
                       <span>まで</span>
@@ -109,7 +126,7 @@
                   <v-label>Youtube予告URL</v-label>
                 </v-col>
                 <v-col cols="8" class="_control">
-                  <v-text-field />
+                  <v-text-field v-model="item.youtube_url"/>
                 </v-col>
               </v-row>
             </v-col>
@@ -122,7 +139,7 @@
               <quill-editor
                 class="quill-editor"
                 ref="editor"
-                v-model="content"
+                v-model="item.affiliate_pr"
                 :options="editorOption"
                 @focus="toggleFocus($event)"
                 @blur="toggleFocus($event, false)"
@@ -138,7 +155,8 @@
               <v-label>記載注意事項</v-label>
               <v-textarea
                 outlined
-                rows="17"
+                rows="12"
+                v-model="item.notes"
               />
             </v-col>
           </v-row>
@@ -147,13 +165,18 @@
               <v-label>リダイレクトURL</v-label>
             </v-col>
             <v-col cols="4" class="_control">
-              <v-text-field/>
+              <v-text-field v-model="item.mail_redirect_url"/>
             </v-col>
             <v-col cols="2" class="_label">
               <v-label>オプトイン方式</v-label>
             </v-col>
             <v-col cols="4" class="_control">
-              <v-text-field/>
+              <v-select
+                :items="[{id:1, label:'メール'}, {id:2, label:'Line'}]"
+                item-value="id" item-text="label"
+                :rules="textRule" required
+                v-model="item.opt_in_method"
+              />
             </v-col>
           </v-row>
           <v-row class="_block">
@@ -164,13 +187,14 @@
                 </v-col>
                 <v-col cols="8" class="_control">
                   <v-btn-toggle
-                    v-model="always"
+                    v-model="item.always_posting"
+                    mandatory
                     color="primary"
                   >
-                    <v-btn value="yes">
+                    <v-btn :value="1">
                       する
                     </v-btn>
-                    <v-btn value="no">
+                    <v-btn :value="0">
                       しない
                     </v-btn>
                   </v-btn-toggle>
@@ -184,16 +208,16 @@
                 </v-col>
                 <v-col cols="8" class="_control">
                   <v-btn-toggle
-                    v-model="company"
+                    v-model="item.company_show"
                     mandatory
                     color="primary"
                     hint="&quote;はい&quote;を選択した場合、毎月月初のアフィリエイターランク自動昇格時の対象キャンペーンに入らなくなります。ご注意ください。`"
                     persistent-hint
                   >
-                    <v-btn value="yes">
+                    <v-btn :value="1">
                       はい
                     </v-btn>
-                    <v-btn value="no">
+                    <v-btn :value="0">
                       いいえ
                     </v-btn>
                   </v-btn-toggle>
@@ -218,6 +242,7 @@
                 outlined
                 hint="キャンペーンの大まかな概要と、販売する商材の内容を入力してください。"
                 persistent-hint
+                v-model="item.campaign_summary"
               />
             </v-col>
           </v-row>
@@ -228,28 +253,30 @@
             <v-col class="_control">
               <v-textarea
                 outlined
+                v-model="item.remarks"
               />
             </v-col>
           </v-row>
         </v-container>
+        </v-form>
       </v-card-text>
 
       <v-card-actions class="_action">
-        <v-btn color="indigo">下書き</v-btn>
-        <v-btn color="purple">登録</v-btn>
+        <v-btn color="indigo" @click="save(0)" :disabled="!valid">下書き</v-btn>
+        <v-btn color="purple" @click="save(1)" :disabled="!valid">登録</v-btn>
       </v-card-actions>
     </v-card>
   </div>
 </template>
 
 <script>
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
-
-import { quillEditor } from 'vue-quill-editor'
-
+  import vuetifyToast from 'vuetify-toast'
+  import 'quill/dist/quill.core.css'
+  import 'quill/dist/quill.snow.css'
+  import 'quill/dist/quill.bubble.css'
+  import { quillEditor } from 'vue-quill-editor'
   import { mask } from 'vue-the-mask'
+
   export default {
     components: {quillEditor},
     directives: {
@@ -269,8 +296,8 @@ import { quillEditor } from 'vue-quill-editor'
         [{ color: [] }, { background: [] }], // dropdown with defaults from theme
         [{ font: [] }],
         [{ align: [] }],
-        ['image'],
-        ['clean'] // remove formatting button
+        // ['image'],
+        // ['clean'] // remove formatting button
       ]
       return {
         editorOption: {
@@ -285,14 +312,132 @@ import { quillEditor } from 'vue-quill-editor'
             }
           }
         },
-        content: '',
+        textRule: [
+          v => !!v || '必須フィールド',
+        ],
         maskDate: '####/##/##',
         maskTime: '##:##',
-        always: 'no',
-        company: 'no'
+        item: {
+          id: 0,
+          advertiser_id: 0, // 出稿広告主
+          title: '', // キャンペーン名
+          image: '', // アイキャッチ画像
+          date_start: '',
+          time_start: '',
+          date_end: '',     // キャンペーン期間
+          time_end: '',
+          youtube_url: '',  // Youtube予告URL
+          affiliate_pr: '',    // アフィリエイター向け PR文
+          notes: '',        // 注意事項
+          mail_redirect_url: '',    // 成約除外メアドリダイレクトURL
+          detail_pdf: '',   // 詳細PDF
+          opt_in_method: 0, // オプトイン方式
+          content_type: 0, // コンテンツタイプ
+          company_show: 0, // 会社名表示
+          always_posting: 0,       // 常時掲載案件化
+          show_setting: 0,  // 表示設定
+          campaign_summary: '',     // キャンペーン概要
+          deposit_amount: 0,     // デポジット金額
+          contracts_limit: 0,     // 成約上限数
+          remarks: '',      // 備考
+        },
+        campaign_id: this.$route.params.id,
+        advertisers: [],
+        preview_url: '',
+        valid: false
       }
     },
+    mounted() {
+      axios.get(`admin/campaign/get/${this.campaign_id}`)
+      .then(res => {
+        this.item = res.data.campaign
+        this.preview_url = this.item.image
+      })
+      .catch(e => {
+        vuetifyToast.error('サーバーからキャンペーンを取得できません。')
+      })
+      axios.get('admin/campaign/advertisers')
+        .then(res => {
+          this.advertisers = res.data.advertisers
+        })
+        .catch(e => {
+          vuetifyToast.error('サーバーから広告主リストを取得できません。 後で試してください。')
+        })
+
+    },
     methods: {
+      save(flag) {
+        // flag: 0 => draft, 1: save
+        if(this.item.image) {
+          let formData = new FormData()
+
+          // for(let file of this.avatar) {
+          formData.append('id', this.item.id)
+          formData.append('advertiser_id', this.item.advertiser_id)
+          formData.append('title', this.item.title)
+          formData.append('image', this.item.image, this.item.image.name)
+          formData.append('date_start', this.item.date_start)
+          formData.append('time_start', this.item.time_start)
+          formData.append('date_end', this.item.date_end)
+          formData.append('time_end', this.item.time_end)
+          formData.append('youtube_url', this.item.youtube_url)
+          formData.append('affiliate_pr', this.item.affiliate_pr)
+          formData.append('notes', this.item.notes)
+          formData.append('mail_redirect_url', this.item.mail_redirect_url)
+          // formData.append('detail_pdf', this.item.detail_pdf)
+          formData.append('opt_in_method', this.item.opt_in_method)
+          // formData.append('content_type', this.item.content_type)
+          formData.append('company_show', this.item.company_show)
+          formData.append('always_posting', this.item.always_posting)
+          // formData.append('show_setting', this.item.show_setting)
+          formData.append('campaign_summary', this.item.campaign_summary)
+          formData.append('deposit_amount', this.item.deposit_amount)
+          formData.append('contracts_limit', this.item.contracts_limit)
+          formData.append('remarks', this.item.remarks)
+          console.log(formData)
+          axios.post(`/admin/campaign/edit/${flag}`, formData, {
+            headers: {'Content-Type': 'multipart/form-data'}
+          })
+            .then( res => {
+              vuetifyToast.success('キャンペーンが保存されました。');
+            })
+            .catch(e => {
+              console.log(e.response)
+              if(e.response.data.hasOwnProperty('errors')) {
+                const errors = e.response.data.errors
+                if(errors.hasOwnProperty('advertiser_id')) vuetifyToast.error('広告主を選択してください。');// 出稿広告主
+                if(errors.hasOwnProperty('title')) vuetifyToast.error('キャンペーンのタイトルを入力してください。');// キャンペーン名
+                if(errors.hasOwnProperty('image')) vuetifyToast.error('バナー画像を選択してください。');// アイキャッチ画像
+                if(errors.hasOwnProperty('date_start')) vuetifyToast.error('キャンペーン期間を選択してください。');// キャンペーン期間
+                if(errors.hasOwnProperty('time_start')) vuetifyToast.error('キャンペーン期間を選択してください。');
+                if(errors.hasOwnProperty('date_end')) vuetifyToast.error('キャンペーン期間を選択してください。');
+                if(errors.hasOwnProperty('time_end')) vuetifyToast.error('キャンペーン期間を選択してください。');
+                if(errors.hasOwnProperty('youtube_url')) vuetifyToast.error('Youtube予告URLを入力してください。');// Youtube予告URL
+                if(errors.hasOwnProperty('affiliate_pr')) vuetifyToast.error('を入力してください。');// アフィリエイター向け PR文
+                if(errors.hasOwnProperty('notes')) vuetifyToast.error('アフィリエイター向け PR文を入力してください。');// 注意事項
+                if(errors.hasOwnProperty('mail_redirect_url')) vuetifyToast.error('成約除外メアドリダイレクトURLを入力してください。');// 成約除外メアドリダイレクトURL
+                if(errors.hasOwnProperty('detail_pdf')) vuetifyToast.error('詳細PDFを入力してください。');// 詳細PDF
+                if(errors.hasOwnProperty('opt_in_method')) vuetifyToast.error('オプトイン方式を選択してください。');// オプトイン方式
+                if(errors.hasOwnProperty('content_type')) vuetifyToast.error('コンテンツタイプを選択してください。');// コンテンツタイプ
+                if(errors.hasOwnProperty('company_show')) vuetifyToast.error('会社名表示を選択してください。');// 会社名表示
+                if(errors.hasOwnProperty('always_posting')) vuetifyToast.error('常時掲載案件化を選択してください。');// 常時掲載案件化
+                if(errors.hasOwnProperty('show_setting')) vuetifyToast.error('表示設定を選択してください。');// 表示設定
+                if(errors.hasOwnProperty('campaign_summary')) vuetifyToast.error('キャンペーン概要を入力してください。');// キャンペーン概要
+                if(errors.hasOwnProperty('deposit_amount')) vuetifyToast.error('デポジット金額を入力してください。');// デポジット金額
+                if(errors.hasOwnProperty('contracts_limit')) vuetifyToast.error('成約上限数を入力してください。');// 成約上限数
+                if(errors.hasOwnProperty('remarks')) vuetifyToast.error('備考を入力してください。');// 備考
+              } else {
+                vuetifyToast.error('サーバーエラー。 後で試してください。')
+              }
+            })
+        } else {
+          vuetifyToast.error('バナー画像を選択してください。');// アイキャッチ画像
+          return
+        }
+      },
+      imgSelect() {
+        this.preview_url = URL.createObjectURL(this.item.image)
+      },
       toggleFocus(event, id, focused = true) {
         this.cursorLocation = event.getSelection() ? event.getSelection().index : 0
       },

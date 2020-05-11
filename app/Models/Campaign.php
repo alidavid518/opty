@@ -11,7 +11,9 @@ class Campaign extends Model
     'title', // キャンペーン名
     'image', // アイキャッチ画像
     'date_start',
+    'time_start',
     'date_end',     // キャンペーン期間
+    'time_end',     // キャンペーン期間
     'youtube_url',  // Youtube予告URL
     'affiliate_pr',    // アフィリエイター向け PR文
     'notes',        // 注意事項
@@ -26,6 +28,10 @@ class Campaign extends Model
     'deposit_amount',     // デポジット金額
     'contracts_limit',     // 成約上限数
     'remarks',      // 備考
+    'register_number', // 登録数
+    'expense', // 経費
+    'block_number', // ブロック数
+    'average_lp_register_rate', // 平均LP登録率
     'status',   // 0: draft, 1: post
   ];
 

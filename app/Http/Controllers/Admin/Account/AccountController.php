@@ -31,7 +31,7 @@ class AccountController extends BaseController
       $file = $request->file('avatar');
       $fname = time() . $file->getClientOriginalName();
       $file->storeAs('public/avatars', $fname);
-      $url = url('/avatars/'. $fname);
+      $url = url('/storage/avatars/'. $fname);
 
       $validator = Validator::make($request->all(), [
           'avatar' => 'required|file',

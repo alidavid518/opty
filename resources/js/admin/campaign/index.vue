@@ -48,17 +48,18 @@
       </v-container>
     </v-card>
 <!--    <NewCampaignDialog :dialog="show_new_campaign_dlg"/>-->
-    <EditCampaignDialog :dialog="show_edit_campaign_dlg"/>
+<!--    <EditCampaignDialog :dialog="show_edit_campaign_dlg"/>-->
   </div>
 </template>
 
 <script>
   import CampaignItem from "../../components/admin/campaign/CampaignItem";
   // import NewCampaignDialog from "../../components/admin/campaign/NewCampaignDialog";
-  import EditCampaignDialog from "../../components/admin/campaign/EditCampaignDialog";
+  // import EditCampaignDialog from "../../components/admin/campaign/EditCampaignDialog";
+  import vuetifyToast from 'vuetify-toast'
 
   export default {
-    components: {CampaignItem, /*NewCampaignDialog,*/ EditCampaignDialog},
+    components: {CampaignItem, /*NewCampaignDialog, EditCampaignDialog*/},
     data() {
       return {
         show_new_campaign_dlg: false,
@@ -68,83 +69,24 @@
           {value: 'price_high', label: '単価高い順'},
           {value: 'expected_reward', label: '報酬予定額順'},
         ],
-        cards: [
-          {
-            id: 1,
-            title: 'キャンペーン',
-            image: '/img/sample/buzz-andersen.png',
-            date_start: '2020/01/01',
-            date_end: '2020/01/07',
-            register_number: 1000,
-            expense: 100000,
-            block_number: 20,
-            block_rate: 2,
-            average_lprr: 13,
-          },
-          {
-            id: 2,
-            title: 'キャンペーン',
-            image: '/img/sample/daniel-monteiro.png',
-            date_start: '2020/02/01',
-            date_end: '2020/02/07',
-            register_number: 2000,
-            expense: 100000,
-            block_number: 20,
-            block_rate: 1,
-            average_lprr: 13,
-          },
-          {
-            id: 3,
-            title: 'キャンペーン3',
-            image: '/img/sample/icons8-team.png',
-            date_start: '2020/03/01',
-            date_end: '2020/03/07',
-            register_number: 1000,
-            expense: 100000,
-            block_number: 20,
-            block_rate: 2,
-            average_lprr: 13,
-          },
-          {
-            id: 4,
-            title: 'キャンペーン4',
-            image: '/img/sample/patrick-hendry.png',
-            date_start: '2020/04/01',
-            date_end: '2020/04/07',
-            register_number: 1000,
-            expense: 100000,
-            block_number: 20,
-            block_rate: 2,
-            average_lprr: 13,
-          },
-          {
-            id: 5,
-            title: 'キャンペーン5',
-            image: '/img/sample/trust-tru-katsande.png',
-            date_start: '2020/05/01',
-            date_end: '2020/05/07',
-            register_number: 1000,
-            expense: 100000,
-            block_number: 20,
-            block_rate: 2,
-            average_lprr: 13,
-          },
-          {
-            id: 6,
-            title: 'キャンペーン6',
-            image: '/img/sample/yolanda-sun.png',
-            date_start: '2020/06/01',
-            date_end: '2020/06/07',
-            register_number: 1000,
-            expense: 100000,
-            block_number: 20,
-            block_rate: 2,
-            average_lprr: 13,
-          }
-        ]
+        cards: []
       }
     },
     mounted() {
+      const flag = 1 // 1: posted, 0: drafts
+      axios.get(`/admin/campaign/list/${flag}`)
+      .then(res => {
+        console.log(res.data)
+        const campaigns = res.data.campaigns
+        this.cards = campaigns.map(c => {
+          c.block_rate = c.register_number === 0 ? 0 : c.block_number * 100 / c.register_number
+          return c
+        })
+      })
+      .catch(e => {
+        console.log(e.response)
+        vuetifyToast.error('サーバーエラー。 マネージャーに連絡するか、後で試してください。')
+      })
     }
   }
 </script>

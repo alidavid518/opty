@@ -12,15 +12,14 @@ use App\Models\Rank;
 
 class CampaignController extends Controller
 {
-  public function list(Request $request)
+  public function list(Request $request, $flag)
   {
     try {
-      $lists = Advertiser::with('rank')->get();
+      $lists = Campaign::where('status', $flag)->get();
     } catch (\Exception $e) {
       return response()->json(['error' => $e->getMessage()], 400);
     }
-    $ranks = Rank::get();
-    return response()->json(['advertisers' =>$lists, 'ranks' => $ranks]);
+    return response()->json(['campaigns' =>$lists]);
   }
 
   public function new(Request $request, $flag) {
@@ -57,8 +56,8 @@ class CampaignController extends Controller
     // save banner
     $file = $request->file('image');
     $fname = time() . $file->getClientOriginalName();
-    $file->storeAs('public/campaign/banner', $fname);
-    $url = url('/campaign/banner/'. $fname);
+    $file->storeAs('public/campaign-banner', $fname);
+    $url = url('/storage/campaign-banner/'. $fname);
     $input['image'] = $url;
 
     // set flag
@@ -70,8 +69,56 @@ class CampaignController extends Controller
     return response()->json(['campaigns' => $list]);
   }
 
-  public function edit(Request $request) {
+  public function edit(Request $request, $flag) {
+    $input = $request->all();
 
+    $validator = Validator::make($input, [
+      'id' => 'required',
+      'advertiser_id'   => 'required', // 出稿広告主
+      'title'           => 'required',  // キャンペーン名
+      'image'           => 'required|file|image|dimensions:width=800,height=200',  // アイキャッチ画像
+      'date_start'      => 'required|date',
+      'time_start'      => 'required',
+      'date_end'        => 'required|date',     // キャンペーン期間
+      'time_end'        => 'required',
+      'youtube_url'     => 'required|url',  // Youtube予告URL
+      'affiliate_pr'    => 'required',    // アフィリエイター向け PR文
+      'notes'           => 'required',        // 注意事項
+      'mail_redirect_url' => 'required|url',    // 成約除外メアドリダイレクトURL
+      'detail_pdf'      => 'nullable',   // 詳細PDF
+      'opt_in_method'   => 'required', // オプトイン方式
+      'content_type'    => 'nullable', // コンテンツタイプ
+      'company_show'    => 'required', // 会社名表示
+      'always_posting'  => 'required',       // 常時掲載案件化
+      'show_setting'    => 'nullable',  // 表示設定
+      'campaign_summary' => 'required',     // キャンペーン概要
+      'deposit_amount'  => 'nullable',     // デポジット金額
+      'contracts_limit' => 'nullable',     // 成約上限数
+      'remarks'         => 'required',      // 備考
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(['errors' => $validator->errors()], 400);
+    }
+
+    // save banner
+    $file = $request->file('image');
+    $fname = time() . $file->getClientOriginalName();
+    $file->storeAs('public/campaign-banner', $fname);
+    $url = url('/storage/campaign-banner/'. $fname);
+    $input['image'] = $url;
+
+    // set flag
+    $input['status'] = $flag;
+
+    try {
+      $cat = Campaign::where('id', $input['id'])->update($input);
+    } catch (\Exception $e) {
+      return response()->json(['error' => $e->getMessage()], 400);
+    }
+    $list = Campaign::with('advertiser')->get();
+
+    return response()->json(['campaigns' => $list]);
   }
 
   public function get(Request $request, $id) {

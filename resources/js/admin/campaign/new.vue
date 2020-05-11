@@ -19,7 +19,7 @@
         <v-form
           ref="form"
           v-model="valid"
-          lazy-validation
+          :lazy-validation="false"
         >
           <v-container fluid>
             <v-row class="_block">
@@ -169,7 +169,7 @@
                 <v-label>記載注意事項</v-label>
                 <v-textarea
                   outlined dense
-                  rows="17"
+                  rows="12"
                   :rules="textRule" required
                   v-model="item.notes"
                 />
@@ -309,8 +309,8 @@
         [{ color: [] }, { background: [] }], // dropdown with defaults from theme
         [{ font: [] }],
         [{ align: [] }],
-        ['image'],
-        ['clean'] // remove formatting button
+        // ['image'],
+        // ['clean'] // remove formatting button
       ]
       return {
         editorOption: {
