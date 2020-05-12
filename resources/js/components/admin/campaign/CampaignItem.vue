@@ -36,17 +36,16 @@
     </v-card-actions>
 
     <v-card-actions class="d-flex justify-center pb-4">
-      <v-btn rounded color="#FF7777">実績</v-btn>
+      <v-btn rounded dark color="#FF7777">実績</v-btn>
       <v-btn
-        rounded color="#5367FD"
-        to="/admin/campaign/setting"
+        rounded dark color="#5367FD"
+        :to="`/admin/campaign/setting/${item.id}`"
       >
         設定
       </v-btn>
       <v-btn
-        rounded
-        color="#1DE9B6"
-        @click="edit"
+        rounded dark color="#1DE9B6"
+        :to="`/admin/campaign/edit/${item.id}`"
       >
         編集
       </v-btn>
@@ -81,7 +80,7 @@
         return val.toFixed(digs).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
       },
       edit() {
-        this.$router.push(`/admin/campaign/edit/${this.item.id}`)
+        this.$router.push()
       }
     }
   }

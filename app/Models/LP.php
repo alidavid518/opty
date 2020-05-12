@@ -6,9 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class LP extends Model
 {
-    protected $fillable = ['campaign_id', 'title', 'url', 'banner', 'is_public', 'redirect_url_pc', 'redirect_url_mobile', 'show_type'];
+  protected $table = 'lps';
+  protected $fillable = ['campaign_id', 'title', 'url', 'banner', 'is_public', 'redirect_url_pc', 'redirect_url_mobile', 'show_type', 'status'];
 
-    public function campaign() {
-      return $this->belongsTo('App\Models\Campaign');
-    }
+  protected $appends = ['show_type_label', 'public_label'];
+
+  public function campaign()
+  {
+    return $this->belongsTo('App\Models\Campaign');
+  }
+
+  public function getShowTypeLabelAttribute()
+  {
+    $label = '非公開';
+    if ($this->show_type === 1) $label = 'バナー表示';
+    if ($this->show_type === 1) $label = 'タイトル';
+    return $label;
+  }
+
+  public function getPublicLabelAttribute()
+  {
+    return $this->is_public === 0 ? '非公開' : '公開';
+  }
 }

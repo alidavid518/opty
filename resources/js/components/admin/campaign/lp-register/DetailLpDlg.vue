@@ -14,7 +14,7 @@
         <v-card-text class="_content">
           <v-row v-if="item.is_public">
             <v-col>
-              <v-btn block>{{item.show_type === 'banner'? 'バナー表示' : 'タイトル表示'}}</v-btn>
+              <v-btn block>{{item.show_type_label}}</v-btn>
             </v-col>
           </v-row>
           <v-row>
@@ -30,13 +30,13 @@
               <h4>成約後リダイレクトURL</h4>
             </v-col>
             <v-col cols="3">PC</v-col>
-            <v-col cols="9">{{item.redirect_pc}}</v-col>
+            <v-col cols="9">{{item.redirect_url_pc}}</v-col>
             <v-col cols="3">スマホ</v-col>
-            <v-col cols="9">{{item.redirect_mobile}}</v-col>
+            <v-col cols="9">{{item.redirect_url_mobile}}</v-col>
           </v-row>
           <v-row>
             <v-col cols="3">公開設定</v-col>
-            <v-col cols="9">{{item.is_public? '公開':'非公開'}}</v-col>
+            <v-col cols="9">{{item.public_label}}</v-col>
           </v-row>
           <v-row>
             <v-col cols="4" class="text-center">

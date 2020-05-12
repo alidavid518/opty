@@ -11,12 +11,7 @@ const router = new Router({
     {name: 'admin.campaign.edit', path: '/admin/campaign/edit/:id', component: require('./admin/campaign/edit')},
     {name: 'admin.campaign.new', path: '/admin/campaign/new', component: require('./admin/campaign/new')},
     {name: 'admin.campaign.detail', path: '/admin/campaign/detail', component: require('./admin/campaign/detail')},
-    {
-      name: 'admin.campaign.setting',
-      path: '/admin/campaign/setting',
-      component: require('./admin/campaign/setting'),
-      props: (route) => ({campaignId: route.params.id}),
-    },
+    {name: 'admin.campaign.setting', path: '/admin/campaign/setting/:id', component: require('./admin/campaign/setting')},
     {name: 'admin.affiliate.index', path: '/admin/affiliate', component: require('./admin/affiliate/index')},
     {
       name: 'admin.affiliate-team.index',

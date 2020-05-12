@@ -1,9 +1,10 @@
 <template>
-  <v-card class="_lp-item">
+  <v-card class="_lp-item ma-3">
     <v-card-text>
-      <v-img contain :src="item.image" class="_lp-item_image"/>
+<!--      <v-img contain :src="item.image" class="_lp-item_image"/>-->
+      <h3 class="text-center">{{item.title}}</h3>
     </v-card-text>
-    <v-card-actions>
+    <v-card-actions class="_lp-item_bottom_fixed">
       <v-btn
         dark
         color="purple darken--2"
@@ -44,6 +45,17 @@
 <style scoped lang="scss">
   ._lp-item {
     width: 200px !important;
+    height: 300px !important;
+    position: relative;
+
+    &_bottom_fixed {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+
     &_image {
       width: 100% !important;
       height: 100% !important;

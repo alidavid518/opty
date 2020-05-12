@@ -6,7 +6,7 @@
           <v-card class="mx-auto">
             <v-row class="campaign-page_header_title">
               <v-col cols="12" class="justify-center d-flex">
-                <h2>{{campaign.name}} / 設定</h2>
+                <h2>{{campaign.title}} / 設定</h2>
               </v-col>
               <v-col cols="12" class="d-flex justify-center">
                 <v-btn
@@ -32,10 +32,10 @@
         <v-col>
           <v-tabs-items v-model="tab">
             <v-tab-item value="story">
-              <SettingStory :items="story"/>
+              <SettingStory :campaign_id="campaign_id"/>
             </v-tab-item>
             <v-tab-item value="lp-reg">
-              <LpRegister :items="Lps"/>
+              <LpRegister :campaign_id="campaign_id"/>
             </v-tab-item>
             <v-tab-item value="mail-line-intro">
               <MailLineIntroduction :mail-introductions="mailIntroductions" :line-introductions="lineIntroductions"/>
@@ -158,7 +158,9 @@
       RewardSetting, MailLineIntroduction, SettingStory, LpRegister, PeriodSetting, LeadExtend
     },
     data() {
+      const campaign_id = parseInt(this.$route.params.id)
       return {
+        campaign_id: isNaN(campaign_id)? 0 : campaign_id,
         tab: '',
         campaignSettingItems: [
           {text: 'ストーリー', target: 'story'},
@@ -181,21 +183,7 @@
           {text: 'コンバージョン', target: ''},
           {text: 'ランキング集計', target: 'rank-summary'},
         ],
-        campaign: {
-          id: 1,
-          name: 'campaign',
-          image: '/img/sample/buzz-andersen.png'
-        },
-        story: [
-          {id: 1, link: 'test.com', },
-          {id: 2, link: 'test.com', },
-          {id: 3, link: 'test.com', },
-        ],
-        Lps: [
-          {id: 1, url: 'uuu', banner: 'bbb', is_public: 1, redirect_pc: 'pc', redirect_mobile: 'mm', show_type: 'banner'},
-          {id: 2, url: 'rrr', banner: 'aaa', is_public: 0, redirect_pc: 'pc', redirect_mobile: 'ooo', show_type: 'private'},
-          {id: 3, url: 'lll', banner: 'nnn', is_public: 1, redirect_pc: 'pc', redirect_mobile: 'bbb', show_type: 'title'},
-        ],
+        campaign: {id: 0, title: '', image: ''},
         rewards: {
           main: [
             {id: 1, rank: 1, amount: 1000, is_show: 1, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
@@ -289,6 +277,13 @@
       }
     },
     mounted() {
+      axios.get(`/admin/campaign/get/${this.campaign_id}`)
+      .then(res => {
+        this.campaign = res.data.campaign
+      })
+      .catch(e => {
+        console.log(e.response)
+      })
     },
     computed: {
       editStory: () => (this.tab === 'story'),

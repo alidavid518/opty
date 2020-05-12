@@ -156,4 +156,5 @@ class CampaignController extends Controller
 
     return response()->json(['advertisers' => $list]);
   }
+
 }

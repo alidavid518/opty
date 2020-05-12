@@ -59,6 +59,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/campaign/get/{id}', 'Campaign\CampaignController@get');
     Route::post('/campaign/edit/{id}', 'Campaign\CampaignController@edit');
     Route::get('/campaign/advertisers', 'Campaign\CampaignController@activeAdvertisers');
+    // campaign/story
+    Route::get('/campaign/story/list/{campaign_id}', 'Story\StoryController@list');
+    Route::post('/campaign/story/save','Story\StoryController@save');
+    // campaign/LP
+    Route::get('/campaign/lp/list/{campaign_id}', 'LP\LPController@list');
+    Route::get('/campaign/lp/delete/{id}', 'LP\LPController@delete');
+    Route::post('/campaign/lp/save','LP\LPController@save');
   });
 
   // user route group
