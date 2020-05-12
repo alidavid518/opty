@@ -18,10 +18,10 @@ class CreateCampaignsTable extends Migration
       $table->string('title')->comment('キャンペーン名');
       $table->bigInteger('advertiser_id')->comment('出稿広告主');
       $table->string('image')->comment('アイキャッチ画像');
-      $table->string('date_start')->comment('キャンペーン期間');
-      $table->string('time_start')->comment('キャンペーン期間');
-      $table->string('date_end')->comment('キャンペーン期間');
-      $table->string('time_end')->comment('キャンペーン期間');
+      $table->date('date_start')->comment('キャンペーン期間');
+      $table->time('time_start')->comment('キャンペーン期間');
+      $table->date('date_end')->comment('キャンペーン期間');
+      $table->time('time_end')->comment('キャンペーン期間');
       $table->string('youtube_url')->comment('Youtube予告URL');
       $table->string('affiliate_pr')->comment('アフィリエイター向け PR文');
       $table->string('notes')->comment('記載注意事項');

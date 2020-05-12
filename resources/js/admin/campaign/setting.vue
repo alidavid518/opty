@@ -37,11 +37,11 @@
             <v-tab-item value="lp-reg">
               <LpRegister :campaign_id="campaign_id"/>
             </v-tab-item>
+            <v-tab-item value="period-set">
+              <PeriodSetting :campaign_id="campaign_id"/>
+            </v-tab-item>
             <v-tab-item value="mail-line-intro">
               <MailLineIntroduction :mail-introductions="mailIntroductions" :line-introductions="lineIntroductions"/>
-            </v-tab-item>
-            <v-tab-item value="period-set">
-              <PeriodSetting @onPeriodSave="savePeriod"/>
             </v-tab-item>
             <v-tab-item value="reward-set">
               <RewardSetting :items="rewards"/>
@@ -295,7 +295,6 @@
     },
     methods: {
       selectCampaign() {},
-      savePeriod(val) { console.log(val) }
     },
     watch: {
       tab: (val, old) => {console.log(val)}

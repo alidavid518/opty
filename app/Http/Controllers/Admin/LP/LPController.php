@@ -41,12 +41,11 @@ class LPController extends Controller
       return response()->json(['errors' => $validator->errors()], 400);
     }
     $id = $input['id'];
-    unset($input['id']);
     try {
       if($id < 1) {
-        LP::create($input);
+        LP::create($request->except(['id']));
       } else {
-        LP::where('id', $id)->update($input);
+        LP::where('id', $id)->update($request->except(['id']));
       }
     } catch (\Exception $e) {
       return response()->json(['errors' => ['save' => $e->getMessage()]], 400);

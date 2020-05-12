@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/campaign/lp/list/{campaign_id}', 'LP\LPController@list');
     Route::get('/campaign/lp/delete/{id}', 'LP\LPController@delete');
     Route::post('/campaign/lp/save','LP\LPController@save');
+    // campaign/Period
+    Route::post('/campaign/period/set/{campaign_id}', 'Campaign\CampaignController@setPeriod');
   });
 
   // user route group

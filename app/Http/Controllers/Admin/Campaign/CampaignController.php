@@ -157,4 +157,13 @@ class CampaignController extends Controller
     return response()->json(['advertisers' => $list]);
   }
 
+  public function setPeriod(Request $request, $campaign_id) {
+    try {
+      Campaign::where('id', $campaign_id)->update($request->all());
+    } catch(\Exception $e) {
+      return response()->json(['error' => 'not delete'], 400);
+    }
+
+    return response()->json(['error' => '']);
+  }
 }

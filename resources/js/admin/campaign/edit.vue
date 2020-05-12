@@ -85,6 +85,7 @@
                         v-mask="maskDate"
                         class="_date_start"
                         placeholder="YYYY/MM/DD"
+                        :rules="dateRule"
                         v-model="item.date_start"
                       />
                       &nbsp;
@@ -92,6 +93,7 @@
                         v-mask="maskTime"
                         class="_time_start"
                         placeholder="00:00"
+                        :rules="timeRule"
                         v-model="item.time_start"
                       />
                       &nbsp;
@@ -104,6 +106,7 @@
                         v-mask="maskDate"
                         class="_date_end"
                         placeholder="YYYY/MM/DD"
+                        :rules="dateRule"
                         v-model="item.date_end"
                       />
                       &nbsp;
@@ -111,6 +114,7 @@
                         v-mask="maskTime"
                         class="_time_end"
                         placeholder="00:00"
+                        :rules="timeRule"
                         v-model="item.time_end"
                       />
                       &nbsp;
@@ -315,6 +319,18 @@
         textRule: [
           v => !!v || '必須フィールド',
         ],
+        emailRule: [
+          v => !!v || 'メールが必要です',
+          v => /.+@.+\..+/.test(v) || 'メールアドレスは有効である必要があります',
+        ],
+        dateRule: [
+          v => !!v || '日付を選択します。',
+          v => this.$date(v, 'YYYY/MM/DD').isValid() || '日付が間違っています。'
+        ],
+        timeRule: [
+          v => !!v || '時間を選択します。',
+          v => parseInt(v.split(':')[0])<24 && parseInt(v.split(':')[1])<60 || '時間は不正確です。'
+        ],
         maskDate: '####/##/##',
         maskTime: '##:##',
         item: {
@@ -345,7 +361,7 @@
         advertisers: [],
         preview_url: '',
         valid: false,
-        file: null
+        file: null,
       }
     },
     mounted() {
@@ -369,6 +385,17 @@
     },
     methods: {
       save(flag) {
+        // check date validity
+        const dts = this.$date(this.item.date_start + ' ' + this.item.time_start)
+        const dte = this.$date(this.item.date_end + ' ' + this.item.time_end)
+        console.log(dts)
+        console.log(dte)
+
+        if(dte.isBefore(dts)) {
+          vuetifyToast.error('終了日が開始日より前です。 日付を修正してください。')
+          return
+        }
+
         // flag: 0 => draft, 1: save
         if(this.item.image) {
           let formData = new FormData()
@@ -381,10 +408,10 @@
           formData.append('id', this.item.id)
           formData.append('advertiser_id', this.item.advertiser_id)
           formData.append('title', this.item.title)
-          formData.append('date_start', this.item.date_start)
-          formData.append('time_start', this.item.time_start)
-          formData.append('date_end', this.item.date_end)
-          formData.append('time_end', this.item.time_end)
+          formData.append('date_start', dts.format('YYYY-MM-DD'))
+          formData.append('time_start', dts.format('HH:mm:ss'))
+          formData.append('date_end', dte.format('YYYY-MM-DD'))
+          formData.append('time_end', dte.format('HH:mm:ss'))
           formData.append('youtube_url', this.item.youtube_url)
           formData.append('affiliate_pr', this.item.affiliate_pr)
           formData.append('notes', this.item.notes)
