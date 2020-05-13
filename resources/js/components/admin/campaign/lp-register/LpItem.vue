@@ -1,8 +1,8 @@
 <template>
   <v-card class="_lp-item ma-3">
     <v-card-text>
-<!--      <v-img contain :src="item.image" class="_lp-item_image"/>-->
-      <h3 class="text-center">{{item.title}}</h3>
+      <v-img contain :src="item.banner" class="_lp-item_image" width="200" height="200"/>
+<!--      <h3 class="text-center">{{item.title}}</h3>-->
     </v-card-text>
     <v-card-actions class="_lp-item_bottom_fixed">
       <v-btn
@@ -25,16 +25,15 @@
 
 <script>
   export default {
-    name: "LpItem",
     props: {
       item: {
         type: Object,
         id: Number,
-        image: String,
+        banner: String,
         default() {
           return {
             id: 0,
-            image: ''
+            banner: ''
           }
         }
       }
@@ -45,7 +44,7 @@
 <style scoped lang="scss">
   ._lp-item {
     width: 200px !important;
-    height: 300px !important;
+    height: 270px !important;
     position: relative;
 
     &_bottom_fixed {
@@ -54,11 +53,6 @@
       width: 100%;
       display: flex;
       justify-content: space-around;
-    }
-
-    &_image {
-      width: 100% !important;
-      height: 100% !important;
     }
   }
 </style>

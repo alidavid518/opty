@@ -40,12 +40,21 @@ class LpController extends Controller
     if ($validator->fails()) {
       return response()->json(['errors' => $validator->errors()], 400);
     }
+    // banner save
+    $file = $request->file('banner');
+    $fname = time() . $file->getClientOriginalName();
+    $file->storeAs('public/lp-banner', $fname);
+    $url = url('/storage/lp-banner/'. $fname);
+    $input['banner'] = $url;
+
     $id = $input['id'];
+    unset($input['id']);
+
     try {
       if($id < 1) {
-        Lp::create($request->except(['id']));
+        Lp::create($input);
       } else {
-        Lp::where('id', $id)->update($request->except(['id']));
+        Lp::where('id', $id)->update($input);
       }
     } catch (\Exception $e) {
       return response()->json(['errors' => ['save' => $e->getMessage()]], 400);
