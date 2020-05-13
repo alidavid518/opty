@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin\LP;
+namespace App\Http\Controllers\Admin\Lp;
 
 use App\Http\Controllers\Controller;
 use App\Models\Campaign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\LP;
+use App\Models\Lp;
 
-class LPController extends Controller
+class LpController extends Controller
 {
 
   public function list(Request $request, $campaign_id)
   {
     try {
-      $list = LP::where('campaign_id', $campaign_id)->get();
+      $list = Lp::where('campaign_id', $campaign_id)->get();
     } catch (\Exception $e) {
       return response()->json(['error' => $e->getMessage()], 400);
     }
@@ -43,9 +43,9 @@ class LPController extends Controller
     $id = $input['id'];
     try {
       if($id < 1) {
-        LP::create($request->except(['id']));
+        Lp::create($request->except(['id']));
       } else {
-        LP::where('id', $id)->update($request->except(['id']));
+        Lp::where('id', $id)->update($request->except(['id']));
       }
     } catch (\Exception $e) {
       return response()->json(['errors' => ['save' => $e->getMessage()]], 400);
@@ -55,7 +55,7 @@ class LPController extends Controller
 
   public function delete(Request $request, $id) {
     try {
-      LP::where('id', $id)->delete();
+      Lp::where('id', $id)->delete();
     } catch (\Exception $e) {
       return response()->json(['errors' => ['save' => $e->getMessage()]], 400);
     }

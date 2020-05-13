@@ -10,9 +10,14 @@
       </v-card-title>
 
       <v-card-text class="_content">
-        <v-row>
-          <v-col cols="12" v-for="(lp, i) in items" :key="i">
-            <LineRichImageItem :item="lp" @onSave="saveLineRichImage"/>
+        <v-row v-if="lps.length > 0">
+          <v-col cols="12" v-for="(lp, i) in lps" :key="i">
+            <LineRichImageList :item="lp" @onSave="saveLineRichImage"/>
+          </v-col>
+        </v-row>
+        <v-row v-else>
+          <v-col cols="12">
+            <h3 class="text-center">登録されたLPはありません。</h3>
           </v-col>
         </v-row>
       </v-card-text>
@@ -21,19 +26,28 @@
 </template>
 
 <script>
-  import LineRichImageItem from "./LineRichImageItem";
+  import LineRichImageList from "./LineRichImageList";
+  import vuetifyToast from 'vuetify-toast'
+
   export default {
     name: "SettingStory",
-    components: {LineRichImageItem},
+    components: {LineRichImageList},
     props: {
-      items: {
-        type: Array,
-        default: () => []
-      }
+      campaign_id: { type: Number, default: 0 }
     },
     data() {
       return {
+        lps: [],
       }
+    },
+    mounted() {
+      axios.get(`/admin/campaign/line-rich-image/lp_list/${this.campaign_id}`)
+      .then(res => {
+        this.lps = res.data.lps
+      })
+      .catch(e => {
+        vuetifyToast.error('サーバーからLPリストを取得できません。')
+      })
     },
     methods: {
       saveLineRichImage(item) {

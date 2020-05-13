@@ -62,12 +62,16 @@ Route::middleware(['auth'])->group(function () {
     // campaign/story
     Route::get('/campaign/story/list/{campaign_id}', 'Story\StoryController@list');
     Route::post('/campaign/story/save','Story\StoryController@save');
-    // campaign/LP
-    Route::get('/campaign/lp/list/{campaign_id}', 'LP\LPController@list');
-    Route::get('/campaign/lp/delete/{id}', 'LP\LPController@delete');
-    Route::post('/campaign/lp/save','LP\LPController@save');
+    // campaign/Lp
+    Route::get('/campaign/lp/list/{campaign_id}', 'Lp\LpController@list');
+    Route::get('/campaign/lp/delete/{id}', 'Lp\LpController@delete');
+    Route::post('/campaign/lp/save','Lp\LpController@save');
     // campaign/Period
     Route::post('/campaign/period/set/{campaign_id}', 'Campaign\CampaignController@setPeriod');
+    // campaign/LineRichImage
+    Route::get('/campaign/line-rich-image/lp_list/{campaign_id}', 'LineRichImage\LineRichImageController@lp_list');
+    Route::post('/campaign/line-rich-image/add-image/{lp_id}', 'LineRichImage\LineRichImageController@new');
+    Route::get('/campaign/line-rich-image/delete/{id}', 'LineRichImage\LineRichImageController@delete');
   });
 
   // user route group
