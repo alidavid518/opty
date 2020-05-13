@@ -72,6 +72,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/campaign/line-rich-image/lp_list/{campaign_id}', 'LineRichImage\LineRichImageController@lp_list');
     Route::post('/campaign/line-rich-image/add-image/{lp_id}', 'LineRichImage\LineRichImageController@new');
     Route::get('/campaign/line-rich-image/delete/{id}', 'LineRichImage\LineRichImageController@delete');
+    // campaign/mail-line-introduction
+    Route::get('/campaign/mail-line-intro/lp_list/{campaign_id}', 'MailLineIntroduction\MailLineIntroductionController@lp_list');
+    Route::post('/campaign/mail-line-intro/new/{lp_id}', 'MailLineIntroduction\MailLineIntroductionController@new');
+    Route::get('/campaign/mail-line-intro/delete/{id}', 'MailLineIntroduction\MailLineIntroductionController@delete');
+
   });
 
   // user route group

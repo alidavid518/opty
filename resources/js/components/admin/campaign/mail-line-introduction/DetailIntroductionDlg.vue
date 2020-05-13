@@ -23,7 +23,7 @@
             </v-col>
           </v-row>
         </v-card-text>
-        <v-card-actions class="_action">
+        <v-card-actions class="_action d-flex justify-center">
           <v-btn @click="$emit('onDetailClose')">キャンセル</v-btn>
         </v-card-actions>
       </v-card>
@@ -53,6 +53,9 @@
 ._detail-intro-dialog {
   ._title {}
   ._content {}
-  ._action {}
+  ._action {
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>

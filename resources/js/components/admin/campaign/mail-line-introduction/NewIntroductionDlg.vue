@@ -8,7 +8,7 @@
     >
       <v-card>
         <v-card-title class="_title">
-          新規
+          新規紹介文登録
         </v-card-title>
         <v-divider/>
         <v-card-text class="_content">
@@ -18,22 +18,24 @@
               <v-text-field
                 dense outlined
                 v-model="item.title"
+                :rules="[v=>!!v || 'タイトルが必要です。']"
               />
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="3">LP URL</v-col>
+            <v-col cols="3">本文</v-col>
             <v-col cols="9">
               <v-textarea
+                :rules="[v=>!!v || '本文が必要です。']"
                 dense outlined
                 v-model="item.content"
               />
             </v-col>
           </v-row>
         </v-card-text>
-        <v-card-actions class="_action">
+        <v-card-actions class="_action d-flex justify-center">
           <v-btn @click="$emit('onNewClose')">キャンセル</v-btn>
-          <v-btn @click="$emit('onNew', item)">保存</v-btn>
+          <v-btn dark color="success" @click="$emit('onNew', item)">保存</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -50,6 +52,7 @@
         id: 0,
         title: '',
         content: '',
+        target: ''
       }
     }),
     methods: {

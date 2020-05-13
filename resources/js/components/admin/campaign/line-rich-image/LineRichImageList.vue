@@ -60,7 +60,6 @@
     },
     methods: {
       onRegisterImage(val) {
-        console.log(this.item)
         this.item.line_rich_images.push(val)
         this.show_register = false
       },

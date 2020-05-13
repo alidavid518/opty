@@ -44,7 +44,7 @@
               <LineRichImages :campaign_id="campaign_id"/>
             </v-tab-item>
             <v-tab-item value="mail-line-intro">
-              <MailLineIntroduction :mail-introductions="mailIntroductions" :line-introductions="lineIntroductions"/>
+              <MailLineIntroduction :campaign_id="campaign_id"/>
             </v-tab-item>
             <v-tab-item value="reward-set">
               <RewardSetting :items="rewards"/>

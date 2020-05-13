@@ -14,36 +14,39 @@
             >
               新規
             </v-btn>
-            <v-btn
-              dark color="primary"
-              @click="save"
-            >
-              下書き
-            </v-btn>
+<!--            <v-btn-->
+<!--              dark color="primary"-->
+<!--              @click="save"-->
+<!--            >-->
+<!--              下書き-->
+<!--            </v-btn>-->
           </v-col>
         </v-row>
       </v-card-title>
       <v-card-text class="_content">
-        <div v-for="(intro, i) in item.lines" :key="i">
-          <LineIntroductionItem
-            :item="intro"
-            @onDelete="showDelete(intro)"
-            @onDetail="showDetail(intro)"
-          />
-        </div>
+        <v-slide-group v-if="introductions.length > 0">
+          <v-slide-item v-for="(intro, i) in introductions" :key="i">
+            <IntroductionItem
+              :item="intro"
+              @onDelete="showDelete(intro)"
+              @onDetail="showDetail(intro)"
+            />
+          </v-slide-item>
+        </v-slide-group>
+        <h3 v-else>登録済みの紹介はありません。</h3>
       </v-card-text>
 
     </v-card>
 
     <new-introduction-dlg
       :show="show_new_dlg"
+      @onNewClose="show_new_dlg=false"
       @onNew="addItem"/>
     <delete-introduction-dlg
       :item="selected" :show="show_delete_dlg"
-      @onDeleteConfirm="deleteConfirm"/>
-    <detail-introduction-dlg
-      :item="selected" :show="show_delete_dlg"
-      @onDeleteConfirm="deleteConfirm"/>
+      @onDeleteConfirm="deleteConfirm"
+      @onDeleteClose="show_delete_dlg=false"
+    />
 
     <scale-loader color="orange darken--1" loading="loading" height="70" width="7"/>
   </v-container>
@@ -53,19 +56,18 @@
   import vuetifyToast from 'vuetify-toast'
   import NewIntroductionDlg from "./NewIntroductionDlg";
   import DeleteIntroductionDlg from "./DeleteIntroductionDlg";
-  import DetailIntroductionDlg from "./DetailIntroductionDlg";
-  import LineIntroductionItem from "./LineIntroductionItem";
+  import IntroductionItem from "./IntroductionItem";
 
   export default {
-    components: {
-      LineIntroductionItem, DetailIntroductionDlg, DeleteIntroductionDlg, NewIntroductionDlg},
+    components: {IntroductionItem, DeleteIntroductionDlg, NewIntroductionDlg},
     props: {
+      target: {type: String, default: ''},
       item: {
         type: Object,
         id: { type: Number, default: 0},
         title: {type: String, default: ''},
         url: {type: String, default: ''},
-        lines: {type: Array, default: []}
+        introductions: {type: Array, default: []}
       }
     },
     data: () => ({
@@ -74,8 +76,15 @@
       selected: {id: 0, title: '', url: '', content: ''},
       show_new_dlg: false,
       show_detail_dlg: false,
-      show_delete_dlg: false
+      show_delete_dlg: false,
+
     }),
+    computed: {
+      introductions() {
+        if(this.item === null || this.item === undefined) return []
+        return this.item.introductions.filter(v => v.target === this.target)
+      }
+    },
     methods: {
       showDetail(item) {
         this.selected = item
@@ -86,21 +95,26 @@
         this.show_delete_dlg = true
       },
       deleteConfirm(item) {
-        /*
-        * delete item from DB
-        * */
-        const id = this.item.mail_introductions.findIndex(v => v.id === item.id)
-        if(id === -1) return
-        this.item.mail_introductions.splice(id, 1)
+        axios.get(`/admin/campaign/mail-line-intro/delete/${item.id}`)
+        .then(res => {
+          this.item.introductions = res.data.introductions
+          this.show_delete_dlg = false
+        })
+        .catch(e => {
+          vuetifyToast.error('紹介を削除できません。')
+        })
       },
       addItem(item) {
-        /*
-        * create item at DB
-        * */
-        this.item.mail_introductions.push(item)
+        item.target = this.target
+        axios.post(`/admin/campaign/mail-line-intro/new/${this.item.id}`, item)
+        .then(res => {
+          this.item = res.data.lp
+          this.show_new_dlg = false
+        })
+        .catch(e => {
+          vuetifyToast.error('紹介を保存できません。')
+        })
       },
-      save() {
-      }
     }
   }
 </script>
@@ -115,7 +129,7 @@
     }
     ._content {
       display: flex;
-      overflow-x: scroll;
+      /*overflow-x: scroll;*/
     }
   }
 </style>

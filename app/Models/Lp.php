@@ -20,6 +20,10 @@ class Lp extends Model
     return $this->hasMany('App\Models\LineRichImage');
   }
 
+  public function introductions() {
+    return $this->hasMany('App\Models\MailLineIntroduction');
+  }
+
   public function getShowTypeLabelAttribute()
   {
     $label = '非公開';

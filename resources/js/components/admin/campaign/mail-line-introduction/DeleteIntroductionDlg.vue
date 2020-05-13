@@ -7,15 +7,15 @@
     >
       <v-card>
         <v-card-title class="_title">
-
+          紹介の削除
         </v-card-title>
         <v-divider/>
         <v-card-text class="_content">
           {{item.title}}を削除しますか？
         </v-card-text>
-        <v-card-actions class="_action">
+        <v-card-actions class="_action d-flex justify-center">
           <v-btn @click="$emit('onDeleteClose')">キャンセル</v-btn>
-          <v-btn @click="$emit('onDeleteConfirm', item)">削除</v-btn>
+          <v-btn dark color="error" @click="$emit('onDeleteConfirm', item)">削除</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

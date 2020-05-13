@@ -22,10 +22,10 @@
       <v-card-text class="_content">
         <v-tabs-items v-model="tab">
           <v-tab-item key="mail">
-            <MailIntroductionList v-for="(mail_intro, i) in mailIntroductions" :key="i" :item="mail_intro"/>
+            <IntroductionList v-for="(lp, i) in lps" :key="i" :item="lp" :target="'mail'"/>
           </v-tab-item>
           <v-tab-item key="line">
-            <LineIntroductionList v-for="(line_intro, i) in lineIntroductions" :key="i" :item="line_intro"/>
+            <IntroductionList v-for="(lp, i) in lps" :key="i" :item="lp" :target="'line'"/>
           </v-tab-item>
         </v-tabs-items>
       </v-card-text>
@@ -34,24 +34,28 @@
 </template>
 
 <script>
-  import LineIntroductionList from "./LineIntroductionList";
-  import MailIntroductionList from "./MailIntroductionList";
+  import IntroductionList from "./IntroductionList"
+  import vuetifyToast from 'vuetify-toast'
+
   export default {
-    components: {MailIntroductionList, LineIntroductionList},
+    components: {IntroductionList},
     props: {
-      mailIntroductions: {
-        type: Array,
-        default: () => []
-      },
-      lineIntroductions: {
-        type: Array,
-        default: () => []
-      },
+      campaign_id: {type: Number, default: 0},
     },
     data() {
       return {
-        tab: 'mail'
+        tab: 'mail',
+        lps: [],
       }
+    },
+    mounted() {
+      axios.get(`/admin/campaign/mail-line-intro/lp_list/${this.campaign_id}`)
+      .then(res => {
+        this.lps = res.data.lps
+      })
+      .catch(e => {
+        vuetifyToast.error('サーバーからLPリストを取得できません。')
+      })
     },
     methods: {
       saveLineRichImage(item) {
