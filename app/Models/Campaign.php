@@ -58,4 +58,8 @@ class Campaign extends Model
   public function advertiser() {
     return $this->belongsTo('App\Models\Advertiser');
   }
+
+  public function line_account() {
+    return $this->hasOne('App\Models\LineAccount');
+  }
 }

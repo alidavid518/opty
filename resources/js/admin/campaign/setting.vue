@@ -46,6 +46,9 @@
             <v-tab-item value="mail-line-intro">
               <MailLineIntroduction :campaign_id="campaign_id"/>
             </v-tab-item>
+            <v-tab-item value="line-register">
+              <LineRegister :campaign_id="campaign_id"/>
+            </v-tab-item>
             <v-tab-item value="reward-set">
               <RewardSetting :items="rewards"/>
             </v-tab-item>
@@ -57,9 +60,6 @@
             </v-tab-item>
             <v-tab-item value="lp-reward">
               <LpReward :items="lp_rewards"/>
-            </v-tab-item>
-            <v-tab-item value="line-register">
-              <LineRegister/>
             </v-tab-item>
             <v-tab-item value="ip-except">
               <ContractIpExcept :items="ip_excepts"/>

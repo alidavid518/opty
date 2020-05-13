@@ -76,7 +76,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/campaign/mail-line-intro/lp_list/{campaign_id}', 'MailLineIntroduction\MailLineIntroductionController@lp_list');
     Route::post('/campaign/mail-line-intro/new/{lp_id}', 'MailLineIntroduction\MailLineIntroductionController@new');
     Route::get('/campaign/mail-line-intro/delete/{id}', 'MailLineIntroduction\MailLineIntroductionController@delete');
-
+    // campaign/line-account
+    Route::get('/campaign/line-account/get/{campaign_id}', 'LineAccount\LineAccountController@get');
+    Route::post('/campaign/line-account/save', 'LineAccount\LineAccountController@save');
   });
 
   // user route group

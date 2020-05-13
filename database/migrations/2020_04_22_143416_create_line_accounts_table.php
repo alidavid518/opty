@@ -17,10 +17,10 @@ class CreateLineAccountsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('campaign_id');
             $table->string('channel_url');
-            $table->string('secret');
-            $table->string('token');
+            $table->string('channel_secret');
+            $table->string('access_token');
             $table->string('redirect_url');
-            $table->string('image', 1024);
+            $table->string('image_url', 1024);
             $table->timestamps();
         });
     }
