@@ -178,6 +178,7 @@
 
 <script>
   import vuetifyToast from 'vuetify-toast'
+
   export default {
     props: {
       show: {type: Boolean, default: false},

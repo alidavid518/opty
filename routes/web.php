@@ -79,10 +79,15 @@ Route::middleware(['auth'])->group(function () {
     // campaign/line-account
     Route::get('/campaign/line-account/get/{campaign_id}', 'LineAccount\LineAccountController@get');
     Route::post('/campaign/line-account/save', 'LineAccount\LineAccountController@save');
-    // campaign/rewards
-    Route::get('/campaign/main-rewards/list/{campaign_id}', 'MainReward\MainrewardController@list');
+    // campaign/main-rewards
+    Route::get('/campaign/main-rewards/list/{campaign_id}', 'MainReward\MainRewardController@list');
     Route::post('/campaign/main-rewards/new', 'MainReward\MainRewardController@new');
     Route::get('/campaign/main-rewards/delete/{id}', 'MainReward\MainRewardController@delete');
+    // campaign/special-rewards
+    Route::get('/campaign/special-rewards/list/{campaign_id}', 'SpecialReward\SpecialrewardController@list');
+    Route::post('/campaign/special-rewards/new', 'SpecialReward\SpecialRewardController@new');
+    Route::get('/campaign/special-rewards/delete/{id}', 'SpecialReward\SpecialRewardController@delete');
+    Route::post('/campaign/special-rewards/bulk-edit', 'SpecialReward\SpecialRewardController@bulk_edit');
   });
 
   // user route group

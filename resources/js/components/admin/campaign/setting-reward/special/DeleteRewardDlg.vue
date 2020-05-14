@@ -26,6 +26,7 @@
 </template>
 
 <script>
+  import vuetifyToast from "vuetify-toast";
 
   export default {
     props: {

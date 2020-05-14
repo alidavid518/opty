@@ -16,6 +16,12 @@
             </v-col>
           </v-row>
           <v-row>
+            <v-col cols="3">RANK</v-col>
+            <v-col cols="9">
+              {{item.affiliate.name_full}}
+            </v-col>
+          </v-row>
+          <v-row>
             <v-col cols="3">期間</v-col>
             <v-col cols="9">
               {{$date(item.date_start +' '+ item.time_start).format('YYYY/MM/DD HH:mm')}}から<br>
@@ -40,6 +46,8 @@
 </template>
 
 <script>
+  import vuetifyToast from "vuetify-toast";
+
   export default {
     props: {
       show: Boolean,
