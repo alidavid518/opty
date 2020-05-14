@@ -4,8 +4,8 @@
       <v-card-title>
         <v-row>
           <v-col cols="12" class="d-flex justify-space-between">
-            <v-btn @click="show_new_dlg=true">新規</v-btn>
-            <v-btn @click="show_bulk_edit_dlg=true">一括編集</v-btn>
+            <v-btn dark color="success" @click="show_new_dlg=true">新規</v-btn>
+            <v-btn dark color="warning" @click="show_bulk_edit_dlg=true">一括編集</v-btn>
           </v-col>
         </v-row>
       </v-card-title>
@@ -28,15 +28,15 @@
               <tbody>
                 <tr v-for="(r, i) in rewards" :key="i">
                   <td><v-checkbox v-model="r.checked"/></td>
-                  <td>{{r.affiliate}}</td>
-                  <td>{{ranks[r.rank-1]}}</td>
+                  <td>{{r.affiliate.name}}</td>
+                  <td>{{r.rank.name}}</td>
                   <td>{{r.amount}}円 / 成約</td>
                   <td>{{r.is_show === 1 ? 'する' : 'No'}}</td>
                   <td>
-                    <v-btn dark color="purple darken--2">
+                    <v-btn dark color="purple darken--2" @click="showDetail(r)">
                       詳細
                     </v-btn>
-                    <v-btn dark color="pink darken--2">
+                    <v-btn dark color="error" @click="showDelete(r)">
                       削除
                     </v-btn>
                   </td>
@@ -78,20 +78,21 @@
     name: "SettingStory",
     components: {BulkEditRewardDlg, DetailRewardDlg, DeleteRewardDlg, NewSpecialRewardDlg},
     props: {
-      rewards: {
-        type: Array,
-        default: () => []
-      }
+      campaign_id: {type: Number, default: 0}
     },
     data: () => ({
       show_new_dlg: false,
       show_detail_dlg: false,
       show_delete_dlg: false,
       show_bulk_edit_dlg: false,
-      selected: {},
+      selected: {id: 0, campaign_id: 0, rank_id: 0, rank:{name:''}, date_start: '', time_start: '', date_end: '', time_end: '', is_show: 1},
       bulks: [],
-      ranks: ['VIP','S VIP','SS VIP','QUEEN','KING']
+      ranks: [],
+      items: []
     }),
+    mounted() {
+
+    },
     methods: {
       saveNew(val) {
 

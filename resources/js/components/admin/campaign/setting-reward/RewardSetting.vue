@@ -24,11 +24,11 @@
       <v-card-text>
         <table-main-reward
           v-if="rewardType==='main'"
-          :rewards="items.main"
+          :campaign_id="campaign_id"
         />
         <table-special-reward
           v-if="rewardType==='special'"
-          :rewards="items.special"
+          :campaign_id="campaign_id"
         />
       </v-card-text>
     </v-container>
@@ -36,18 +36,13 @@
 </template>
 
 <script>
-  import TableMainReward from "./TableMainReward";
-  import TableSpecialReward from "./TableSpecialReward";
+  import TableMainReward from "./main/TableMainReward";
+  import TableSpecialReward from "./special/TableSpecialReward";
+
   export default {
     components: {TableMainReward, TableSpecialReward},
     props: {
-      items: {
-        type: Object,
-        main: { type: Array, default: []},
-        special: { type: Array, default: []},
-        first_come: { type: Array, default: []},
-        append: { type: Array, default: []},
-      }
+      campaign_id: {type:Number, default: 0},
     },
     data() {
       return {
@@ -58,7 +53,6 @@
           {value: 'first-come', label: '先着報酬'},
           {value: 'increased', label: '増加報酬'},
         ],
-        ranks: ['VIP','S VIP','SS VIP','QUEEN','KING'],
       }
     },
     methods: {

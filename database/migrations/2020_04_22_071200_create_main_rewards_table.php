@@ -14,8 +14,9 @@ class CreateMainRewardsTable extends Migration
     public function up()
     {
         Schema::create('main_rewards', function (Blueprint $table) {
-            $table->bigInteger('id');
+            $table->bigIncrements('id');
             $table->bigInteger('campaign_id');
+            $table->bigInteger('rank_id');
             $table->date('date_start');
             $table->time('time_start');
             $table->date('date_end');

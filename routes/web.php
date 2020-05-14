@@ -79,6 +79,10 @@ Route::middleware(['auth'])->group(function () {
     // campaign/line-account
     Route::get('/campaign/line-account/get/{campaign_id}', 'LineAccount\LineAccountController@get');
     Route::post('/campaign/line-account/save', 'LineAccount\LineAccountController@save');
+    // campaign/rewards
+    Route::get('/campaign/main-rewards/list/{campaign_id}', 'MainReward\MainrewardController@list');
+    Route::post('/campaign/main-rewards/new', 'MainReward\MainRewardController@new');
+    Route::get('/campaign/main-rewards/delete/{id}', 'MainReward\MainRewardController@delete');
   });
 
   // user route group

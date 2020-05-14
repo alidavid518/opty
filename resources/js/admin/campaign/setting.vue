@@ -50,7 +50,7 @@
               <LineRegister :campaign_id="campaign_id"/>
             </v-tab-item>
             <v-tab-item value="reward-set">
-              <RewardSetting :items="rewards"/>
+              <RewardSetting :campaign_id="campaign_id"/>
             </v-tab-item>
             <v-tab-item value="rank-except">
               <RankExcept :items="except_items"/>
