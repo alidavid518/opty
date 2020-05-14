@@ -50,6 +50,11 @@ class Campaign extends Model
     return $this->hasMany('App\Models\SpecialReward');
   }
 
+  public function first_come_rewards()
+  {
+    return $this->hasMany('App\Models\FirstComeReward');
+  }
+
   public function lps()
   {
     return $this->hasMany('App\Models\Lp');

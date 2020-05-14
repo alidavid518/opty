@@ -30,7 +30,7 @@
                     {{$date(r.date_end + ' ' + r.time_end).format('YYYY/MM/DD HH:mm')}}まで
                   </td>
                   <td>{{r.amount}}円 / 成約</td>
-                  <td>{{r.is_show === 1 ? 'する' : 'No'}}</td>
+                  <td>{{r.is_show === 1 ? 'する' : 'しない'}}</td>
                   <td>
                     <v-btn dark color="purple darken--2" @click="showDetail(r)">
                       詳細

@@ -30,6 +30,10 @@
           v-if="rewardType==='special'"
           :campaign_id="campaign_id"
         />
+        <table-first-come-reward
+          v-if="rewardType==='first-come'"
+          :campaign_id="campaign_id"
+        />
       </v-card-text>
     </v-container>
   </v-card>
@@ -38,9 +42,10 @@
 <script>
   import TableMainReward from "./main/TableMainReward";
   import TableSpecialReward from "./special/TableSpecialReward";
+  import TableFirstComeReward from "./first-come/TableFirstComeReward";
 
   export default {
-    components: {TableMainReward, TableSpecialReward},
+    components: {TableMainReward, TableSpecialReward, TableFirstComeReward},
     props: {
       campaign_id: {type:Number, default: 0},
     },

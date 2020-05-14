@@ -88,6 +88,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/campaign/special-rewards/new', 'SpecialReward\SpecialRewardController@new');
     Route::get('/campaign/special-rewards/delete/{id}', 'SpecialReward\SpecialRewardController@delete');
     Route::post('/campaign/special-rewards/bulk-edit', 'SpecialReward\SpecialRewardController@bulk_edit');
+    // campaign/first-come
+    Route::get('/campaign/first-come/list/{campaign_id}', 'FirstCome\FirstComeRewardController@list');
+    Route::post('/campaign/first-come/new', 'FirstCome\FirstComeRewardController@new');
+    Route::get('/campaign/first-come/delete/{id}', 'FirstCome\FirstComeRewardController@delete');
+    Route::post('/campaign/first-come/bulk-edit', 'FirstCome\FirstComeRewardController@bulk_edit');
   });
 
   // user route group

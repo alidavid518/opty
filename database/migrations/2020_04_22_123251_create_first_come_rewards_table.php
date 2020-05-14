@@ -14,8 +14,17 @@ class CreateFirstComeRewardsTable extends Migration
     public function up()
     {
         Schema::create('first_come_rewards', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+          $table->bigIncrements('id');
+          $table->bigInteger('campaign_id');
+          $table->bigInteger('affiliate_id');
+          $table->bigInteger('rank_id');
+          $table->date('date_start');
+          $table->time('time_start');
+          $table->date('date_end');
+          $table->time('time_end');
+          $table->integer('amount');
+          $table->tinyInteger('is_show')->default(1)->comment('1:show, 0:hide');
+          $table->timestamps();
         });
     }
 
