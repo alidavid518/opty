@@ -55,20 +55,20 @@
             <v-tab-item value="lp-reward">
               <LpReward :campaign_id="campaign_id"/>
             </v-tab-item>
-            <v-tab-item value="rank-except">
-              <RankExcept :items="except_items"/>
-            </v-tab-item>
-            <v-tab-item value="lead-extend">
-              <LeadExtend :vleads="lead_items" :vextends="extend_items"/>
-            </v-tab-item>
             <v-tab-item value="ip-except">
-              <ContractIpExcept :items="ip_excepts"/>
-            </v-tab-item>
-            <v-tab-item value="rank-summary">
-              <RankingSummary :items="ranking_summary_items"/>
+              <ContractIpExcept :campaign_id="campaign_id"/>
             </v-tab-item>
             <v-tab-item value="prize-setting">
-              <PrizeSetting/>
+              <PrizeSetting :campaign_id="campaign_id"/>
+            </v-tab-item>
+            <v-tab-item value="rank-except">
+              <RankExcept :campaign_id="campaign_id"/>
+            </v-tab-item>
+            <v-tab-item value="lead-extend">
+              <LeadExtend :campaign_id="campaign_id"/>
+            </v-tab-item>
+            <v-tab-item value="rank-summary">
+              <RankingSummary :campaign_id="campaign_id"/>
             </v-tab-item>
           </v-tabs-items>
         </v-col>
@@ -184,42 +184,6 @@
           {text: 'ランキング集計', target: 'rank-summary'},
         ],
         campaign: {id: 0, title: '', image: ''},
-        mailIntroductions: [
-          {id: 1, url: 'url1', title: 'LP1', mails: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
-          {id: 2, url: 'url2', title: 'LP2', mails: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
-          {id: 3, url: 'url3', title: 'LP3', mails: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
-        ],
-        lineIntroductions: [
-          {id: 1, url: 'url1', title: 'LP1', lines: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
-          {id: 2, url: 'url2', title: 'LP2', lines: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
-          {id: 3, url: 'url3', title: 'LP3', lines: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
-        ],
-        except_items: [
-          {id: 1, name: 'aff1', rank: 1},
-          {id: 2, name: 'aff2', rank: 2},
-          {id: 3, name: 'aff3', rank: 3},
-          {id: 4, name: 'aff4', rank: 4},
-        ],
-        lead_items: [
-          {id: 1, affiliate: 'aff1', rank: 1, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
-          {id: 2, affiliate: 'aff2', rank: 2, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
-          {id: 3, affiliate: 'aff3', rank: 3, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
-        ],
-        extend_items: [
-          {id: 1, affiliate: 'aff1', rank: 4, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
-          {id: 2, affiliate: 'aff2', rank: 5, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
-          {id: 3, affiliate: 'aff3', rank: 3, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
-        ],
-        ip_excepts: [
-          {id: 1, lp_id: 1, ip: '111.111.111.111'},
-          {id: 2, lp_id: 1, ip: '222.111.111.111'},
-          {id: 3, lp_id: 1, ip: '333.111.111.111'},
-        ],
-        ranking_summary_items: [
-          {affiliate: 'aaa', rank: 1, contract_number: 10, reward: 3000, ranking: 1},
-          {affiliate: 'bbb', rank: 2, contract_number: 9, reward: 2000, ranking: 2},
-          {affiliate: 'ccc', rank: 3, contract_number: 8, reward: 1000, ranking: 3},
-        ]
       }
     },
     mounted() {

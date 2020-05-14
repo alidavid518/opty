@@ -10,7 +10,7 @@ use App\Models\Rank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class LpRewardController extends Controller
+class CampaignIpExceptController extends Controller
 {
   public function list(Request $request, $campaign_id)
   {

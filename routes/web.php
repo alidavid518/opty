@@ -103,6 +103,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/campaign/lp-reward/save', 'LpReward\LpRewardController@save');
     Route::get('/campaign/lp-reward/delete/{id}', 'LpReward\LpRewardController@delete');
     Route::post('/campaign/lp-reward/edit', 'LpReward\LpRewardController@edit');
+    // campaign/contract-ip-except
+    Route::get('/campaign/contract-ip-except/list/{campaign_id}', 'ContractExceptIp\ContractExceptIpController@list');
+    Route::post('/campaign/contract-ip-except/new', 'ContractExceptIp\ContractExceptIpController@new');
+    Route::get('/campaign/contract-ip-except/delete/{id}', 'ContractExceptIp\ContractExceptIpController@delete');
+
   });
 
   // user route group

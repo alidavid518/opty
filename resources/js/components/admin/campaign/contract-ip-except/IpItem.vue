@@ -19,7 +19,7 @@
       item: {
         type: Object,
         id: {type: Number, default: 0},
-        lp_id: {type: Number, default: 0},
+        campaign_id: {type: Number, default: 0},
         ip: {type: String, default: ''}
       }
     }

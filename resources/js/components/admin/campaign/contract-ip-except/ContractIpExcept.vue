@@ -12,14 +12,18 @@
       <v-card-text>
         <v-row>
           <v-col class="d-flex justify-center">
-            <v-text-field
-              v-model="ip"
-              outlined dense hide-details
-              class="_ip mr-2"
-              placeholder="IPアドレスを入力してください、"
-            />
+            <v-form v-model="valid">
+              <v-text-field
+                v-model="ip"
+                outlined dense hide-details
+                class="_ip mr-2"
+                :rules="ipRule"
+                placeholder="IPアドレスを入力してください、"
+              />
+            </v-form>
             <v-btn
               dark color="primary"
+              :disabled="!valid"
               @click="addIp"
             >
               登録
@@ -28,9 +32,7 @@
         </v-row>
         <v-divider/>
         <v-row class="_ip-container">
-          <IpItem v-for="(ip, i) in items" :key="i" :item="ip"
-                  @onDelete="showDelete"
-          />
+          <IpItem v-for="(ip, i) in items" :key="i" :item="ip" @onDelete="showDelete"/>
         </v-row>
       </v-card-text>
     </v-container>
@@ -42,37 +44,57 @@
 <script>
   import DeleteDlg from "./DeleteDlg";
   import IpItem from "./IpItem";
+  import vuetifyToast from 'vuetify-toast'
+
   export default {
     components: {IpItem, DeleteDlg},
     props: {
-      items: {
-        type: Array,
-        default: () => []
-      }
+      campaign_id: {type: Number, default: 0}
     },
     data: vm => ({
       show_delete: false,
-      lp_id: '000',
+      valid: false,
       ip: '',
-      selected: {id: 0, lp_id: 0, ip: ''}
+      items: [],
+      selected: {id: 0, campaign_id: 0, ip: ''},
+      ipRule: [
+        v => !!v || '必須フィールド',
+        v => /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(v) || '間違ったIPアドレス'
+      ],
     }),
+    mounted() {
+      axios.get(`/admin/campaign/contract-ip-except/list/${this.campaign_id}`)
+      .then(res => {
+        this.items = res.data.ips
+      })
+      .catch(e => {
+        vuetifyToast.error('サーバーからIPリストを取得できません。')
+      })
+    },
     methods: {
       addIp() {
-        this.items.push({
-          id: this.items.length + 1,
-          lp_id: this.lp_id,
-          ip: this.ip
-        })
+        const data = {ip: this.ip, campaign_id: this.campaign_id}
+        axios.post(`/admin/campaign/contract-ip-except/new`, data)
+          .then(res => {
+            this.items = res.data.ips
+          })
+          .catch(e => {
+            vuetifyToast.error('IPを保存できません。')
+          })
       },
       showDelete(item) {
         this.selected = item
         this.show_delete = true
       },
       deleteIp(item) {
-        console.log(item)
-        const ind = this.items.findIndex(it => it.id === item.id)
-        if(ind > -1) this.items.splice(ind, 1)
-        this.show_delete = false
+        axios.get(`/admin/campaign/contract-ip-except/delete/${item.id}`)
+          .then(res => {
+            this.items = res.data.ips
+            this.show_delete = false
+          })
+          .catch(e => {
+            vuetifyToast.error('IPを削除できません。')
+          })
       }
     }
   }
