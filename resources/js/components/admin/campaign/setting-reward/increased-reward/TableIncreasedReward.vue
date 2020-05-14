@@ -20,7 +20,7 @@
                   <th>ID</th>
                   <th>アフィリエイター名</th>
                   <th>RANK</th>
-                  <th>先着報酬額</th>
+                  <th>増加報酬額</th>
                   <th>表示の有無</th>
                   <th> </th>
                 </tr>
@@ -96,7 +96,7 @@
       affiliates: []
     }),
     mounted() {
-      axios.get(`/admin/campaign/first-come/list/${this.campaign_id}`)
+      axios.get(`/admin/campaign/increased-reward/list/${this.campaign_id}`)
       .then(res => {
         this.items = res.data.rewards.map(r => {
           r.checked = false
@@ -120,7 +120,7 @@
       },
       saveNewReward(val) {
         val.campaign_id = this.campaign_id
-        axios.post(`/admin/campaign/first-come/new`, val)
+        axios.post(`/admin/campaign/increased-reward/new`, val)
           .then(res => {
             this.items = res.data.rewards
           })
@@ -130,7 +130,7 @@
         this.show_new_dlg = false
       },
       deleteReward(val) {
-        axios.get(`/admin/campaign/first-come/delete/${val.id}`)
+        axios.get(`/admin/campaign/increased-reward/delete/${val.id}`)
           .then(res => {
             this.items = this.items.filter(v => v.id !== val.id)
           })
@@ -149,7 +149,7 @@
 
         val.campaign_id = this.campaign_id
         val.ids = selectIds
-        axios.post('/admin/campaign/first-come/bulk-edit', val)
+        axios.post('/admin/campaign/increased-reward/bulk-edit', val)
         .then(res => {
           this.items = res.data.rewards.map(r => {
             r.checked = false

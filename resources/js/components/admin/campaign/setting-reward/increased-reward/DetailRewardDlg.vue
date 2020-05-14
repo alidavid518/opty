@@ -6,7 +6,7 @@
       max-width="600px"
     >
       <v-card>
-        <v-card-title class="_title">特別報酬</v-card-title>
+        <v-card-title class="_title">増加報酬</v-card-title>
         <v-divider/>
         <v-card-text class="_content">
           <v-row>

@@ -34,6 +34,10 @@
           v-if="rewardType==='first-come'"
           :campaign_id="campaign_id"
         />
+        <table-increased-reward
+          v-if="rewardType==='increased'"
+          :campaign_id="campaign_id"
+        />
       </v-card-text>
     </v-container>
   </v-card>
@@ -43,9 +47,10 @@
   import TableMainReward from "./main/TableMainReward";
   import TableSpecialReward from "./special/TableSpecialReward";
   import TableFirstComeReward from "./first-come/TableFirstComeReward";
+  import TableIncreasedReward from "./increased-reward/TableIncreasedReward";
 
   export default {
-    components: {TableMainReward, TableSpecialReward, TableFirstComeReward},
+    components: {TableMainReward, TableSpecialReward, TableFirstComeReward, TableIncreasedReward},
     props: {
       campaign_id: {type:Number, default: 0},
     },
