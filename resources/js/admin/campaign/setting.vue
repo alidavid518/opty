@@ -52,14 +52,14 @@
             <v-tab-item value="reward-set">
               <RewardSetting :campaign_id="campaign_id"/>
             </v-tab-item>
+            <v-tab-item value="lp-reward">
+              <LpReward :campaign_id="campaign_id"/>
+            </v-tab-item>
             <v-tab-item value="rank-except">
               <RankExcept :items="except_items"/>
             </v-tab-item>
             <v-tab-item value="lead-extend">
               <LeadExtend :vleads="lead_items" :vextends="extend_items"/>
-            </v-tab-item>
-            <v-tab-item value="lp-reward">
-              <LpReward :items="lp_rewards"/>
             </v-tab-item>
             <v-tab-item value="ip-except">
               <ContractIpExcept :items="ip_excepts"/>
@@ -184,22 +184,6 @@
           {text: 'ランキング集計', target: 'rank-summary'},
         ],
         campaign: {id: 0, title: '', image: ''},
-        rewards: {
-          main: [
-            {id: 1, rank: 1, amount: 1000, is_show: 1, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-            {id: 2, rank: 2, amount: 1000, is_show: 0, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-            {id: 3, rank: 3, amount: 1000, is_show: 0, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-            {id: 4, rank: 4, amount: 1000, is_show: 1, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          ],
-          special: [
-            {id: 1, rank: 1, amount: 1000, is_show: 1, affiliate: 'aaa', checked: false, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-            {id: 2, rank: 2, amount: 1000, is_show: 0, affiliate: 'bbb', checked: false, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-            {id: 3, rank: 3, amount: 1000, is_show: 0, affiliate: 'ccc', checked: false, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-            {id: 4, rank: 4, amount: 1000, is_show: 1, affiliate: 'ddd', checked: false, start: '2019/02/07  12:00', end: '2019/02/08 00:00'},
-          ],
-          first_come: [],
-          append: []
-        },
         mailIntroductions: [
           {id: 1, url: 'url1', title: 'LP1', mails: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
           {id: 2, url: 'url2', title: 'LP2', mails: [{id:1, title: 'title1', content:'content1'}, {id:2,title:'title2',content:'content2'}]},
@@ -225,21 +209,6 @@
           {id: 1, affiliate: 'aff1', rank: 4, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
           {id: 2, affiliate: 'aff2', rank: 5, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
           {id: 3, affiliate: 'aff3', rank: 3, special_reward: 1000, start_date: '2019-04-09', start_time: '10:11', end_date: '2019-05-01', end_time: '11:11'},
-        ],
-        lp_rewards: [
-          {id: 1, title: 'title1', url: 'url1', is_public: 1,
-            rewards: [
-              {id: 1, rank: 1, reward: 1000, start_date: '2020/01/05', start_time: '00:00', end_date: '2020/01/12', end_time: '12:00'},
-              {id: 2, rank: 3, reward: 3000, start_date: '2020/01/05', start_time: '00:00', end_date: '2020/01/12', end_time: '12:00'},
-            ]
-          },
-          {id: 2, title: 'title2', url: 'url2', is_public: 1,
-            rewards: [
-              {id: 1, rank: 2, reward: 2000, start_date: '2020/01/05', start_time: '00:00', end_date: '2020/01/12', end_time: '12:00'},
-              {id: 2, rank: 4, reward: 3000, start_date: '2020/01/05', start_time: '00:00', end_date: '2020/01/12', end_time: '12:00'},
-            ]
-          },
-          {id: 3, title: 'title3', url: 'url3', is_public: 0, rewards: []},
         ],
         ip_excepts: [
           {id: 1, lp_id: 1, ip: '111.111.111.111'},

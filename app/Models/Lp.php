@@ -24,6 +24,11 @@ class Lp extends Model
     return $this->hasMany('App\Models\MailLineIntroduction');
   }
 
+  public function lp_rewards()
+  {
+    return $this->hasMany('App\Models\LpReward');
+  }
+
   public function getShowTypeLabelAttribute()
   {
     $label = '非公開';

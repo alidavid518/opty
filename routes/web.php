@@ -98,6 +98,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/campaign/increased-reward/new', 'IncreasedReward\IncreasedRewardController@new');
     Route::get('/campaign/increased-reward/delete/{id}', 'IncreasedReward\IncreasedRewardController@delete');
     Route::post('/campaign/increased-reward/bulk-edit', 'IncreasedReward\IncreasedRewardController@bulk_edit');
+    // campaign/lp-reward
+    Route::get('/campaign/lp-reward/list/{campaign_id}', 'LpReward\LpRewardController@list');
+    Route::post('/campaign/lp-reward/save', 'LpReward\LpRewardController@save');
+    Route::get('/campaign/lp-reward/delete/{id}', 'LpReward\LpRewardController@delete');
+    Route::post('/campaign/lp-reward/edit', 'LpReward\LpRewardController@edit');
   });
 
   // user route group

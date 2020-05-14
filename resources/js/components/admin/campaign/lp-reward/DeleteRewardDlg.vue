@@ -34,12 +34,12 @@
         type: Object,
         id: {type: Number, default: 0},
         lp_id: {type: Number, default: 0},
-        reward: {type: Number, default: 0},
-        rank: {type: Number, default: 0},
-        start_date: {type: String, default: ''},
-        start_time: {type: String, default: ''},
-        end_date: {type: String, default: ''},
-        end_time: {type: String, default: ''}
+        amount: {type: Number, default: 0},
+        rank_id: {type: Number, default: 0},
+        date_start: {type: String, default: ''},
+        time_start: {type: String, default: ''},
+        date_end: {type: String, default: ''},
+        time_end: {type: String, default: ''}
       },
     },
     data: vm => ({

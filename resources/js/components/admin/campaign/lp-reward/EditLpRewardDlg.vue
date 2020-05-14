@@ -12,62 +12,72 @@
         </v-card-title>
         <v-divider/>
         <v-card-text class="_content">
-          <v-row>
-            <v-col cols="3">報酬額</v-col>
-            <v-col cols="9">
-              <v-text-field
-                hide-details dense outlined
-                v-model="item.reward"
-                class="d-inline-flex"
-              />
-              円
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="3">Rank</v-col>
-            <v-col cols="9">
-              <v-select
-                outlined dense hide-details
-                v-model="item.rank"
-                :items="ranks"
-                item-value="id" item-text="label"
-              />
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="3">期間設定</v-col>
-            <v-col cols="9">
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field type="date"
-                    outlined dense hide-details
-                    class="d-inline-flex"
-                    v-model="item.start_date"/>
-                  <v-text-field type="time"
-                    outlined dense hide-details
-                    class="d-inline-flex"
-                    v-model="item.start_time"/>
-                  から
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field type="date"
-                    outlined dense hide-details
-                    class="d-inline-flex"
-                    v-model="item.end_date"/>
-                  <v-text-field type="time"
-                    outlined dense hide-details
-                    class="d-inline-flex"
-                    v-model="item.end_time"/>
-                  まで
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
+          <v-form v-model="valid">
+            <v-row>
+              <v-col cols="3">報酬額</v-col>
+              <v-col cols="9">
+                <v-text-field
+                  hide-details="auto" dense outlined
+                  v-model="item.amount"
+                  :rules="[required, mustNumber]"
+                  class="d-inline-flex"
+                />
+                円
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="3">Rank</v-col>
+              <v-col cols="9">
+                <v-select
+                  outlined dense hide-details="auto"
+                  v-model="item.rank_id"
+                  :items="ranks"
+                  :rules="[required]"
+                  item-value="id" item-text="label"
+                />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="3">期間設定</v-col>
+              <v-col cols="9">
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      type="date"
+                      outlined dense hide-details="auto"
+                      class="d-inline-flex"
+                      :rules="[required]"
+                      v-model="item.date_start"/>
+                    <v-text-field
+                      type="time"
+                      outlined dense hide-details="auto"
+                      class="d-inline-flex"
+                      :rules="[required]"
+                      v-model="item.time_start"/>
+                    から
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field type="date"
+                                  outlined dense hide-details="auto"
+                                  class="d-inline-flex"
+                                  :rules="[required]"
+                                  v-model="item.date_end"/>
+                    <v-text-field type="time"
+                                  outlined dense hide-details="auto"
+                                  class="d-inline-flex"
+                                  :rules="[required]"
+                                  v-model="item.time_end"/>
+                    まで
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-form>
         </v-card-text>
         <v-card-actions class="_action justify-center py-3">
           <v-btn @click="$emit('onEditClose')">キャンセル</v-btn>
-          <v-btn color="primary"
-            @click="$emit('onEditSave')">保存</v-btn>
+          <v-btn color="primary" :disabled="!valid"
+            @click="save">保存</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -75,6 +85,8 @@
 </template>
 
 <script>
+  import vuetifyToast from "vuetify-toast";
+
   export default {
     props: {
       show: {type:Boolean, default: false},
@@ -82,12 +94,12 @@
         type: Object,
         id: {type: Number, default: 0},
         lp_id: {type: Number, default: 0},
-        reward: {type: Number, default: 0},
-        rank: {type: Number, default: 0},
-        start_date: {type: String, default: ''},
-        start_time: {type: String, default: ''},
-        end_date: {type: String, default: ''},
-        end_time: {type: String, default: ''}
+        amount: {type: Number, default: 0},
+        rank_id: {type: Number, default: 0},
+        date_start: {type: String, default: ''},
+        time_start: {type: String, default: ''},
+        date_end: {type: String, default: ''},
+        time_end: {type: String, default: ''}
       },
     },
     data: vm => ({
@@ -98,10 +110,23 @@
         {id: 4, label: 'QUEEN'},
         {id: 5, label: 'KING'},
       ],
+      required: v => !!v || '必須フィールド',
+      mustNumber: v => !isNaN(parseInt(v)) || '数ではない',
+      valid: false
     }),
     watch: {
     },
     methods: {
+      save() {
+        const dts = this.$date(this.item.date_start + '' + this.item.time_start)
+        const dte = this.$date(this.item.date_end + '' + this.item.time_end)
+
+        if(dte.isBefore(dts)) {
+          vuetifyToast.error('開始日は終了日より前にしてください。')
+          return
+        }
+        this.$emit('onEditSave', this.item)
+      }
     }
   }
 </script>
