@@ -1,7 +1,7 @@
 <template>
   <v-row class="_rank-except-item">
-    <v-col cols="8" class="d-flex align-center">{{item.name}}</v-col>
-    <v-col cols="2" class="d-flex align-center">{{ranks[item.rank-1]}}</v-col>
+    <v-col cols="8" class="d-flex align-center">{{item.affiliate_name}}</v-col>
+    <v-col cols="2" class="d-flex align-center">{{item.rank_name}}</v-col>
     <v-col cols="2" class="d-flex align-center">
       <v-btn dark color="error"
              @click="$emit('onExceptDelete', item)"

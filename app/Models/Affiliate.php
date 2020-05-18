@@ -17,7 +17,7 @@ class Affiliate extends Model
     'name_first', 'name_last', 'furi_first', 'furi_last', 'email', 'password', 'nickname', 'rank_id', 'note', 'status'
   ];
 
-  protected $appends = ['status_label', 'name_full', 'special_reward_amount'];
+  protected $appends = ['status_label', 'name_full', 'special_reward_amount', 'rank_name'];
 
   public function rank() {
     return $this->belongsTo('App\Models\Rank');
@@ -45,6 +45,10 @@ class Affiliate extends Model
       $sum += $sr->amount;
     }
     return $sum;
+  }
+
+  public function getRankNameAttribute() {
+    return $this->rank ? $this->rank->name : '';
   }
 
   public function getStatusLabelAttribute()

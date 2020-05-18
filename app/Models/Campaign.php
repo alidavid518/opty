@@ -76,4 +76,8 @@ class Campaign extends Model
   public function lead_extend_affiliates() {
     return $this->hasMany('App\Models\LeadExtendAffiliate');
   }
+
+  public function rank_excepts() {
+    return $this->hasMany('App\Models\RankExcept');
+  }
 }

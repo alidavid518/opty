@@ -18,7 +18,7 @@
         </v-card-text>
         <v-card-actions class="_action justify-center">
           <v-btn @click="$emit('onDeleteClose')">キャンセル</v-btn>
-          <v-btn dark color="error"
+          <v-btn color="error"
                  @click="$emit('onDeleteConfirm', item)">削除</v-btn>
         </v-card-actions>
       </v-card>
@@ -33,13 +33,6 @@
       item: {
         type: Object,
         id: {type: Number, default: 0},
-        title: {type:String, default: ''},
-        url: {type:String, default:''},
-        banner: {type:String, default: ''},
-        is_public: {type: Number, default: 1},
-        redirect_pc: {type: String, default: ''},
-        redirect_mobile: {type: String, default: ''},
-        show_type: {type: String, default: 'banner'},
       },
     },
     data: vm => ({

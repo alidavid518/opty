@@ -115,6 +115,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/campaign/prize/list/{campaign_id}', 'Prize\PrizeController@list');
     Route::post('/campaign/prize/save', 'Prize\PrizeController@save');
     Route::get('/campaign/prize/delete/{id}', 'Prize\PrizeController@delete');
+    // campaign/rank-except
+    Route::get('/campaign/rank-except/list/{campaign_id}', 'RankExcept\RankExceptController@list');
+    Route::post('/campaign/rank-except/new', 'RankExcept\RankExceptController@save');
+    Route::get('/campaign/rank-except/delete/{id}', 'RankExcept\RankExceptController@delete');
   });
 
   // user route group
