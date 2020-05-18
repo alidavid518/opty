@@ -72,4 +72,8 @@ class Campaign extends Model
   public function line_account() {
     return $this->hasOne('App\Models\LineAccount');
   }
+
+  public function lead_extend_affiliates() {
+    return $this->hasMany('App\Models\LeadExtendAffiliate');
+  }
 }

@@ -17,10 +17,18 @@ class Affiliate extends Model
     'name_first', 'name_last', 'furi_first', 'furi_last', 'email', 'password', 'nickname', 'rank_id', 'note', 'status'
   ];
 
-  protected $appends = ['status_label', 'name_full'];
+  protected $appends = ['status_label', 'name_full', 'special_reward_amount'];
 
   public function rank() {
     return $this->belongsTo('App\Models\Rank');
+  }
+
+  public function special_rewards() {
+    return $this->hasMany('App\Models\SpecialReward');
+  }
+
+  public function lead_extend_affiliates() {
+    return $this->hasMany('App\Models\LeadExtendAffiliate');
   }
 
   public function getStatusOptions() {
@@ -28,6 +36,15 @@ class Affiliate extends Model
       static::STATUS_ACTIVE => '確認済み',
       static::STATUS_INACTIVE => '登録済み'
     ];
+  }
+
+  public function getSpecialRewardAmountAttribute() {
+    $srs = $this->special_rewards;
+    $sum = 0;
+    foreach ($srs as $sr) {
+      $sum += $sr->amount;
+    }
+    return $sum;
   }
 
   public function getStatusLabelAttribute()

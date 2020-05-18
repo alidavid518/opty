@@ -107,7 +107,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/campaign/contract-ip-except/list/{campaign_id}', 'ContractExceptIp\ContractExceptIpController@list');
     Route::post('/campaign/contract-ip-except/new', 'ContractExceptIp\ContractExceptIpController@new');
     Route::get('/campaign/contract-ip-except/delete/{id}', 'ContractExceptIp\ContractExceptIpController@delete');
-
+    // campaign/lead-extend
+    Route::get('/campaign/lead-extend/list/{campaign_id}', 'LeadExtend\LeadExtendController@list');
+    // campaign/prize
+    Route::get('/campaign/prize/list/{campaign_id}', 'Prize\PrizeController@list');
+    Route::post('/campaign/prize/save', 'Prize\PrizeController@save');
+    Route::get('/campaign/prize/delete/{id}', 'Prize\PrizeController@delete');
   });
 
   // user route group

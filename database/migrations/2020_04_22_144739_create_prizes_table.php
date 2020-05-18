@@ -17,7 +17,7 @@ class CreatePrizesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('campaign_id');
             $table->integer('contract_rank');
-            $table->string('name');
+            $table->string('prize_name');
             $table->string('image', 1024);
             $table->timestamps();
         });

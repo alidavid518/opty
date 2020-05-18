@@ -12,8 +12,11 @@
       <v-card-text>
         <v-row>
           <v-col cols="12" class="d-flex justify-space-between">
-            <v-btn @click="showNew">登録</v-btn>
-            <label>キャンペーン期間 {{lp_start}} - {{lp_end}}</label>
+            <v-btn color="info" @click="showNew">新規登録</v-btn>
+            <label>キャンペーン期間&emsp;
+              {{$date(campaign.date_start + ' ' + campaign.time_start).format('YYYY/MM/DD HH:mm')}} -
+              {{$date(campaign.date_end + ' ' + campaign.time_end).format('YYYY/MM/DD HH:mm')}}
+            </label>
           </v-col>
         </v-row>
         <v-divider/>
@@ -37,22 +40,22 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(lead, i) in vleads" :key="i">
-                      <th>{{lead.id}}</th>
-                      <th>{{lead.affiliate}}</th>
-                      <th>{{ranks[lead.rank-1]}}</th>
-                      <th>{{lead.special_reward}}</th>
-                      <th>{{lead.start_date}} {{lead.start_time}} - {{lead.end_date}} {{lead.end_time}}</th>
+                    <tr v-for="(v, i) in vleads" :key="i">
+                      <th>{{v.id}}</th>
+                      <th>{{v.affiliate_name}}</th>
+                      <th>{{v.rank_name}}</th>
+                      <th>{{v.affiliate.special_reward_amount}}</th>
+                      <th>{{$date(v.date_start + ' ' + v.time_start).format('YYYY/MM/DD HH:mm')}} - </th>
                       <th>
                         <v-btn
-                          color="purple darken--2" dark
-                          @click="showLeadEdit(lead)"
+                          color="purple darken--2"
+                          @click="showEdit(v)"
                         >
                           編集
                         </v-btn>
                         <v-btn
-                          color="error" dark
-                          @click="showLeadDelete(lead)"
+                          color="error"
+                          @click="showDelete(v)"
                         >
                           削除
                         </v-btn>
@@ -76,20 +79,20 @@
                   <tbody>
                   <tr v-for="(v, i) in vextends" :key="i">
                     <th>{{v.id}}</th>
-                    <th>{{v.affiliate}}</th>
-                    <th>{{ranks[v.rank-1]}}</th>
-                    <th>{{v.special_reward}}</th>
-                    <th>{{v.start_date}} {{v.start_time}} - {{v.end_date}} {{v.end_time}}</th>
+                    <th>{{v.affiliate_name}}</th>
+                    <th>{{v.rank_name}}</th>
+                    <th>{{v.affiliate.special_reward_amount}}</th>
+                    <th>- {{$date(v.date_end + ' ' + v.time_end).format('YYYY/MM/DD HH:mm')}}</th>
                     <th>
                       <v-btn
-                        color="purple darken--2" dark
-                        @click="showExtendEdit(v)"
+                        color="purple darken--2"
+                        @click="showEdit(v)"
                       >
                         編集
                       </v-btn>
                       <v-btn
-                        color="error" dark
-                        @click="showExtendDelete(v)"
+                        color="error"
+                        @click="showDelete(v)"
                       >
                         削除
                       </v-btn>
@@ -104,122 +107,76 @@
       </v-card-text>
     </v-container>
 
-    <NewLeadDlg
-      :show="show_new_lead"
-      @onNewLeadClose="show_new_lead=false"
-      @onNewLead="saveNewLead"/>
-    <EditLeadDlg
-      :show="show_edit_lead"
-      :item="selected_lead"
-      @onEditLeadClose="show_edit_lead=false"
-      @onEditLead="saveEditLead"/>
-    <DeleteLeadDlg
-      :show="show_delete_lead"
-      :item="selected_lead"
-      @onDeleteLeadClose="show_delete_lead=false"
-      @onDeleteLeadConfirm="deleteLead"/>
-    <NewExtendDlg
-      :show="show_new_extend"
-      @onNewExtendClose="show_new_extend=false"
-      @onNewExtend="saveNewExtend"/>
-    <EditExtendDlg
-      :show="show_edit_extend"
-      :item="selected_extend"
-      @onEditExtendClose="show_edit_extend=false"
-      @onEditExtend="saveEditExtend"/>
-    <DeleteExtendDlg
-      :show="show_delete_extend"
-      :item="selected_extend"
-      @onDeleteExtendClose="show_delete_extend=false"
-      @onDeleteExtendsConfirm="deleteExtend"/>
+    <NewDlg
+      :show="show_new" :kind="tab" @onNewClose="show_new=false"
+      @onNewSave="saveNew"/>
+    <EditDlg
+      :show="show_edit" :kind="tab" :item="selected"
+      @onEditClose="show_edit=false"
+      @onEditSave="saveEdit"/>
+    <DeleteDlg
+      :show="show_delete" :kind="tab" :item="selected"
+      @onDeleteClose="show_delete=false"
+      @onDeleteYes="deleted"/>
   </v-card>
 </template>
 
 <script>
-  import NewLeadDlg from "./NewLeadDlg";
-  import EditLeadDlg from "./EditLeadDlg";
-  import DeleteLeadDlg from "./DeleteLeadDlg";
-  import NewExtendDlg from "./NewExtendDlg";
-  import EditExtendDlg from "./EditExtendDlg";
-  import DeleteExtendDlg from "./DeleteExtendDlg";
+  import NewDlg from "./NewDlg";
+  import EditDlg from "./EditDlg";
+  import DeleteDlg from "./DeleteDlg";
+  import vuetifyToast from "vuetify-toast"
 
   export default {
-    components: {NewLeadDlg, EditLeadDlg, DeleteLeadDlg, NewExtendDlg, EditExtendDlg, DeleteExtendDlg},
+    components: {NewDlg, EditDlg, DeleteDlg},
     props: {
-      vleads: { type: Array, default: () => [] },
-      vextends: { type: Array, default: () => [] },
+      campaign_id: {type: Number, default: 0},
     },
     data: vm => ({
-      lp_start: '2019/04/09 00:00',
-      lp_end: '2019/04/20 23:55',
-      selected_lead: {
-        id: 0,
-        search_type: 'member',
-        keyword: '',
-        member_id: '',
-        team_id: '',
-        start_date: '',
-        start_time: ''
-      },
-      selected_extend: {
-        id: 0,
-          search_type: 'member',
-          keyword: '',
-          member_id: '',
-          team_id: '',
-          start_date: '',
-          start_time: ''
-      },
-      show_new_lead: false,
-      show_new_extend: false,
-      show_edit_lead: false,
-      show_edit_extend: false,
-      show_delete_lead: false,
-      show_delete_extend: false,
-      tab: 'lead',
-      ranks: ['VIP', 'S VIP', 'SS VIP', 'QUEEN', 'KING']
+      campaign: {date_start:'', time_start:'', date_end:'', time_end:''},
+      vleads: [],
+      vextends: [],
+      search_type: 'member',
+      keyword: '',
+      member_id: '',
+      team_id: '',
+      selected: {id: 0, affiliate_id: 0, campaign_is: 0, kind: '', date_start: '', time_start: '', date_end: '', time_end: '',},
+      show_new: false,
+      show_edit: false,
+      show_delete: false,
+      tab: 0,
     }),
+    mounted() {
+      axios.get(`/admin/campaign/lead-extend/list/${this.campaign_id}`)
+      .then(res => {
+        this.campaign = res.data.campaign
+        this.vleads = this.campaign.lead_extend_affiliates.filter(v => v.kind === 'lead')
+        this.vextends = this.campaign.lead_extend_affiliates.filter(v => v.kind === 'extend')
+      })
+      .catch(e => {
+        vuetifyToast.error('サーバーから先行/延長アフィリエイトリストを取得できません。')
+      })
+    },
     methods: {
       showNew() {
-        if(this.tab === 'lead') {
-          this.show_new_lead = true
-        } else {
-          this.show_new_extend = true
-        }
+        this.show_new = true
       },
-      showExtendEdit(val) {
-        this.selected_extend = val
-        this.show_edit_extend = true
+      showEdit(val) {
+        this.selected = val
+        this.show_edit = true
       },
-      showExtendDelete(val) {
-        this.selected_extend = val
-        this.show_delete_extend = true
+      showDelete(val) {
+        this.selected = val
+        this.show_delete = true
       },
-      showLeadEdit(val) {
-        this.selected_lead = val
-        this.show_edit_lead = true
+      saveNew(item) {
+        this.show_new = false
       },
-      showLeadDelete(val) {
-        this.selected_lead = val
-        this.show_delete_lead = true
+      saveEdit(item) {
+        this.show_edit = false
       },
-      saveNewLead(item) {
-        this.show_new_lead = false
-      },
-      saveEditLead(item) {
-        this.show_edit_lead = false
-      },
-      deleteLead(item) {
-        this.show_delete_lead = false
-      },
-      saveNewExtend(item) {
-        this.show_new_extend = false
-      },
-      saveEditExtend(item) {
-        this.show_edit_extend = false
-      },
-      deleteExtend(item) {
-        this.show_delete_extend = false
+      deleted(item) {
+        this.show_delete = false
       },
     }
   }

@@ -12,7 +12,7 @@
       <v-card-text>
         <v-row>
           <v-col cols="12">
-            <v-btn @click="show_new=true">登録</v-btn>
+            <v-btn color="info" @click="show_new=true">登録</v-btn>
           </v-col>
           <v-col cols="12">
             <label class="mr-2">キャンペーン期間</label>

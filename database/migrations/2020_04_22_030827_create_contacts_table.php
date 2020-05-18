@@ -15,7 +15,8 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('affiliate_id')->comment('アフィリエイターID');
+            $table->string('kind')->comment('question: question from user, answer: answer to user');
+            $table->bigInteger('from')->comment('');
             $table->bigInteger('parent_id')->comment('id of parent message');
             $table->string('title');
             $table->string('content', 1024);

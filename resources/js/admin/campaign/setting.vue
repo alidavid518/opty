@@ -55,6 +55,9 @@
             <v-tab-item value="lp-reward">
               <LpReward :campaign_id="campaign_id"/>
             </v-tab-item>
+            <v-tab-item value="lead-extend">
+              <LeadExtend :campaign_id="campaign_id"/>
+            </v-tab-item>
             <v-tab-item value="ip-except">
               <ContractIpExcept :campaign_id="campaign_id"/>
             </v-tab-item>
@@ -63,9 +66,6 @@
             </v-tab-item>
             <v-tab-item value="rank-except">
               <RankExcept :campaign_id="campaign_id"/>
-            </v-tab-item>
-            <v-tab-item value="lead-extend">
-              <LeadExtend :campaign_id="campaign_id"/>
             </v-tab-item>
             <v-tab-item value="rank-summary">
               <RankingSummary :campaign_id="campaign_id"/>
