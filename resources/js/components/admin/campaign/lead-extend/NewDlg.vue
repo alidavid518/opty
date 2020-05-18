@@ -20,12 +20,13 @@
                     <v-radio dense label="個人ID 検索" value="member"/>
                   </v-col>
                   <v-col cols="12">
-                    <v-text-field
-                      append-icon="mdi-magnify"
+                    <v-autocomplete
                       dense outlined hide-details="auto"
                       :disabled="item.search_type !== 'member'"
-                      @click:append="search('member')"
-                      v-model="member_keyword"/>
+                      :items="affiliates"
+                      :filter="id_filter"
+                      item-text="id_name" item-value="id"
+                      v-model="item.member_id"/>
                   </v-col>
                 </v-row>
               </v-col>
@@ -35,12 +36,13 @@
                     <v-radio dense label="チームID 検索" value="team"/>
                   </v-col>
                   <v-col cols="12">
-                    <v-text-field
-                      append-icon="mdi-magnify"
+                    <v-autocomplete
                       :disabled="item.search_type!=='team'"
                       dense outlined hide-details="auto"
-                      @click:append="search('team')"
-                      v-model="team_keyword"/>
+                      :items="teams"
+                      item-text="id_name" item-value="id"
+                      :filter="id_filter"
+                      v-model="item.team_id"/>
                   </v-col>
                 </v-row>
               </v-col>
@@ -50,26 +52,40 @@
                     <v-radio dense label="キーワード 検索" value="keyword"/>
                   </v-col>
                   <v-col cols="12">
-                    <v-text-field
-                      append-icon="mdi-magnify"
+                    <v-autocomplete
                       dense outlined hide-details="auto"
                       :disabled="item.search_type !== 'keyword'"
-                      @click:append="search('keyword')"
-                      v-model="keyword_keyword"/>
+                      :items="affiliates"
+                      item-value="id" item-text="id_name"
+                      :filter="keyword_filter"
+                      v-model="item.member_id"/>
                   </v-col>
                 </v-row>
               </v-col>
               <v-col cols="12">
-                <v-row>
-                  <v-col cols="12">{{['開始','終了'][kind]}}日時</v-col>
+                <v-row v-if="kind === 0">
+                  <v-col cols="12">開始日時</v-col>
                   <v-col cols="12">
                     <v-text-field
                       type="date" outlined dense hide-details="auto"
-                      v-model="item.start_date"
+                      v-model="item.date_start"
                       class="mr-2 d-inline-flex"/>
                     <v-text-field
                       type="time" outlined dense hide-details="auto"
-                      v-model="item.start_time"
+                      v-model="item.time_start"
+                      class="d-inline-flex"/>
+                  </v-col>
+                </v-row>
+                <v-row v-else>
+                  <v-col cols="12">終了日時</v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      type="date" outlined dense hide-details="auto"
+                      v-model="item.date_end"
+                      class="mr-2 d-inline-flex"/>
+                    <v-text-field
+                      type="time" outlined dense hide-details="auto"
+                      v-model="item.time_end"
                       class="d-inline-flex"/>
                   </v-col>
                 </v-row>
@@ -91,26 +107,30 @@
     props: {
       kind: {type:Number, default: 0},
       show: {type:Boolean, default: false},
+      affiliates: {type: Array, default: () => []},
+      teams: {type: Array, default: () => []},
     },
     data: vm => ({
       item: {
-        id: 0,
         search_type: 'member',
-        keyword: '',
         member_id: '',
         team_id: '',
-        start_date: '',
-        start_time: ''
+        date_start: '',
+        time_start: '',
+        date_end: '',
+        time_end: ''
       },
-      member_keyword: '',
-      team_keyword: '',
-      keyword_keyword: ''
     }),
     methods: {
-      search(kind) {
-        if(kind === 'member' && this.member_keyword === '') {
-
-        }
+      id_filter(item, query, itemText) {
+        if(isNaN(parseInt(query))) return
+        const idString = item.id + ''
+        return idString.indexOf(query) > -1
+      },
+      keyword_filter(item, query, itemText) {
+        query = query.toLowerCase()
+        const target = item.name_full.toLowerCase()
+        return target.indexOf(query) > -1
       },
     }
   }

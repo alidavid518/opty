@@ -10,11 +10,11 @@ class LeadExtendAffiliate extends Model
     protected $appends = ['affiliate_name', 'rank_name'];
 
     public function campaign() {
-      $this->belongsTo('App\Models\Campaign');
+      return $this->belongsTo('App\Models\Campaign');
     }
 
     public function affiliate() {
-      $this->belongsTo('App\Models\Affiliate');
+      return $this->belongsTo('App\Models\Affiliate');
     }
 
     public function getAffiliateNameAttribute() {
@@ -22,6 +22,6 @@ class LeadExtendAffiliate extends Model
     }
 
     public function getRankNameAttribute() {
-      return $this->rank->name;
+      return $this->affiliate->rank->name;
     }
 }

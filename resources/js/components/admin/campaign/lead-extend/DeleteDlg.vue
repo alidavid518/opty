@@ -17,9 +17,9 @@
           </strong>
         </v-card-text>
         <v-card-actions class="_action justify-center">
-          <v-btn @click="$emit('onDeleteLeadClose')">キャンセル</v-btn>
+          <v-btn @click="$emit('onDeleteClose')">キャンセル</v-btn>
           <v-btn dark color="error"
-                 @click="$emit('onDeleteLeadConfirm', item)">削除</v-btn>
+                 @click="$emit('onDeleteConfirm', item)">削除</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

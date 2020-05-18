@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\LeadExtend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Affiliate;
 use App\Models\Campaign;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\LeadExtendAffiliate;
@@ -18,56 +20,60 @@ class LeadExtendController extends Controller
     } catch (\Exception $e) {
       return response()->json(['error' => $e->getMessage()], 400);
     }
-    return response()->json(['campaign' =>$camp]);
+    $affiliates = Affiliate::all();
+    $teams = Team::all();
+    return response()->json(['campaign' => $camp, 'affiliates' => $affiliates, 'teams' => $teams]);
   }
 
   public function save(Request $request) {
     $input = $request->all();
 
     $validator = Validator::make($input, [
-      'id' => 'required',
       'campaign_id' => 'required',
-      'title' => 'required',
-      'url' => 'required|url',
-      'banner' => 'required|file|image', // |dimensions:width=800,height=200
-      'is_public' => 'required',
-      'redirect_url_pc' => 'required|url',
-      'redirect_url_mobile' => 'required|url',
-      'show_type' => 'required',
-      'status' => 'required',
+      'affiliate_id' => 'nullable',
+      'team_id' => 'nullable',
+      'kind' => 'required',
+      'date_start' => 'nullable',
+      'time_start' => 'nullable',
+      'date_end' => 'nullable',
+      'time_end' => 'nullable',
     ]);
 
     if ($validator->fails()) {
       return response()->json(['errors' => $validator->errors()], 400);
     }
-    // banner save
-    $file = $request->file('banner');
-    $fname = time() . $file->getClientOriginalName();
-    $file->storeAs('public/lp-banner', $fname);
-    $url = url('/storage/lp-banner/'. $fname);
-    $input['banner'] = $url;
 
-    $id = $input['id'];
-    unset($input['id']);
-
+    \DB::beginTransaction();
     try {
-      if($id < 1) {
-        Lp::create($input);
+      if($request->has('team_id')) {
+        $affiliates = Team::find($request->get('team_id'))->affiliates;
+        foreach ($affiliates as $aff) {
+          $data = $request->except(['team_id', 'search_type']);
+          $data['affiliate_id'] = $aff->id;
+          LeadExtendAffiliate::create($data);
+        }
       } else {
-        Lp::where('id', $id)->update($input);
+        $data = $data = $request->except(['search_type']);
+        LeadExtendAffiliate::create($data);
       }
-    } catch (\Exception $e) {
+    } catch(\Exception $e) {
+      \DB::rollBack();
       return response()->json(['errors' => ['save' => $e->getMessage()]], 400);
     }
-    return response()->json(['errors' => []]);
+    \DB::commit();
+    $camp = Campaign::with('lead_extend_affiliates')->find($request->get('campaign_id'));
+    return response()->json(['campaign' => $camp]);
   }
 
   public function delete(Request $request, $id) {
     try {
-      Lp::where('id', $id)->delete();
+      $lea = LeadExtendAffiliate::find($id);
+      $campaign_id = $lea->campaign->id;
+      $lea->delete();
     } catch (\Exception $e) {
       return response()->json(['errors' => ['save' => $e->getMessage()]], 400);
     }
-    return response()->json(['errors' => []]);
+    $camp = Campaign::with('lead_extend_affiliates')->find($campaign_id);
+    return response()->json(['campaign' => $camp]);
   }
 }

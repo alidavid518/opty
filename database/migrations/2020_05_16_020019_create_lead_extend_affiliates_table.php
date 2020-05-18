@@ -18,10 +18,10 @@ class CreateLeadExtendAffiliatesTable extends Migration
             $table->bigInteger('campaign_id')->comment('campaign id of campaigns table');
             $table->bigInteger('affiliate_id')->comment('id of affiliates table');
             $table->string('kind')->comment('lead or extend');
-            $table->date('date_start');
-            $table->time('time_start');
-            $table->date('date_end');
-            $table->time('time_end');
+            $table->date('date_start')->nullable();
+            $table->time('time_start')->nullable();
+            $table->date('date_end')->nullable();
+            $table->time('time_end')->nullable();
             $table->timestamps();
         });
     }

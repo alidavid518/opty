@@ -109,6 +109,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/campaign/contract-ip-except/delete/{id}', 'ContractExceptIp\ContractExceptIpController@delete');
     // campaign/lead-extend
     Route::get('/campaign/lead-extend/list/{campaign_id}', 'LeadExtend\LeadExtendController@list');
+    Route::post('/campaign/lead-extend/new', 'LeadExtend\LeadExtendController@save');
+    Route::get('/campaign/lead-extend/delete/{id}', 'LeadExtend\LeadExtendController@delete');
     // campaign/prize
     Route::get('/campaign/prize/list/{campaign_id}', 'Prize\PrizeController@list');
     Route::post('/campaign/prize/save', 'Prize\PrizeController@save');
