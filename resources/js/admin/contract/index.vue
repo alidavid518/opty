@@ -5,29 +5,26 @@
         <v-container fluid>
           <v-row>
             <v-col>
-              <h2 class="d-inline mr-1">成約管理一覧</h2>
+              <h2 class="d-inline mr-1">成約管理 一覧</h2>
             </v-col>
             <v-col class="d-flex justify-end">
               <v-btn
                 class="mr-2"
-                rounded
-                color="#1DE9B6"
+                rounded color="success"
                 :to="'/admin/contract/reservation'"
               >
                 承認予約
               </v-btn>
               <v-btn
                 class="mr-2"
-                rounded
-                color="#89DFFF"
+                rounded color="info"
                 @click="showAccount"
               >
                 報酬一括更新
               </v-btn>
               <v-btn
                 class="mr-2"
-                rounded
-                color="#C694F9"
+                rounded dark color="purple darken--2"
                 @click="showAccount"
               >
                 報酬任意更新
@@ -57,13 +54,13 @@
               <td>{{ item.expected_payment }}円</td>
               <td>{{ item.deposit_difference }}円</td>
               <td>
-                <v-btn color="#C694F9" dark @click="showDetail(item)">
+                <v-btn color="purple darken--2" dark @click="showDetail(item)">
                   詳細
                 </v-btn>
-                <v-btn color="#5367FD" dark @click="showAnalysis(item)">
+                <v-btn color="primary" @click="showAnalysis(item)">
                   分析
                 </v-btn>
-                <v-btn color="#F99494" dark @click="showDelete(item)">
+                <v-btn color="error" @click="showDelete(item)">
                   棄却
                 </v-btn>
               </td>

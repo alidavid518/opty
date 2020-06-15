@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Admin\Contacts;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
-use App\Models\QuestionCategory;
 use Illuminate\Http\Request;
-use App\Models\Question;
 use Illuminate\Support\Facades\Validator;
 
-class ContactController extends Controller
+class AffiliateContactController extends Controller
 {
   public function list(Request $request, $status)
   {

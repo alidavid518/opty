@@ -65,4 +65,7 @@ class Affiliate extends Model
     return $this->belongsToMany('App\Models\Team', 'affiliate_team');
   }
 
+  public function contacts() {
+    return $this->hasMany('App\Models\Contact');
+  }
 }

@@ -48,4 +48,8 @@ class Advertiser extends Model
     return $this->getStatusOptions()[$this->status];
   }
 
+  public function contacts() {
+    return $this->hasMany('App\Models\Contact');
+  }
+
 }

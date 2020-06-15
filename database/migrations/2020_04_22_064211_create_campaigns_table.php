@@ -36,10 +36,10 @@ class CreateCampaignsTable extends Migration
       $table->string('remarks')->comment('備考');
       $table->integer('deposit_amount')->default(0)->comment('デポジット金額');
       $table->integer('contracts_limit')->default(0)->comment('成約上限数');
-      $table->increments('register_number')->default(0)->comment('登録数');
-      $table->increments('expense')->default(0)->comment('経費');
-      $table->increments('block_number')->default(0)->comment('ブロック数');
-      $table->increments('average_lp_register_rate')->default(0)->comment('平均LP登録率');
+      $table->integer('register_number')->default(0)->comment('登録数');
+      $table->integer('expense')->default(0)->comment('経費');
+      $table->integer('block_number')->default(0)->comment('ブロック数');
+      $table->float('average_lp_register_rate')->default(0)->comment('平均LP登録率');
       $table->tinyInteger('status')->default(0)->comment('0: draft, 1:post');
       $table->timestamps();
     });

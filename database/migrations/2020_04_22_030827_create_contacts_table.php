@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContactsTable extends Migration
+class CreateAdvertiserContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,11 +15,12 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kind')->comment('question: question from user, answer: answer to user');
-            $table->bigInteger('from')->comment('');
-            $table->bigInteger('parent_id')->comment('id of parent message');
+            $table->bigInteger('advertiser_id')->nullable()->comment('advertiser id');
+            $table->bigInteger('affiliate_id')->nullable()->comment('affiliate id');
+            $table->bigInteger('parent_id')->nullable()->comment('id of parent message');
             $table->string('title');
             $table->string('content', 1024);
+            $table->string('kind')->default('advertiser')->comment('advertiser, affiliate');
             $table->tinyInteger('status')->default(0)->comment('0:新規,1:返信済,2:リプライ,3;完了');
             $table->timestamps();
         });

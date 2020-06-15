@@ -10,6 +10,27 @@ use App\Models\Lp;
 
 class LpController extends Controller
 {
+  private function generateMailRegisterFormTag($lp_id) {
+    return '<form action="'.url('/mail-register').'" method="get">' .
+          '<input type="hidden" name="l" value="'.$lp_id.'"/>' .
+          '<input type="text" name="n" required placeholder="名前"/>' .
+          '<input type="email" name="e" required placeholder="電子メールアドレス"/>' .
+          '<input type="submit" value="登録"/>' .
+          '</form>';
+  }
+
+  private function generateLineRegisterTag($lp_id) {
+    return '<form action="'.url('/line-register').'" method="get">' .
+      '<input type="hidden" name="l" value="'.$lp_id.'"/>' .
+      '<input type="text" name="n" required placeholder="名前"/>' .
+      '<input type="text" name="u" required placeholder="ラインユーザーID"/>' .
+      '<input type="submit" value="登録"/>' .
+      '</form>';
+  }
+
+  private function generateAffiliateLink($lp_id) {
+    return url('/affiliate-link?l='.$lp_id.'&a={affiliate_id}');
+  }
 
   public function list(Request $request, $campaign_id)
   {

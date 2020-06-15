@@ -13,9 +13,11 @@
 
 use Illuminate\Http\Request;
 
-//Route::get('/','Front\HomeController@index')->name('front.home');
-
 Auth::routes();
+
+// Routes to accept affiliate link to LP
+Route::get('/affiliate-link', 'ContractIncomeController@affiliateLink');
+Route::get('/mail-register', 'ContractIncomeController@mailRegister');
 
 // single page
 Route::middleware(['auth'])->group(function () {

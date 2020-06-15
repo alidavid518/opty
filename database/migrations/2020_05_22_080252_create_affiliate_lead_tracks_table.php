@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAffiliateLeadsTable extends Migration
+class CreateAffiliateLeadTracksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateAffiliateLeadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('affiliate_leads', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->date('date_start');
-            $table->time('time_start');
+        Schema::create('affiliate_lead_tracks', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('affiliate_id');
+            $table->bigInteger('lp_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateAffiliateLeadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('affiliate_leads');
+        Schema::dropIfExists('affiliate_lead_tracks');
     }
 }

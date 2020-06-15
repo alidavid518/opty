@@ -41,4 +41,12 @@ class Lp extends Model
   {
     return $this->is_public === 0 ? '非公開' : '公開';
   }
+
+  public function registered_mails() {
+    return $this->hasMany('App\Models\RegisteredMail');
+  }
+
+  public function registered_lines() {
+    return $this->hasMany('App\Models\RegisteredLine');
+  }
 }
