@@ -12,6 +12,7 @@
 
   <!-- Styles -->
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- app.css here -->
   <link href="{{ asset('css/user.css') }}" rel="stylesheet">
