@@ -2,4 +2,4 @@
 
 Laravel + Vue project
 
-&copy; **egor0518** All Rights Reserved.
+&copy; 2020 **egor0518** All Rights Reserved.
