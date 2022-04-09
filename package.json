@@ -28,7 +28,7 @@
     "chart.js": "^2.9.3",
     "dropzone": "^5.7.0",
     "luxon": "^1.23.0",
-    "moment": "^2.21.0",
+    "moment": "^2.29.2",
     "vue-chartjs": "^3.5.0",
     "vue-dayjs-plugin": "^1.0.0",
     "vue-quill-editor": "^3.0.6",
