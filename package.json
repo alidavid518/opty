@@ -18,7 +18,7 @@
     "bread-compressor-cli": "^1.1.0",
     "cross-env": "^5.2.1",
     "jquery": "^3.5.1",
-    "laravel-mix": "^2.1",
+    "laravel-mix": "^6.0",
     "lodash": "^4.17.4",
     "sass": "^1.26.3",
     "vue": "^2.6.11",
